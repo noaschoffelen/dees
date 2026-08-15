@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu — Dees Tilburg</title>
+  <meta name="description" content="Het menu van Dees: specialty koffie & thee, vers desembrood, croissants, foccacia en sandwiches. Korte Tuinstraat 20-22, Tilburg." />
+  <link rel="icon" type="image/png" href="assets/img/logo/favicon.png" />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Dees — home">
+        <img src="assets/img/logo/dees-wordmark-black.png" alt="Dees" />
+      </a>
+      <nav class="nav__links" aria-label="Hoofdmenu">
+        <a href="index.html">Home</a>
+        <a href="menu.html" aria-current="page">Menu</a>
+        <a href="ateliers.html">Ateliers</a>
+        <a href="crew.html">Dees Crew</a>
+        <a href="vergaderen.html">Vergaderen</a>
+      </nav>
+      <button class="nav__toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="mobile-menu" data-open="false">
+    <nav aria-label="Mobiel menu">
+      <ul>
+        <li><a href="index.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Home</a></li>
+        <li><a href="menu.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Menu</a></li>
+        <li><a href="ateliers.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Ateliers</a></li>
+        <li><a href="crew.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Dees Crew</a></li>
+        <li><a href="vergaderen.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Vergaderen</a></li>
+      </ul>
+    </nav>
+    <p class="menu__foot payoff">brood<span class="dot"></span>ateliers<span class="dot"></span>koffie</p>
+  </div>
+
+  <main>
+
+    <section class="page-hero page-hero--blue">
+      <div class="container">
+        <p class="kicker eyebrow-red">Vers &amp; handgemaakt</p>
+        <h1>Menu</h1>
+        <p class="lead" style="max-width:44ch;margin-top:1rem">Specialty koffie, verse desem uit eigen oven en broodjes met liefde belegd. Kijk in de zaak op het bord voor onze specials van de maand.</p>
+      </div>
+      <img class="page-hero__hand" src="assets/img/hands/h-downleft.png" alt="" aria-hidden="true" />
+    </section>
+
+    <div class="marquee marquee--purple" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Mixen <img src="assets/img/hands/h-right.png" alt=""> Kneden <img src="assets/img/hands/h-right.png" alt=""> Bakken <img src="assets/img/hands/h-right.png" alt=""> Eten <img src="assets/img/hands/h-right.png" alt=""></span>
+        <span>Mixen <img src="assets/img/hands/h-right.png" alt=""> Kneden <img src="assets/img/hands/h-right.png" alt=""> Bakken <img src="assets/img/hands/h-right.png" alt=""> Eten <img src="assets/img/hands/h-right.png" alt=""></span>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="menucard">
+
+          <!-- KOLOM 1 -->
+          <div class="menu-col reveal">
+            <div class="menu-group menu-group--blue" style="text-align:center">
+              <img src="assets/img/logo/dees-lockup-black.png" alt="Dees — brood • ateliers • koffie" style="max-width:220px;margin:.4rem auto" />
+            </div>
+            <div class="menu-group menu-group--red">
+              <h3>Koffie</h3>
+              <div class="menu-item"><span class="name">Zwart</span><span class="leader"></span><span class="price">3</span></div>
+              <div class="menu-item"><span class="name">Espresso</span><span class="leader"></span><span class="price">3,2</span></div>
+              <div class="menu-item"><span class="name">Cappucino</span><span class="leader"></span><span class="price">3,8</span></div>
+              <div class="menu-item"><span class="name">Latte macchiato</span><span class="leader"></span><span class="price">4</span></div>
+              <div class="menu-item"><span class="name">Flat white</span><span class="leader"></span><span class="price">4</span></div>
+            </div>
+            <div class="menu-group menu-group--red">
+              <h3>Thee</h3>
+              <div class="menu-item"><span class="name">Zwarte thee</span><span class="leader"></span><span class="price">3</span></div>
+              <div class="menu-item"><span class="name">Groene thee</span><span class="leader"></span><span class="price">3</span></div>
+              <div class="menu-item"><span class="name">Chai latte</span><span class="leader"></span><span class="price">4</span></div>
+            </div>
+          </div>
+
+          <!-- KOLOM 2 -->
+          <div class="menu-col reveal">
+            <div class="menu-group menu-group--red">
+              <h3>Desembrood</h3>
+              <div class="menu-item"><span class="name">Groot</span><span class="leader"></span><span class="price">6</span></div>
+              <div class="menu-item"><span class="name">Klein</span><span class="leader"></span><span class="price">3,5</span></div>
+              <p class="menu-note">meergranen / volkoren / boule blanche</p>
+            </div>
+            <div class="menu-group menu-group--red">
+              <h3>Croissant</h3>
+              <div class="menu-item"><span class="name">Naturel</span><span class="leader"></span><span class="price">2</span></div>
+              <div class="menu-item"><span class="name">Kaas</span><span class="leader"></span><span class="price">2,5</span></div>
+            </div>
+            <div class="menu-group menu-group--red">
+              <h3>Foccacia</h3>
+              <div class="menu-item"><span class="name">Groot</span><span class="leader"></span><span class="price">6</span></div>
+              <div class="menu-item"><span class="name">Klein</span><span class="leader"></span><span class="price">3,5</span></div>
+            </div>
+            <div class="menu-group menu-group--blue">
+              <h3>Sandwiches</h3>
+              <div class="menu-item"><span class="name">Club sandwich</span><span class="leader"></span><span class="price">7</span></div>
+              <div class="menu-item"><span class="name">Mortadella burrata</span><span class="leader"></span><span class="price">7,5</span></div>
+              <div class="menu-item"><span class="name">Boerenkaas</span><span class="leader"></span><span class="price">6</span></div>
+              <div class="menu-item"><span class="name">Gegrilde kip</span><span class="leader"></span><span class="price">7</span></div>
+              <div class="menu-item"><span class="name">Dees broodje</span><span class="leader"></span><span class="price">7</span></div>
+              <p class="menu-note">Kijk op het bord voor onze speciale broodjes van de maand!</p>
+            </div>
+          </div>
+
+        </div>
+        <p class="center" style="margin-top:2rem;opacity:.75;font-weight:600">Alle prijzen in euro's. Menu onder voorbehoud — vraag gerust naar het dagaanbod.</p>
+      </div>
+    </section>
+
+    <div class="band band--full">
+      <img src="assets/img/photo/broodzakken.jpg" alt="Broodzakken van Dees met vers gebakken brood." loading="lazy" />
+      <div class="band__quote">
+        <p class="display skew">Dees broodje<br>is van Dees</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__logo">
+        <img src="assets/img/logo/dees-wordmark-white.png" alt="Dees" />
+        <p class="payoff">brood<span class="dot"></span>ateliers<span class="dot"></span>koffie</p>
+        <p style="opacity:.8;margin-top:1rem">Een open plek voor brood, koffie en creativiteit in het Dwaalgebied van Tilburg.</p>
+      </div>
+      <div>
+        <h4>Bezoek</h4>
+        <ul class="footer__links">
+          <li>Korte Tuinstraat 20-22</li>
+          <li>Dwaalgebied, Tilburg</li>
+          <li style="opacity:.7;margin-top:.6rem">Openingstijden volgen binnenkort</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact &amp; menu</h4>
+        <ul class="footer__links">
+          <li><a href="mailto:info@deestilburg.nl">info@deestilburg.nl</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="ateliers.html">Ateliers</a></li>
+          <li><a href="crew.html">Dees Crew</a></li>
+          <li><a href="vergaderen.html">Vergaderen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bar">
+      <span>© <span id="jaar">2026</span> Dees — brood • ateliers • koffie</span>
+      <span>Tilburg 🥐</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

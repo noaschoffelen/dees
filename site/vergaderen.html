@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vergaderen — Dees Tilburg (Coming Soon)</title>
+  <meta name="description" content="Binnenkort kun je vergaderen bij Dees in Tilburg. Meer informatie volgt snel." />
+  <link rel="icon" type="image/png" href="assets/img/logo/favicon.png" />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Dees — home">
+        <img src="assets/img/logo/dees-wordmark-black.png" alt="Dees" />
+      </a>
+      <nav class="nav__links" aria-label="Hoofdmenu">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="ateliers.html">Ateliers</a>
+        <a href="crew.html">Dees Crew</a>
+        <a href="vergaderen.html" aria-current="page">Vergaderen</a>
+      </nav>
+      <button class="nav__toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="mobile-menu" data-open="false">
+    <nav aria-label="Mobiel menu">
+      <ul>
+        <li><a href="index.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Home</a></li>
+        <li><a href="menu.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Menu</a></li>
+        <li><a href="ateliers.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Ateliers</a></li>
+        <li><a href="crew.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Dees Crew</a></li>
+        <li><a href="vergaderen.html"><img class="point" src="assets/img/hands/h-right.png" alt="" aria-hidden="true">Vergaderen</a></li>
+      </ul>
+    </nav>
+    <p class="menu__foot payoff">brood<span class="dot"></span>ateliers<span class="dot"></span>koffie</p>
+  </div>
+
+  <main>
+    <section class="bg-blue" style="position:relative;overflow:hidden">
+      <span class="hero__blob blob-1" aria-hidden="true" style="background:var(--red)"></span>
+      <span class="hero__blob blob-2" aria-hidden="true" style="background:var(--purple)"></span>
+      <img class="hero__hand h-a" src="assets/img/hands/h-downright.png" alt="" aria-hidden="true" />
+      <img class="hero__hand h-b" src="assets/img/hands/h-upleft.png" alt="" aria-hidden="true" />
+      <div class="container soon" style="position:relative;z-index:3">
+        <p class="kicker eyebrow-red">Vergaderen bij Dees</p>
+        <h1 class="soon__big">Coming<br><span class="skew">Soon</span></h1>
+        <p class="lead" style="max-width:40ch;margin-top:1.5rem">Binnenkort meer informatie over vergaderen bij Dees — flexplekken en een vergaderruimte midden tussen brood, koffie en creativiteit.</p>
+        <div class="hero__cta" style="margin-top:2rem">
+          <a href="mailto:info@deestilburg.nl?subject=Vergaderen%20bij%20Dees" class="btn btn--red">Hou me op de hoogte</a>
+          <a href="index.html" class="btn btn--ghost">Terug naar home</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Coming soon <img src="assets/img/hands/h-right.png" alt=""> Vergaderen <img src="assets/img/hands/h-right.png" alt=""> Flexwerk <img src="assets/img/hands/h-right.png" alt=""> Dees <img src="assets/img/hands/h-right.png" alt=""></span>
+        <span>Coming soon <img src="assets/img/hands/h-right.png" alt=""> Vergaderen <img src="assets/img/hands/h-right.png" alt=""> Flexwerk <img src="assets/img/hands/h-right.png" alt=""> Dees <img src="assets/img/hands/h-right.png" alt=""></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__logo">
+        <img src="assets/img/logo/dees-wordmark-white.png" alt="Dees" />
+        <p class="payoff">brood<span class="dot"></span>ateliers<span class="dot"></span>koffie</p>
+        <p style="opacity:.8;margin-top:1rem">Een open plek voor brood, koffie en creativiteit in het Dwaalgebied van Tilburg.</p>
+      </div>
+      <div>
+        <h4>Bezoek</h4>
+        <ul class="footer__links">
+          <li>Korte Tuinstraat 20-22</li>
+          <li>Dwaalgebied, Tilburg</li>
+          <li style="opacity:.7;margin-top:.6rem">Openingstijden volgen binnenkort</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact &amp; menu</h4>
+        <ul class="footer__links">
+          <li><a href="mailto:info@deestilburg.nl">info@deestilburg.nl</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="ateliers.html">Ateliers</a></li>
+          <li><a href="crew.html">Dees Crew</a></li>
+          <li><a href="vergaderen.html">Vergaderen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bar">
+      <span>© <span id="jaar">2026</span> Dees — brood • ateliers • koffie</span>
+      <span>Tilburg 🥐</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
