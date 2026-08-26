@@ -5,19 +5,19 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://deestilburg.nl/menu.html</loc>
+    <loc>https://deestilburg.nl/menu</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deestilburg.nl/ateliers.html</loc>
+    <loc>https://deestilburg.nl/ateliers</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deestilburg.nl/crew.html</loc>
+    <loc>https://deestilburg.nl/crew</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://deestilburg.nl/vergaderen.html</loc>
+    <loc>https://deestilburg.nl/vergaderen</loc>
     <priority>0.5</priority>
   </url>
 </urlset>
