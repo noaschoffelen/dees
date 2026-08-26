@@ -63,7 +63,7 @@
       <div class="container" style="max-width:640px">
         <div class="tile" style="color:var(--ink)">
           <h2 style="font-size:var(--fs-h3);margin-bottom:1rem">Solliciteer bij Dees</h2>
-          <form class="form" action="https://formspree.io/f/mkjwdyny" method="POST" enctype="multipart/form-data" novalidate>
+          <form class="form" action="https://formspree.io/f/mkjwdyny" method="POST" novalidate>
             <div class="field">
               <label for="naam">Naam</label>
               <input id="naam" name="naam" type="text" autocomplete="name" required />
@@ -80,18 +80,14 @@
               <label for="bericht">Bericht</label>
               <textarea id="bericht" name="bericht"></textarea>
             </div>
-            <div class="field">
-              <label for="cv">Cv (pdf)</label>
-              <input id="cv" name="cv" type="file" accept="application/pdf" />
-            </div>
-            <div class="field">
-              <label for="motivatie">Motivatie (pdf)</label>
-              <input id="motivatie" name="motivatie" type="file" accept="application/pdf" />
-            </div>
             <button type="submit" class="btn btn--red">Versturen <img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="filter:brightness(0) invert(1)"></button>
-            <p class="form__note">Je sollicitatie, inclusief cv en motivatie, wordt direct naar Dees verstuurd.</p>
+            <p class="form__note">Je bericht wordt direct naar Dees verstuurd.</p>
             <p class="form__status" role="status" aria-live="polite" style="font-weight:700;color:var(--purple)"></p>
           </form>
+          <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:3px solid var(--ink)">
+            <p style="margin-bottom:.8rem">Heb je een cv en motivatiebrief? Stuur die er apart bij:</p>
+            <a href="mailto:personeel@deestilburg.nl?subject=Sollicitatie" class="btn btn--ghost">Mail ons met cv + motivatie <img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></a>
+          </div>
         </div>
       </div>
     </section>
