@@ -200,6 +200,11 @@ p { margin: 0 0 1em; }
   position: absolute; right: var(--gutter); bottom: var(--gutter); z-index: 3;
   font-weight: 700; letter-spacing: .02em; color: var(--ink); margin: 0;
 }
+@media (max-width: 700px) {
+  .hero { min-height: auto; padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; }
+  .hero__brood { white-space: normal; flex-wrap: wrap; font-size: clamp(2.6rem, 17vw, 4.5rem); row-gap: .15em; }
+  .hero__addr-corner { position: static; display: block; text-align: center; margin-top: 2rem; }
+}
 
 /* Zwevende kleurblokken achter hero */
 .hero__blob { position: absolute; border-radius: 40% 60% 55% 45%; z-index: 1; opacity: .9; }
