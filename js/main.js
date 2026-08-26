@@ -46,36 +46,6 @@
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ---- Contactformulier -> opent mail-app (mailto) ---- */
-  var form = document.querySelector("form[data-mailto]");
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var to = form.getAttribute("data-mailto");
-      var naam = (form.naam && form.naam.value || "").trim();
-      var email = (form.email && form.email.value || "").trim();
-      var tel = (form.telefoon && form.telefoon.value || "").trim();
-      var bericht = (form.bericht && form.bericht.value || "").trim();
-      var onderwerp = "Bericht via deestilburg.nl" + (naam ? " — " + naam : "");
-      var body =
-        "Naam: " + naam + "\n" +
-        "E-mail: " + email + "\n" +
-        "Telefoon: " + tel + "\n\n" +
-        "Bericht:\n" + bericht + "\n";
-      var href =
-        "mailto:" + to +
-        "?subject=" + encodeURIComponent(onderwerp) +
-        "&body=" + encodeURIComponent(body);
-      window.location.href = href;
-
-      var status = form.querySelector(".form__status");
-      if (status) {
-        status.textContent =
-          "Bedankt! Je mailprogramma opent met je bericht. Verstuur die mail om je vraag naar Dees te sturen.";
-      }
-    });
-  }
-
   /* ---- Contactformulieren -> Formspree (echte verzending, incl. bijlages) ---- */
   var formspreeForms = document.querySelectorAll('form[action*="formspree.io"]');
   formspreeForms.forEach(function (fsForm) {

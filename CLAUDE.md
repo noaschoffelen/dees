@@ -37,11 +37,20 @@ zonder hard-refresh altijd de laatste versie ziet.
 
 Deployed on **Vercel**, connected to this GitHub repo (`noaschoffelen/dees`), root as
 source directory, no build command. Custom domain `deestilburg.nl` points at Vercel via
-DNS (A record to Vercel's apex IP + CNAME for `www`). There used to be a duplicate
-`site/` copy of the whole tree (a leftover from early GitHub Pages hosting) — it was
-removed once Vercel/root became the single source of truth. There should only ever be
-one copy of the site files now; if a `site/` directory reappears, flag it rather than
-silently maintaining two copies.
+DNS (A records to Vercel's edge IPs, managed through Cloudflare DNS). There used to be a
+duplicate `site/` copy of the whole tree (a leftover from early GitHub Pages hosting) —
+it was removed once Vercel/root became the single source of truth, and GitHub Pages
+itself was disabled on the repo. There should only ever be one copy of the site files
+and one active host now; if a `site/` directory or GitHub Pages reappears, flag it
+rather than silently maintaining two copies.
+
+`vercel.json` sets `"cleanUrls": true`, so every page is linked/referenced without its
+`.html` extension (`menu.html` → `/menu`) — internal links, `sitemap.xml`, and `og:url`
+tags all use the extensionless form; Vercel handles the redirect from the old `.html`
+URL automatically. This only works on Vercel — the plain local dev server (`python3 -m
+http.server`) does **not** understand `cleanUrls`, so internal nav links will 404
+locally even though they resolve fine once deployed. `robots.txt` and `sitemap.xml`
+live at the repo root alongside the pages.
 
 ## Structure
 
@@ -51,20 +60,28 @@ menu.html            Menu (Coming Soon)
 ateliers.html        Ateliers + contact form
 crew.html            Dees Crew + sollicitatie (application) form
 vergaderen.html      Vergaderen (coming soon)
+robots.txt            Allow-all + sitemap pointer
+sitemap.xml            The 5 pages, extensionless URLs
+vercel.json            cleanUrls + trailingSlash config
 css/
   styles.css         Design system: color/type/spacing tokens in :root, then components
   fonts.css           Local @font-face rules (Serial B Neue: regular + heavy)
 js/main.js            Vanilla JS, no dependencies (see below)
 assets/
-  fonts/              Locally hosted Serial B Neue webfonts (.woff2/.woff)
-  img/                logo/ (SVG), hands/, photo/, graphic/
+  fonts/              Locally hosted Serial B Neue webfonts (.woff2/.woff) — just the
+                       Regular/Heavy files actually used; the full 10-weight source
+                       family lives in brand/fonts/, not here
+  img/                logo/ (SVG), hands/, photo/, graphic/ (incl. the og:image social
+                       card) — only assets actually referenced by a page belong here;
+                       unused exports/photo options go in brand/ instead
 ```
 
 `brand/` (root only) holds source material: the brandbook PDF, official logo exports
-(`brand/logo/<color>/{SVG,EPS,AI,1x}`), font drops (`brand/fonts/`), and moodboard/hero
-reference images (`brand/images/`, `brand/moodboard/`). It is not served — treat it as
-where raw deliverables from the designer (DETLET) land before being processed into
-`assets/`.
+(`brand/logo/<color>/{SVG,EPS,AI,1x}`), font drops (`brand/fonts/`), the original hand
+icon upload (`brand/hands/`), and moodboard/hero/reserve photos (`brand/images/`,
+`brand/moodboard/`). It is not served — treat it as where raw deliverables from the
+designer (DETLET) or the client land, including photo options that didn't end up on the
+site, before being processed into `assets/`.
 
 Every HTML page follows the same shape: `<header class="nav">` with the same nav links,
 a `#mobile-menu` panel, page content, and a shared footer — copy-paste consistent across
@@ -109,16 +126,25 @@ the same way rather than introducing a framework or build step:
 2. Mobile nav toggle (`.nav__toggle` / `#mobile-menu`, syncs `aria-expanded`)
 3. Scroll-reveal via `IntersectionObserver` for any `.reveal` element (falls back to
    immediately showing content if unsupported)
-4. Contact forms — two different mechanisms currently coexist:
-   - `form[data-mailto]` — legacy client-side-only path that builds a `mailto:` link.
-     Not currently used by any page, but the handler is still there.
-   - `form[action*="formspree.io"]` — the real path, used by `ateliers.html` and
-     `crew.html`. Submits via `fetch()` with `FormData` (so file inputs work), shows
-     inline status in `.form__status`, disables the submit button while in flight.
-     `ateliers.html` posts to Formspree form `maewrvnq` (→ ateliers@deestilburg.nl);
-     `crew.html` posts to `mkjwdyny` (→ info@deestilburg.nl) and includes cv/motivatie
-     file uploads — file uploads must be enabled in that Formspree form's settings or
-     submissions with attachments get rejected with a 400.
+4. Contact forms (`form[action*="formspree.io"]`) — used by `ateliers.html` and
+   `crew.html`. Submits via `fetch()` with `FormData`, shows inline status in
+   `.form__status`, disables the submit button while in flight. `ateliers.html` posts to
+   Formspree form `maewrvnq` (→ ateliers@deestilburg.nl); `crew.html` posts to
+   `mkjwdyny` (→ info@deestilburg.nl). Formspree file uploads need a paid plan, so the
+   crew form doesn't attempt them — cv/motivatie instead go through a separate
+   `mailto:personeel@deestilburg.nl?subject=Sollicitatie` button next to the form, which
+   opens the applicant's own mail client for them to attach files directly.
+
+## SEO / social metadata
+
+Every page carries its own `<title>`, `meta description`, and matching
+`og:*`/`twitter:*` tags (title, description, `og:url`, and a shared
+`assets/img/graphic/og-image.png` social-share card). The homepage additionally has
+JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, and `sameAs`
+links (Instagram, Google Business Profile) — deliberately no `telephone`/`openingHours`
+yet since those are still placeholders; add them once real values exist. Search Console
+is verified via the `google-site-verification` meta tag on `index.html` only — don't
+remove it.
 
 ## Known placeholders / intentional TODOs
 

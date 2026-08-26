@@ -50,8 +50,18 @@ brand/                Bronmateriaal (brandbook, logo-varianten, fonts, moodboard
 ## Contactformulieren
 
 `ateliers.html` en `crew.html` versturen via Formspree (echte e-mailbezorging, geen
-mailto meer). Het sollicitatieformulier op `crew.html` ondersteunt cv/motivatie-uploads
-zodra bestandsuploads aanstaan in de Formspree-forminstellingen.
+mailto meer). Formspree-bestandsuploads vereisen een betaald plan, dus het
+sollicitatieformulier op `crew.html` doet dat niet — cv/motivatie gaan via een aparte
+mailto-knop (`personeel@deestilburg.nl`) die het eigen mailprogramma van de sollicitant
+opent.
+
+## URL's & SEO
+
+`vercel.json` zet `cleanUrls` aan: pagina's zijn bereikbaar zonder `.html`
+(`/menu` i.p.v. `menu.html`); dit werkt alleen op Vercel, niet met de lokale
+Python-server. `robots.txt` + `sitemap.xml` staan in de root. Elke pagina heeft eigen
+`title`/`description`/`og:*`-tags; de homepage heeft daarnaast structured data
+(bedrijfsnaam, adres, Instagram, Google Bedrijfsprofiel) voor Google.
 
 ## Nog te doen / bewuste keuzes
 
