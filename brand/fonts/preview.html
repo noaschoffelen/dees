@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<title>Serial A TRIAL — preview (niet live, geen licentie)</title>
+<style>
+  @font-face {
+    font-family: "Serial A Bold TRIAL";
+    src: url("A/SerialATRIAL-Bold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Serial A Sharp TRIAL";
+    src: url("A/SERIALATRIAL-Sharp.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Serial A Outline TRIAL";
+    src: url("A/SerialATRIAL-Outline.ttf") format("truetype");
+  }
+
+  :root {
+    --blue: #94C5ED; --red: #F11F0A; --purple: #5F1B47; --ink: #0E0E0E; --paper: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: system-ui, sans-serif;
+  }
+  .banner {
+    background: var(--red); color: var(--paper); padding: 1rem 2rem;
+    font-family: system-ui, sans-serif; font-weight: 700;
+  }
+  .banner a { color: var(--paper); }
+  section { padding: 3rem 2rem; border-bottom: 3px solid var(--ink); }
+  section h2 {
+    font-family: system-ui, sans-serif; text-transform: uppercase;
+    font-size: .9rem; letter-spacing: .1em; color: #888; margin: 0 0 1.5rem;
+  }
+  .current { background: var(--blue); }
+  .current .sample { font-family: "Baloo 2", "Nunito", system-ui, sans-serif; }
+  .trial-bold .sample { font-family: "Serial A Bold TRIAL", system-ui, sans-serif; }
+  .trial-sharp .sample { font-family: "Serial A Sharp TRIAL", system-ui, sans-serif; }
+  .trial-outline .sample { font-family: "Serial A Outline TRIAL", system-ui, sans-serif; }
+
+  .sample { margin: 0; line-height: 1; }
+  .hero-size { font-size: clamp(3rem, 12vw, 8rem); text-transform: none; }
+  .h2-size { font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: .6rem; }
+  .nav-size { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; }
+  .marquee-size {
+    font-size: clamp(1.4rem, 4vw, 2.4rem); text-transform: uppercase; font-weight: 800;
+  }
+</style>
+</head>
+<body>
+
+  <div class="banner">
+    ⚠️ Preview only — Serial A TRIAL (dumdum.studio), geen webfont-licentie. Niet gekoppeld aan de live site, niet committen als definitief.
+  </div>
+
+  <section class="current">
+    <h2>Huidig — Baloo 2 (live op de site)</h2>
+    <p class="sample nav-size">Dees — brood • ateliers • koffie</p>
+    <p class="sample hero-size">Ken je Dees?</p>
+  </section>
+
+  <section class="trial-bold">
+    <h2>Serial A — Bold TRIAL (aanbevolen als vervanger)</h2>
+    <p class="sample nav-size">Dees — brood • ateliers • koffie</p>
+    <p class="sample hero-size">Ken je Dees?</p>
+    <p class="sample marquee-size" style="margin-top:2rem">Brood → Ateliers → Koffie → Dees →</p>
+  </section>
+
+  <section class="trial-sharp">
+    <h2>Serial A — Sharp TRIAL (alternatief)</h2>
+    <p class="sample h2-size">Brood, ateliers &amp; koffie</p>
+  </section>
+
+  <section class="trial-outline">
+    <h2>Serial A — Outline TRIAL (decoratief accent, waarschijnlijk niet als hoofd-kopfont)</h2>
+    <p class="sample h2-size">Brood, ateliers &amp; koffie</p>
+  </section>
+
+</body>
+</html>
