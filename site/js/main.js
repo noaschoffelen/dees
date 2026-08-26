@@ -75,4 +75,45 @@
       }
     });
   }
+
+  /* ---- Contactformulieren -> Formspree (echte verzending, incl. bijlages) ---- */
+  var formspreeForms = document.querySelectorAll('form[action*="formspree.io"]');
+  formspreeForms.forEach(function (fsForm) {
+    fsForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var status = fsForm.querySelector(".form__status");
+      var submitBtn = fsForm.querySelector('button[type="submit"]');
+      if (status) status.textContent = "Bezig met versturen...";
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch(fsForm.action, {
+        method: "POST",
+        body: new FormData(fsForm),
+        headers: { Accept: "application/json" }
+      })
+        .then(function (response) {
+          if (response.ok) {
+            fsForm.reset();
+            if (status) status.textContent = "Bedankt! Je bericht is verstuurd naar Dees.";
+          } else {
+            return response.json().then(function (data) {
+              var msg =
+                data && data.errors
+                  ? data.errors.map(function (er) { return er.message; }).join(", ")
+                  : "Er ging iets mis. Probeer het later opnieuw of mail ons direct.";
+              if (status) status.textContent = msg;
+            });
+          }
+        })
+        .catch(function () {
+          if (status) {
+            status.textContent =
+              "Er ging iets mis. Controleer je internetverbinding en probeer het opnieuw.";
+          }
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  });
 })();
