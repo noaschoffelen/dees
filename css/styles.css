@@ -302,7 +302,11 @@ p { margin: 0 0 1em; }
 .page-hero { padding-block: clamp(2.5rem, 7vw, 5rem); position: relative; overflow: hidden; }
 .page-hero h1 { font-size: var(--fs-h1); }
 .page-hero .kicker { margin-bottom: 1rem; }
-.page-hero__hand { position: absolute; right: -10px; bottom: -20px; width: clamp(90px, 16vw, 200px); opacity: .9; animation: bob 4.5s ease-in-out infinite; }
+.page-hero__hand { position: absolute; right: 6%; bottom: 10%; width: clamp(90px, 16vw, 200px); opacity: .9; animation: wiggle-point-hero 1.6s ease-in-out infinite; }
+@keyframes wiggle-point-hero {
+  0%, 100% { transform: rotate(64deg) translateX(0); }
+  50% { transform: rotate(64deg) translateX(.1em); }
+}
 .page-hero--blue { background: var(--blue); }
 .page-hero--purple { background: var(--purple); color: var(--blue); }
 .page-hero--purple h1 { color: var(--blue); }
