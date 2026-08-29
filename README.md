@@ -28,10 +28,15 @@ menu.html            Menu (Coming Soon)
 ateliers.html        Ateliers + contactformulier
 crew.html            Dees Crew + sollicitatieformulier
 vergaderen.html       Vergaderen (Coming Soon)
+privacy.html          Privacybeleid
+api/
+  ateliers-contact.js  Verstuurt het contactformulier via Resend
+  crew-apply.js        Verstuurt het sollicitatieformulier via Resend (incl. cv/motivatie)
+  _utils.js            Gedeelde helpers (validatie, rate limiting)
 css/
   styles.css         Design-systeem (kleuren, type, componenten)
   fonts.css           Lokale @font-face (Serial B Neue: regular + heavy)
-js/main.js            Mobiel menu, scroll-reveal, formulieren → Formspree
+js/main.js            Mobiel menu, scroll-reveal, formulieren → eigen /api/* endpoints
 assets/
   fonts/              Lokaal gehoste webfonts (.woff2/.woff)
   img/                Logo's (SVG), handjes, foto's
@@ -49,11 +54,13 @@ brand/                Bronmateriaal (brandbook, logo-varianten, fonts, moodboard
 
 ## Contactformulieren
 
-`ateliers.html` en `crew.html` versturen via Formspree (echte e-mailbezorging, geen
-mailto meer). Formspree-bestandsuploads vereisen een betaald plan, dus het
-sollicitatieformulier op `crew.html` doet dat niet — cv/motivatie gaan via een aparte
-mailto-knop (`personeel@deestilburg.nl`) die het eigen mailprogramma van de sollicitant
-opent.
+`ateliers.html` en `crew.html` versturen naar hun eigen `/api/*` endpoint (Vercel
+serverless functions), die de e-mail versturen via **Resend** — geen derde partij zoals
+Formspree meer nodig. Het sollicitatieformulier stuurt cv en motivatiebrief gewoon mee
+als bijlage in dezelfde e-mail. Vereist een geldige `RESEND_API_KEY` als environment
+variable in Vercel (Production + Preview); lokaal testen kan alleen via `vercel dev`,
+niet met de simpele Python-server. Zie `CLAUDE.md` voor de volledige architectuur
+(DNS-opzet, rate limiting, validatie).
 
 ## URL's & SEO
 
@@ -61,10 +68,13 @@ opent.
 (`/menu` i.p.v. `menu.html`); dit werkt alleen op Vercel, niet met de lokale
 Python-server. `robots.txt` + `sitemap.xml` staan in de root. Elke pagina heeft eigen
 `title`/`description`/`og:*`-tags; de homepage heeft daarnaast structured data
-(bedrijfsnaam, adres, Instagram, Google Bedrijfsprofiel) voor Google.
+(bedrijfsnaam, adres, Instagram, Google Bedrijfsprofiel, LinkedIn) voor Google.
 
 ## Nog te doen / bewuste keuzes
 
 - **Openingstijden** staan als placeholder — nog aan te leveren.
 - Serial A (het slanke, schuine display-font uit het brandbook) is nog niet in gebruik —
   alleen trial-bestanden aanwezig in `brand/fonts/A/`, wacht op licentie.
+- `privacy.html` is een eerlijke eerste versie, geen juridisch geverifieerde tekst.
+- De site draait nog op Vercel's gratis **Hobby**-plan, terwijl de voorwaarden daarvan
+  commercieel gebruik eigenlijk niet toestaan — overstappen naar Pro is aan de klant.

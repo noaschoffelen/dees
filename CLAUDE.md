@@ -49,8 +49,19 @@ rather than silently maintaining two copies.
 tags all use the extensionless form; Vercel handles the redirect from the old `.html`
 URL automatically. This only works on Vercel — the plain local dev server (`python3 -m
 http.server`) does **not** understand `cleanUrls`, so internal nav links will 404
-locally even though they resolve fine once deployed. `robots.txt` and `sitemap.xml`
-live at the repo root alongside the pages.
+locally even though they resolve fine once deployed (use `vercel dev` instead if you
+need cleanUrls or the `/api/*` functions to work locally — see "Email & forms backend"
+below). `robots.txt` and `sitemap.xml` live at the repo root alongside the pages.
+
+DNS is on **Cloudflare** (nameservers `raina`/`ray.ns.cloudflare.com`), self-managed by
+the client (own account, scoped "Edit zone DNS" API token — never the Global API Key).
+The root and `www` records point directly at Vercel and are **not** proxied (grey cloud,
+"DNS only") — Vercel's SSL and the mail records below both expect that; don't turn
+proxying on without re-checking both still work. Google Workspace handles the actual
+`@deestilburg.nl` mailboxes (MX `smtp.google.com`, DKIM `google._domainkey`, SPF
+`v=spf1 include:_spf.google.com ~all`, DMARC `p=none`) — Resend's own MX/SPF/DKIM live
+scoped to the `send.` subdomain specifically so they never collide with Google's root
+records (see below).
 
 ## Structure
 
@@ -60,9 +71,15 @@ menu.html            Menu (Coming Soon)
 ateliers.html        Ateliers + contact form
 crew.html            Dees Crew + sollicitatie (application) form
 vergaderen.html      Vergaderen (coming soon)
+privacy.html          Privacybeleid — linked from every footer and both forms
 robots.txt            Allow-all + sitemap pointer
-sitemap.xml            The 5 pages, extensionless URLs
-vercel.json            cleanUrls + trailingSlash config
+sitemap.xml            The 6 pages, extensionless URLs
+vercel.json            cleanUrls + trailingSlash + security headers (CSP etc.) config
+api/
+  ateliers-contact.js  Serverless function behind the ateliers contact form (see below)
+  crew-apply.js        Serverless function behind the sollicitatie form (see below)
+  _utils.js            Shared helpers (header sanitizing, email validation, rate limit) —
+                       the `_` prefix keeps it from becoming its own route
 css/
   styles.css         Design system: color/type/spacing tokens in :root, then components
   fonts.css           Local @font-face rules (Serial B Neue: regular + heavy)
@@ -86,7 +103,8 @@ site, before being processed into `assets/`.
 Every HTML page follows the same shape: `<header class="nav">` with the same nav links,
 a `#mobile-menu` panel, page content, and a shared footer — copy-paste consistent across
 pages rather than templated (there's no templating system). When changing shared chrome
-(nav, footer, mobile menu), update it identically across all five pages.
+(nav, footer, mobile menu), update it identically across all six pages (the five main
+pages plus `privacy.html`).
 
 ## Design system (`css/styles.css`)
 
@@ -126,14 +144,50 @@ the same way rather than introducing a framework or build step:
 2. Mobile nav toggle (`.nav__toggle` / `#mobile-menu`, syncs `aria-expanded`)
 3. Scroll-reveal via `IntersectionObserver` for any `.reveal` element (falls back to
    immediately showing content if unsupported)
-4. Contact forms (`form[action*="formspree.io"]`) — used by `ateliers.html` and
-   `crew.html`. Submits via `fetch()` with `FormData`, shows inline status in
-   `.form__status`, disables the submit button while in flight. `ateliers.html` posts to
-   Formspree form `maewrvnq` (→ ateliers@deestilburg.nl); `crew.html` posts to
-   `mkjwdyny` (→ info@deestilburg.nl). Formspree file uploads need a paid plan, so the
-   crew form doesn't attempt them — cv/motivatie instead go through a separate
-   `mailto:personeel@deestilburg.nl?subject=Sollicitatie` button next to the form, which
-   opens the applicant's own mail client for them to attach files directly.
+4. Contact forms (`form[action^="/api/"]`) — used by `ateliers.html` and `crew.html`.
+   Intercepts submit, converts any `<input type="file">` fields to `{filename, content}`
+   (base64) via `FileReader`, then POSTs everything as one JSON body to the form's own
+   `/api/*` endpoint. Client-side blocks file uploads over ~3MB combined (see "Email &
+   forms backend" for why) and shows inline status in `.form__status`, disabling the
+   submit button while in flight.
+
+## Email & forms backend (`/api/*`)
+
+Both forms post JSON to their own Vercel serverless function (plain Node.js,
+`module.exports = async function handler(req, res) {...}`, no framework) which sends the
+actual email via the **Resend** API (`api.resend.com/emails`, `RESEND_API_KEY` env var —
+set in Vercel's Production **and** Preview environment variables, not just `.env.local`;
+a local-only key does nothing once deployed). Resend's domain verification lives on the
+`send.` subdomain (see DNS note above), and the sending "From" address stays Dees's own
+verified address — only the **display name** is set to the submitter's name, since the
+literal From address can't be spoofed to the visitor's own email (SPF/DKIM/DMARC block
+that, by design). `reply_to` is set to the visitor's address so replying in Gmail goes
+straight to them.
+
+- `api/ateliers-contact.js` → `ateliers@deestilburg.nl`, subject `Interesse atelier — {naam}`.
+- `api/crew-apply.js` → `info@deestilburg.nl`, subject `Sollicitatie website — {naam}`.
+  Accepts `cv`/`motivatie` as `{filename, content}` and attaches them directly to the
+  email via Resend's `attachments` field (base64) — no third-party file host needed.
+  Server-side re-validates file extension (`.pdf`/`.doc`/`.docx`) and combined size
+  (~4MB base64 ≈ Vercel's hard 4.5MB request-body limit) since the client-side check is
+  trivially bypassable by posting to the endpoint directly.
+
+Both endpoints share `api/_utils.js`: `sanitizeHeaderValue` (strips `\r\n`/`"<>"` from
+the name before it's interpolated into the From/Subject headers — prevents header
+injection), `isValidEmail` (basic format check), and `isRateLimited` (in-memory,
+per-IP, 5 requests / 10 min). That rate limiter is **best-effort only** — its `Map`
+lives in module scope, so it only persists for as long as a given serverless instance
+stays warm, and resets on a cold start. It's a deliberate, zero-cost/zero-dependency
+mitigation against basic scripted spam, not a hard guarantee; don't rely on it for
+anything security-critical. Both forms also carry a honeypot field (`name="website"`,
+visually hidden, `tabindex="-1"`) — a filled-in honeypot makes the handler return `200
+{ok:true}` without actually sending anything.
+
+**Testing locally:** `python3 -m http.server` can't run these functions or `cleanUrls`
+— use `vercel dev` instead, and pass the key inline
+(`RESEND_API_KEY="re_..." vercel dev`) since `vercel dev` has not reliably picked up
+`.env.local` in this project (root cause not fully confirmed — possibly the space in
+the `/Users/noa/ Dees/Website` folder name).
 
 ## SEO / social metadata
 
@@ -141,7 +195,7 @@ Every page carries its own `<title>`, `meta description`, and matching
 `og:*`/`twitter:*` tags (title, description, `og:url`, and a shared
 `assets/img/graphic/og-image.png` social-share card). The homepage additionally has
 JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, and `sameAs`
-links (Instagram, Google Business Profile) — deliberately no `telephone`/`openingHours`
+links (Instagram, Google Business Profile, LinkedIn) — deliberately no `telephone`/`openingHours`
 yet since those are still placeholders; add them once real values exist. Search Console
 is verified via the `google-site-verification` meta tag on `index.html` only — don't
 remove it.
@@ -153,6 +207,13 @@ remove it.
   `brand/fonts/A/`. Don't wire it into `css/fonts.css`/`--font-display` until a real
   license is confirmed with the user.
 - Opening hours are still a placeholder in the footer.
+- `privacy.html` is a good-faith first draft based on what the site actually does
+  (which forms collect what, which processors — Resend/Google Workspace/Vercel — are
+  involved) but has not been legally reviewed; don't treat its wording as final.
+- The site currently runs on Vercel's free **Hobby** plan, whose ToS restricts it to
+  non-commercial use — technically out of compliance for a revenue-generating business
+  site. Flagged to the client; upgrading to Pro is their call, not something to do
+  unprompted.
 
 ## Git workflow
 
