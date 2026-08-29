@@ -291,6 +291,11 @@ p { margin: 0 0 1em; }
 
 /* ---------- Small helpers ---------- */
 .hand-inline { height: 1em; width: auto; vertical-align: -.15em; animation: wiggle 1.6s ease-in-out infinite; }
+.hand-inline.hand-point-text { animation-name: wiggle-point-text; }
+@keyframes wiggle-point-text {
+  0%, 100% { transform: rotate(40deg) translateX(0); }
+  50% { transform: rotate(40deg) translateX(.1em); }
+}
 @keyframes wiggle { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(.1em); } }
 
 /* Page hero (binnenpagina's) */

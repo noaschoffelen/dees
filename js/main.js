@@ -46,34 +46,72 @@
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ---- Contactformulieren -> Formspree (echte verzending, incl. bijlages) ---- */
-  var formspreeForms = document.querySelectorAll('form[action*="formspree.io"]');
-  formspreeForms.forEach(function (fsForm) {
-    fsForm.addEventListener("submit", function (e) {
+  /* ---- Contactformulieren -> eigen /api/* endpoint (Resend, echte verzending) ---- */
+  var MAX_BIJLAGEN_BYTES = 3 * 1024 * 1024; /* ruim onder Vercel's ~4.5MB request-limiet na base64 */
+
+  function bestandNaarBase64(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result.split(",")[1]); };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  var apiForms = document.querySelectorAll('form[action^="/api/"]');
+  apiForms.forEach(function (apiForm) {
+    apiForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      var status = fsForm.querySelector(".form__status");
-      var submitBtn = fsForm.querySelector('button[type="submit"]');
+      var status = apiForm.querySelector(".form__status");
+      var submitBtn = apiForm.querySelector('button[type="submit"]');
       if (status) status.textContent = "Bezig met versturen...";
       if (submitBtn) submitBtn.disabled = true;
 
-      fetch(fsForm.action, {
-        method: "POST",
-        body: new FormData(fsForm),
-        headers: { Accept: "application/json" }
-      })
+      var data = {};
+      var bestandVelden = [];
+      new FormData(apiForm).forEach(function (waarde, naam) {
+        if (waarde instanceof File) {
+          if (waarde.size > 0) bestandVelden.push([naam, waarde]);
+        } else {
+          data[naam] = waarde;
+        }
+      });
+
+      var totaleGrootte = bestandVelden.reduce(function (som, veld) { return som + veld[1].size; }, 0);
+      if (totaleGrootte > MAX_BIJLAGEN_BYTES) {
+        if (status) status.textContent = "De bijlages zijn samen te groot (max 3MB). Mail ze liever direct naar personeel@deestilburg.nl.";
+        if (submitBtn) submitBtn.disabled = false;
+        return;
+      }
+
+      Promise.all(
+        bestandVelden.map(function (veld) {
+          return bestandNaarBase64(veld[1]).then(function (base64) {
+            return [veld[0], { filename: veld[1].name, content: base64 }];
+          });
+        })
+      )
+        .then(function (bijlages) {
+          bijlages.forEach(function (paar) { data[paar[0]] = paar[1]; });
+          return fetch(apiForm.action, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json", Accept: "application/json" }
+          });
+        })
         .then(function (response) {
-          if (response.ok) {
-            fsForm.reset();
-            if (status) status.textContent = "Bedankt! Je bericht is verstuurd naar Dees.";
-          } else {
-            return response.json().then(function (data) {
-              var msg =
-                data && data.errors
-                  ? data.errors.map(function (er) { return er.message; }).join(", ")
-                  : "Er ging iets mis. Probeer het later opnieuw of mail ons direct.";
-              if (status) status.textContent = msg;
-            });
-          }
+          return response.json().then(function (body) {
+            if (response.ok) {
+              apiForm.reset();
+              if (status) status.textContent = "Bedankt! Je bericht is verstuurd naar Dees.";
+            } else {
+              if (status) {
+                status.textContent =
+                  (body && body.error) ||
+                  "Er ging iets mis. Probeer het later opnieuw of mail ons direct.";
+              }
+            }
+          });
         })
         .catch(function () {
           if (status) {
