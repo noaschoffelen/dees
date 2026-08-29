@@ -1,14 +1,7 @@
+const { sanitizeHeaderValue, isValidEmail, isRateLimited } = require("./_utils");
+
 const TO = "ateliers@deestilburg.nl";
 const FROM_ADDRESS = "ateliers@deestilburg.nl";
-
-/* Voorkomt header-injectie en houdt de weergavenaam schoon:
-   geen regeleindes, geen aanhalingstekens/haakjes die het "Naam <adres>"-formaat breken. */
-function sanitizeHeaderValue(value) {
-  return String(value || "")
-    .replace(/[\r\n]+/g, " ")
-    .replace(/["<>]/g, "")
-    .trim();
-}
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,10 +9,27 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { naam, email, telefoon, bericht } = req.body || {};
+  if (isRateLimited(req)) {
+    res.status(429).json({ error: "Te veel verzoeken. Probeer het over een paar minuten opnieuw." });
+    return;
+  }
+
+  const { naam, email, telefoon, bericht, website } = req.body || {};
+
+  /* Honeypot: onzichtbaar veld voor mensen, bots vullen het vaak in.
+     Doe alsof het gelukt is, zonder daadwerkelijk te versturen. */
+  if (website) {
+    res.status(200).json({ ok: true });
+    return;
+  }
 
   if (!naam || !email) {
     res.status(400).json({ error: "Naam en e-mailadres zijn verplicht." });
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    res.status(400).json({ error: "Vul een geldig e-mailadres in." });
     return;
   }
 
