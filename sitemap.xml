@@ -20,4 +20,8 @@
     <loc>https://deestilburg.nl/vergaderen</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://deestilburg.nl/privacy</loc>
+    <priority>0.2</priority>
+  </url>
 </urlset>
