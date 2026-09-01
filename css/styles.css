@@ -199,7 +199,7 @@ p { margin: 0 0 1em; }
   font-weight: 700; letter-spacing: .02em; color: var(--ink); margin: 0;
 }
 @media (max-width: 700px) {
-  .hero { min-height: calc(100dvh - 68px); padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; justify-content: center; }
+  .hero { min-height: calc(100dvh - 68px - 60px); padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; justify-content: center; }
   .hero__brood { white-space: normal; flex-wrap: wrap; font-size: clamp(2.6rem, 17vw, 4.5rem); row-gap: .15em; }
   .hero__addr-corner { position: static; display: block; text-align: center; margin-top: 2rem; }
 }
@@ -292,6 +292,11 @@ p { margin: 0 0 1em; }
 /* ---------- Small helpers ---------- */
 .hand-inline { height: 1em; width: auto; vertical-align: -.15em; animation: wiggle 1.6s ease-in-out infinite; }
 .hand-inline.hand-point-text { animation-name: wiggle-point-text; }
+.hand-inline.hand-point-up { animation-name: wiggle-point-up; }
+@keyframes wiggle-point-up {
+  0%, 100% { transform: rotate(-52deg) translateX(0); }
+  50% { transform: rotate(-52deg) translateX(.1em); }
+}
 @keyframes wiggle-point-text {
   0%, 100% { transform: rotate(54deg) translateX(0); }
   50% { transform: rotate(54deg) translateX(.1em); }
