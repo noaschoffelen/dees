@@ -198,11 +198,22 @@ p { margin: 0 0 1em; }
   position: absolute; right: var(--gutter); bottom: var(--gutter); z-index: 3;
   font-weight: 700; letter-spacing: .02em; color: var(--ink); margin: 0;
 }
+.hero__scroll-hint { display: none; }
 @media (max-width: 700px) {
-  .hero { min-height: calc(100dvh - 68px - 60px); padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; justify-content: center; }
+  /* Hero + marquee samen precies één scherm hoog, marquee altijd volledig zichtbaar
+     als laatste — flex verdeelt de ruimte zelf op basis van de echte marquee-hoogte,
+     in plaats van een gegokte pixelwaarde die per toestel kan afwijken. */
+  .home-fold { display: flex; flex-direction: column; min-height: calc(100dvh - 64px); }
+  .hero { min-height: 0; flex: 1 1 auto; padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; justify-content: center; }
+  .home-fold .marquee { flex: 0 0 auto; }
   .hero__brood { white-space: normal; flex-wrap: wrap; font-size: clamp(2.6rem, 17vw, 4.5rem); row-gap: .15em; }
   .hero__addr-corner { position: static; display: block; text-align: center; margin-top: 2rem; }
+  .hero__scroll-hint {
+    display: block; position: absolute; left: 50%; bottom: 14px; z-index: 3;
+    color: var(--paper); transform: translateX(-50%); animation: scroll-hint-bob 1.6s ease-in-out infinite;
+  }
 }
+@keyframes scroll-hint-bob { 50% { transform: translateX(-50%) translateY(6px); } }
 
 .hero__hand { position: absolute; z-index: 2; width: clamp(60px, 9vw, 120px); opacity: .95; }
 .hero__hand.h-a { top: 10%; left: 8%; animation: bob 4s ease-in-out infinite; }
@@ -279,7 +290,7 @@ p { margin: 0 0 1em; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee__track, .hero__hand, .hand-inline, .page-hero__hand { animation: none !important; }
+  .marquee__track, .hero__hand, .hand-inline, .page-hero__hand, .hero__scroll-hint { animation: none !important; }
 }
 
 /* ---------- Desktop nav ---------- */
@@ -292,10 +303,10 @@ p { margin: 0 0 1em; }
 /* ---------- Small helpers ---------- */
 .hand-inline { height: 1em; width: auto; vertical-align: -.15em; animation: wiggle 1.6s ease-in-out infinite; }
 .hand-inline.hand-point-text { animation-name: wiggle-point-text; }
-.hand-inline.hand-point-up { animation-name: wiggle-point-up; }
-@keyframes wiggle-point-up {
-  0%, 100% { transform: rotate(-52deg) translateX(0); }
-  50% { transform: rotate(-52deg) translateX(.1em); }
+.hand-inline.hand-point-left { animation-name: wiggle-point-left; }
+@keyframes wiggle-point-left {
+  0%, 100% { transform: scaleX(-1) translateX(0); }
+  50% { transform: scaleX(-1) translateX(.1em); }
 }
 @keyframes wiggle-point-text {
   0%, 100% { transform: rotate(54deg) translateX(0); }
