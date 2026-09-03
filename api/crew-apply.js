@@ -2,6 +2,8 @@ const { sanitizeHeaderValue, isValidEmail, isRateLimited } = require("./_utils")
 
 const TO = "info@deestilburg.nl";
 const FROM_ADDRESS = "info@deestilburg.nl";
+/* Team tijdelijk voltallig — zet op true zodra sollicitaties weer open mogen. */
+const SOLLICITATIES_OPEN = false;
 const ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
 const MAX_ATTACHMENTS_BASE64_BYTES = 4 * 1024 * 1024; /* ~3MB ruwe bestanden na base64, zelfde grens als de browser-check */
 
@@ -18,6 +20,11 @@ module.exports = async function handler(req, res) {
 
   if (isRateLimited(req)) {
     res.status(429).json({ error: "Te veel verzoeken. Probeer het over een paar minuten opnieuw." });
+    return;
+  }
+
+  if (!SOLLICITATIES_OPEN) {
+    res.status(403).json({ error: "Het team van Dees is voor nu voltallig — sollicitaties staan tijdelijk gesloten." });
     return;
   }
 

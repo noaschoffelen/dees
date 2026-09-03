@@ -74,7 +74,12 @@
       <div class="container" style="max-width:640px">
         <div class="tile" style="color:var(--ink)">
           <h2 style="font-size:var(--fs-h3);margin-bottom:1rem">Solliciteer bij Dees</h2>
-          <form class="form" action="/api/crew-apply" method="POST" novalidate>
+          <div class="form-closed">
+          <div class="form-closed__overlay">
+            <p style="max-width:34ch;margin-bottom:1.2rem">Voor nu is het team van Dees gevuld, maar hou onze Instagram in de gaten voor vacatures in de toekomst.</p>
+            <a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener" class="btn btn--blue">Volg ons op Instagram <img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></a>
+          </div>
+          <form class="form" action="/api/crew-apply" method="POST" novalidate inert>
             <div style="position:absolute;left:-9999px" aria-hidden="true">
               <label for="website">Laat dit veld leeg</label>
               <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
@@ -107,6 +112,7 @@
             <p class="form__note">Je bericht (met cv en motivatiebrief) wordt direct naar Dees verstuurd. Bestanden samen max. 3MB — te groot? Mail ze naar <a href="mailto:personeel@deestilburg.nl?subject=Sollicitatie">personeel@deestilburg.nl</a>. Door te versturen ga je akkoord met het verwerken van je gegevens om te reageren — lees ons <a href="privacy">privacybeleid</a>.</p>
             <p class="form__status" role="status" aria-live="polite" style="font-weight:700;color:var(--purple)"></p>
           </form>
+          </div>
         </div>
       </div>
     </section>
@@ -132,6 +138,7 @@
         <ul class="footer__links">
           <li><a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.linkedin.com/company/129854213" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="tel:+31628966205">+31 6 28966205</a></li>
           <li><a href="mailto:info@deestilburg.nl">info@deestilburg.nl</a></li>
         </ul>
       </div>
