@@ -336,6 +336,9 @@ p { margin: 0 0 1em; }
 .page-hero--blue { background: var(--blue); }
 .page-hero--purple { background: var(--purple); color: var(--blue); }
 .page-hero--purple h1 { color: var(--blue); }
+.page-hero--red { background: var(--red); color: var(--paper); }
+.page-hero--red h1 { color: var(--paper); }
+.page-hero--red .kicker { color: var(--paper); }
 
 /* Info tegels layout hulp */
 .two-col { display: grid; gap: clamp(1.5rem,4vw,3rem); }
