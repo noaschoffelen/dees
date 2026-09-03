@@ -75,59 +75,55 @@
 
     <section class="section">
       <div class="container">
-        <p class="kicker eyebrow-red">Tot 12:00</p>
-        <h2 style="font-size:var(--fs-h2);margin-bottom:1.5rem"><img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="display:inline-block;height:.7em;margin-right:.3em">Ontbijtje</h2>
-        <div class="menu-card" style="max-width:520px">
-          <ul class="menu-list">
-            <li><span>Desem, kaas, jam, eitje, boter</span><span class="price">€ 7,50</span></li>
-            <li class="menu-list__addon"><span>+ verse jus</span><span class="price">€ 10,50</span></li>
-            <li><span>Croissant + jam of kaas</span><span class="price">€ 4,50</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <div class="menu-board reveal">
 
-    <section class="section bg-purple" style="color:var(--paper)">
-      <div class="container">
-        <p class="kicker" style="color:var(--blue)">Vanaf 11:00</p>
-        <h2 style="font-size:var(--fs-h2);margin-bottom:2rem;color:var(--blue)"><img class="hand-inline" src="assets/img/hands/h-right-blue.svg" alt="" style="display:inline-block;height:.7em;margin-right:.3em">Lunch</h2>
-        <div class="two-col">
-          <div class="menu-card">
-            <p class="kicker eyebrow-red" style="margin-bottom:1rem">Op desembrood — enkel/dubbel</p>
+          <div class="menu-board__band menu-board__band--blue">
+            <p class="kicker" style="color:var(--purple)">Tot 12:00</p>
+            <h2 class="menu-board__title" style="color:var(--purple)">Ontbijtje</h2>
             <ul class="menu-list">
+              <li><span>Desem, kaas, jam, eitje, boter</span><span class="price">€ 7,50</span></li>
+              <li class="menu-list__addon"><span>+ verse jus</span><span class="price">€ 10,50</span></li>
+              <li><span>Croissant + jam of kaas</span><span class="price">€ 4,50</span></li>
+            </ul>
+          </div>
+
+          <div class="menu-board__band menu-board__band--purple">
+            <p class="kicker" style="color:var(--blue)">Vanaf 11:00</p>
+            <h2 class="menu-board__title" style="color:var(--blue)">Lunch — op desembrood</h2>
+            <ul class="menu-list menu-list--on-dark">
               <li><span>Kikkererwtensmash</span><span class="price">€ 8 / € 12</span></li>
               <li><span>Doperwtenspread</span><span class="price">€ 8 / € 12,50</span></li>
               <li><span>BLT</span><span class="price">€ 13</span></li>
               <li><span>Eiersalade</span><span class="price">€ 10,50</span></li>
-              <li class="menu-list__addon"><span>+ bacon</span><span class="price">€ 12,50</span></li>
+              <li class="menu-list__addon menu-list__addon--on-dark"><span>+ bacon</span><span class="price">€ 12,50</span></li>
             </ul>
           </div>
-          <div class="menu-card">
-            <p class="kicker eyebrow-red" style="margin-bottom:1rem">Foccacia</p>
-            <ul class="menu-list">
+
+          <div class="menu-board__band menu-board__band--red">
+            <h2 class="menu-board__title" style="color:var(--paper)">Foccacia</h2>
+            <ul class="menu-list menu-list--on-dark">
               <li><span>Caprese</span><span class="price">€ 11</span></li>
               <li><span>Mortadella</span><span class="price">€ 12,50</span></li>
               <li><span>Limabonen en courgette</span><span class="price">€ 11</span></li>
             </ul>
           </div>
-        </div>
 
-        <div class="menu-card" style="margin-top:2rem;max-width:520px">
-          <p class="kicker eyebrow-red" style="margin-bottom:1rem">Ook lekker</p>
-          <ul class="menu-list">
-            <li><span>Tosti kaas / ham</span><span class="price">€ 8 / € 9</span></li>
-            <li><span>Tosti kimchi</span><span class="price">€ 9,50</span></li>
-            <li><span>Soep met brood</span><span class="price">€ 9,25</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+          <div class="menu-board__band menu-board__band--blue">
+            <h2 class="menu-board__title" style="color:var(--purple)">Ook lekker</h2>
+            <ul class="menu-list">
+              <li><span>Tosti kaas / ham</span><span class="price">€ 8 / € 9</span></li>
+              <li><span>Tosti kimchi</span><span class="price">€ 9,50</span></li>
+              <li><span>Soep met brood</span><span class="price">€ 9,25</span></li>
+            </ul>
+          </div>
 
-    <section class="section" style="text-align:center">
-      <div class="container">
-        <p class="kicker eyebrow-red">In de vitrine</p>
-        <h2 style="font-size:var(--fs-h3);margin-top:.5rem"><img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="display:inline-block;height:.6em;margin-right:.25em">Zoet, op = op</h2>
-        <p class="tekst-blok" style="max-width:46ch;margin-inline:auto;margin-top:.8rem">Ons zoete aanbod wisselt dagelijks en staat vers in de vitrine — kom op tijd, want op is op.</p>
+          <div class="menu-board__band menu-board__band--paper" style="text-align:center">
+            <p class="kicker eyebrow-red">In de vitrine</p>
+            <h2 class="menu-board__title" style="font-size:var(--fs-h3)"><img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="display:inline-block;height:.6em;margin-right:.25em">Zoet, op = op</h2>
+            <p class="tekst-blok" style="max-width:42ch;margin-inline:auto;margin-top:.6rem">Ons zoete aanbod wisselt dagelijks en staat vers in de vitrine — kom op tijd, want op is op.</p>
+          </div>
+
+        </div>
       </div>
     </section>
 
