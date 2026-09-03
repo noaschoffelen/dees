@@ -195,11 +195,10 @@ the `/Users/noa/ Dees/Website` folder name).
 Every page carries its own `<title>`, `meta description`, and matching
 `og:*`/`twitter:*` tags (title, description, `og:url`, and a shared
 `assets/img/graphic/og-image.png` social-share card). The homepage additionally has
-JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, and `sameAs`
-links (Instagram, Google Business Profile, LinkedIn) — deliberately no `telephone`/`openingHours`
-yet since those are still placeholders; add them once real values exist. Search Console
-is verified via the `google-site-verification` meta tag on `index.html` only — don't
-remove it.
+JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, `telephone`,
+`openingHoursSpecification` (Tue–Fri 08:00–17:00, Sat–Sun 09:00–16:00, closed Monday) and
+`sameAs` links (Instagram, Google Business Profile, LinkedIn). Search Console is verified
+via the `google-site-verification` meta tag on `index.html` only — don't remove it.
 
 ## Known placeholders / intentional TODOs
 
@@ -207,7 +206,6 @@ remove it.
   poster-style marquee treatment) is not in use — only unlicensed trial files exist in
   `brand/fonts/A/`. Don't wire it into `css/fonts.css`/`--font-display` until a real
   license is confirmed with the user.
-- Opening hours are still a placeholder in the footer.
 - `privacy.html` is a good-faith first draft based on what the site actually does
   (which forms collect what, which processors — Resend/Google Workspace/Vercel — are
   involved) but has not been legally reviewed; don't treat its wording as final.

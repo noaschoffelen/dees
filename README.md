@@ -69,11 +69,11 @@ niet met de simpele Python-server. Zie `CLAUDE.md` voor de volledige architectuu
 (`/menu` i.p.v. `menu.html`); dit werkt alleen op Vercel, niet met de lokale
 Python-server. `robots.txt` + `sitemap.xml` staan in de root. Elke pagina heeft eigen
 `title`/`description`/`og:*`-tags; de homepage heeft daarnaast structured data
-(bedrijfsnaam, adres, Instagram, Google Bedrijfsprofiel, LinkedIn) voor Google.
+(bedrijfsnaam, adres, telefoon, openingstijden, Instagram, Google Bedrijfsprofiel,
+LinkedIn) voor Google.
 
 ## Nog te doen / bewuste keuzes
 
-- **Openingstijden** staan als placeholder — nog aan te leveren.
 - Serial A (het slanke, schuine display-font uit het brandbook) is nog niet in gebruik —
   alleen trial-bestanden aanwezig in `brand/fonts/A/`, wacht op licentie.
 - `privacy.html` is een eerlijke eerste versie, geen juridisch geverifieerde tekst.
