@@ -72,8 +72,9 @@ ateliers.html        Ateliers + contact form
 crew.html            Dees Crew + sollicitatie (application) form
 vergaderen.html      Vergaderen (coming soon)
 privacy.html          Privacybeleid — linked from every footer and both forms
+contact.html          Contact — address, phone, email, socials, embedded Google Map
 robots.txt            Allow-all + sitemap pointer
-sitemap.xml            The 6 pages, extensionless URLs
+sitemap.xml            The 7 pages, extensionless URLs
 vercel.json            cleanUrls + trailingSlash + security headers (CSP etc.) config
 api/
   ateliers-contact.js  Serverless function behind the ateliers contact form (see below)
@@ -103,8 +104,8 @@ site, before being processed into `assets/`.
 Every HTML page follows the same shape: `<header class="nav">` with the same nav links,
 a `#mobile-menu` panel, page content, and a shared footer — copy-paste consistent across
 pages rather than templated (there's no templating system). When changing shared chrome
-(nav, footer, mobile menu), update it identically across all six pages (the five main
-pages plus `privacy.html`).
+(nav, footer, mobile menu), update it identically across all seven pages (the five main
+pages plus `privacy.html` and `contact.html`).
 
 ## Design system (`css/styles.css`)
 
@@ -214,6 +215,14 @@ remove it.
   non-commercial use — technically out of compliance for a revenue-generating business
   site. Flagged to the client; upgrading to Pro is their call, not something to do
   unprompted.
+- The sollicitatie form on `crew.html` is temporarily closed (team is fully staffed): the
+  form stays visible but faded and `inert` behind an overlay pointing to Instagram, and
+  `api/crew-apply.js` has `SOLLICITATIES_OPEN = false` as a server-side backstop. Flip
+  that constant back to `true` (and remove the `inert`/overlay markup) once hiring
+  reopens — don't do it unprompted.
+- `contact.html` embeds a Google Maps iframe (no API key, the `output=embed` URL format),
+  which needed `frame-src https://www.google.com` added to the CSP in `vercel.json` —
+  the only relaxation of an otherwise locked-down policy.
 
 ## Git workflow
 

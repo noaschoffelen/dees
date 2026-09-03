@@ -29,6 +29,7 @@ ateliers.html        Ateliers + contactformulier
 crew.html            Dees Crew + sollicitatieformulier
 vergaderen.html       Vergaderen (Coming Soon)
 privacy.html          Privacybeleid
+contact.html          Contact — adres, telefoon, e-mail, socials, kaart
 api/
   ateliers-contact.js  Verstuurt het contactformulier via Resend
   crew-apply.js        Verstuurt het sollicitatieformulier via Resend (incl. cv/motivatie)
@@ -76,5 +77,7 @@ Python-server. `robots.txt` + `sitemap.xml` staan in de root. Elke pagina heeft 
 - Serial A (het slanke, schuine display-font uit het brandbook) is nog niet in gebruik —
   alleen trial-bestanden aanwezig in `brand/fonts/A/`, wacht op licentie.
 - `privacy.html` is een eerlijke eerste versie, geen juridisch geverifieerde tekst.
+- Het sollicitatieformulier op `crew.html` staat tijdelijk dicht (team is voltallig) —
+  zet `SOLLICITATIES_OPEN` in `api/crew-apply.js` terug op `true` zodra dat weer mag.
 - De site draait nog op Vercel's gratis **Hobby**-plan, terwijl de voorwaarden daarvan
   commercieel gebruik eigenlijk niet toestaan — overstappen naar Pro is aan de klant.
