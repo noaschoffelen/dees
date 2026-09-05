@@ -346,6 +346,11 @@ p { margin: 0 0 1em; }
   0%, 100% { transform: scaleX(-1) translateX(0); }
   50% { transform: scaleX(-1) translateX(.1em); }
 }
+.hand-inline.hand-point-right { animation-name: wiggle-point-right; }
+@keyframes wiggle-point-right {
+  0%, 100% { transform: rotate(38deg) translateX(0); }
+  50% { transform: rotate(38deg) translateX(.1em); }
+}
 @keyframes wiggle-point-text {
   0%, 100% { transform: rotate(54deg) translateX(0); }
   50% { transform: rotate(54deg) translateX(.1em); }
