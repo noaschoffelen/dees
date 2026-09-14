@@ -7,3 +7,5 @@ ehthumbs.db
 Thumbs.db
 .vercel
 .env*
+secrets/
+*-service-account*.json
