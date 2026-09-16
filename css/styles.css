@@ -298,7 +298,6 @@ p { margin: 0 0 1em; }
 .menu-board__band--blue { background: var(--blue); }
 .menu-board__band--purple { background: var(--purple); }
 .menu-board__band--red { background: var(--red); }
-.menu-board__band--paper { background: var(--paper); }
 .menu-board__title { font-size: var(--fs-h3); margin-bottom: 1.2rem; }
 
 .menu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
@@ -347,11 +346,6 @@ p { margin: 0 0 1em; }
 @keyframes wiggle-point-left {
   0%, 100% { transform: scaleX(-1) translateX(0); }
   50% { transform: scaleX(-1) translateX(.1em); }
-}
-.hand-inline.hand-point-right { animation-name: wiggle-point-right; }
-@keyframes wiggle-point-right {
-  0%, 100% { transform: rotate(38deg) translateX(0); }
-  50% { transform: rotate(38deg) translateX(.1em); }
 }
 @keyframes wiggle-point-text {
   0%, 100% { transform: rotate(54deg) translateX(0); }
