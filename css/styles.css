@@ -309,6 +309,8 @@ p { margin: 0 0 1em; }
 }
 .menu-list li:last-child { border-bottom: none; padding-bottom: 0; }
 .menu-list .price { white-space: nowrap; }
+.menu-list__item { display: flex; flex-direction: column; gap: .25rem; }
+.menu-list__desc { font-size: .8rem; font-weight: 400; opacity: .7; }
 .menu-list__addon { margin-top: -.5rem; font-size: .9rem; font-weight: 400; opacity: .75; }
 .menu-list--on-dark li { border-bottom-color: rgba(251,248,242,.35); color: var(--paper); }
 .menu-list__addon--on-dark { opacity: .65; }
