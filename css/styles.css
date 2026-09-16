@@ -250,9 +250,7 @@ p { margin: 0 0 1em; }
 
 /* Themed section backgrounds */
 .bg-blue { background: var(--blue); }
-.bg-red { background: var(--red); color: var(--paper); }
 .bg-purple { background: var(--purple); color: var(--blue); }
-.bg-red .kicker { color: currentColor; }
 
 /* ---------- Formulier ---------- */
 .form { display: grid; gap: 1.1rem; max-width: 620px; }

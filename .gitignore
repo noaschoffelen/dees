@@ -9,3 +9,4 @@ Thumbs.db
 .env*
 secrets/
 *-service-account*.json
+brand/
