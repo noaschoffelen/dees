@@ -283,6 +283,19 @@ p { margin: 0 0 1em; }
 /* ---------- Contact tile ---------- */
 .tile { border: 3px solid var(--ink); border-radius: var(--radius-lg); padding: clamp(1.4rem,3vw,2.2rem); background: var(--paper); }
 
+/* ---------- Prijs-tegels (bureauverhuur) ---------- */
+.price-grid { display: grid; gap: 1.25rem; margin-top: 2rem; }
+@media (min-width: 760px) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
+.price-tile { text-align: center; }
+.price-tile__term { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: .95rem; opacity: .7; }
+.price-tile__amount { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h2); line-height: 1; margin: .5rem 0 .2rem; }
+.price-tile__unit { font-size: .9rem; opacity: .7; }
+
+.perks { display: grid; gap: .8rem; margin-top: 2rem; }
+.perks li { display: flex; gap: .6em; align-items: flex-start; font-weight: 700; }
+.perks img { height: .9em; margin-top: .3em; flex-shrink: 0; }
+.perks__note { margin-top: 1.2rem; font-size: .9rem; font-weight: 400; opacity: .75; }
+
 /* ---------- Menukaart ---------- */
 /* Eén omlijnd bord met losse, direct op elkaar aansluitende gekleurde vlakken per
    categorie — naar het bord uit het brandbook (moodboard), i.p.v. losse kaartjes met
