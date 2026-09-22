@@ -286,10 +286,14 @@ p { margin: 0 0 1em; }
 /* ---------- Prijs-tegels (bureauverhuur) ---------- */
 .price-grid { display: grid; gap: 1.25rem; margin-top: 2rem; }
 @media (min-width: 760px) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
-.price-tile { text-align: center; }
-.price-tile__term { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: .95rem; opacity: .7; }
-.price-tile__amount { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h2); line-height: 1; margin: .5rem 0 .2rem; }
-.price-tile__unit { font-size: .9rem; opacity: .7; }
+.price-tile { text-align: center; color: var(--ink); }
+.price-tile__term {
+  display: flex; align-items: center; justify-content: center; min-height: 2.6em;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .02em; font-size: .95rem; line-height: 1.3; opacity: .65;
+}
+.price-tile__amount { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h2); line-height: 1; margin: .5rem 0 .2rem; color: var(--purple); }
+.price-tile__unit { font-size: .9rem; opacity: .65; }
 
 .perks { display: grid; gap: .8rem; margin-top: 2rem; }
 .perks li { display: flex; gap: .6em; align-items: flex-start; font-weight: 700; }
