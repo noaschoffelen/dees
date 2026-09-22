@@ -340,7 +340,7 @@ p { margin: 0 0 1em; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee__track, .hero__hand, .hand-inline, .page-hero__hand, .hero__scroll-hint { animation: none !important; }
+  .marquee__track, .hero__hand, .hand-inline, .page-hero__hand, .hero__scroll-hint, .page-hero__scroll-hint { animation: none !important; }
 }
 
 /* ---------- Desktop nav ---------- */
@@ -379,6 +379,14 @@ p { margin: 0 0 1em; }
 .page-hero--red { background: var(--red); color: var(--paper); }
 .page-hero--red h1 { color: var(--paper); }
 .page-hero--red .kicker { color: var(--paper); }
+
+.page-hero__scroll-hint { display: none; }
+@media (max-width: 700px) {
+  .page-hero__scroll-hint {
+    display: block; position: absolute; left: 50%; bottom: 14px; z-index: 3;
+    color: currentColor; transform: translateX(-50%); animation: scroll-hint-bob 1.6s ease-in-out infinite;
+  }
+}
 
 /* Info tegels layout hulp */
 .two-col { display: grid; gap: clamp(1.5rem,4vw,3rem); }
