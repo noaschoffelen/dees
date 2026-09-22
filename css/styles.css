@@ -385,6 +385,7 @@ p { margin: 0 0 1em; }
   display: block; position: relative; z-index: 3;
   width: 100vw; margin-inline: calc(50% - 50vw);
   margin-top: clamp(1.6rem, 4vw, 2.6rem);
+  margin-bottom: clamp(2.4rem, 6vw, 3.8rem);
   background: var(--red); color: var(--paper);
   border-block: 3px solid var(--ink);
   padding-block: clamp(1.2rem, 3.4vw, 1.9rem);
