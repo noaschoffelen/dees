@@ -79,11 +79,8 @@ records (see below).
 ```
 index.html          Home — "Ken je Dees?"
 menu.html            Menu — full menu, pulled from the client's own physical menu card
-ateliers.html        Ateliers — "de makers van Dees": the 7 makers in the ateliers, with its own
-                     css/ateliers.css + js/ateliers.js (see "Ateliers-pagina" below)
-werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
-team.html            Team (was `crew.html` / "Dees Crew"; `/crew` 301-redirects to `/team` via
-                     `redirects` in vercel.json) + sollicitatie (application) form
+ateliers.html        Ateliers (fully rented, no waitlist) + bureau (desk) rental + contact form
+crew.html            Dees Crew + sollicitatie (application) form
 vergaderen.html      Vergaderen — meeting room info + booking-request contact form
 privacy.html          Privacybeleid — linked from every footer and both forms
 contact.html          Contact — address, phone, email, socials, embedded Google Map
@@ -94,10 +91,9 @@ api/
   ateliers-contact.js   Serverless function behind the ateliers/bureau contact form (see below)
   crew-apply.js         Serverless function behind the sollicitatie form (see below)
   vergaderen-contact.js Serverless function behind the vergaderen booking-request form (see
-                        below) — temporary stand-in until the client's own booking/
-                        reservation system is wired in; vergaderen.html has a
-                        `#reservering-module` wrapper around this section specifically so
-                        that swap is contained to one block
+                        below) — temporary stand-in until the PlanPanther booking widget is
+                        wired in; vergaderen.html has a `#planpanther-module` wrapper around
+                        this section specifically so that swap is contained to one block
   _utils.js             Shared helpers (header sanitizing, email validation, rate limit) —
                        the `_` prefix keeps it from becoming its own route
 css/
@@ -258,8 +254,8 @@ that, by design). `reply_to` is set to the visitor's address so replying in Gmai
 straight to them.
 
 - `api/ateliers-contact.js` → `ateliers@deestilburg.nl`, subject `Interesse atelier — {naam}`.
-  Used by the bureau (desk) rental enquiry form on `werkplekken.html` (it lived on
-  `ateliers.html` until the two pages were split; the endpoint name stayed).
+  Used by both the ateliers-vol Instagram follow-up and the bureau (desk) rental enquiry
+  form on `ateliers.html` — same endpoint, same inbox for both.
 - `api/crew-apply.js` → `info@deestilburg.nl`, subject `Sollicitatie website — {naam}`.
   Accepts `cv`/`motivatie` as `{filename, content}` and attaches them directly to the
   email via Resend's `attachments` field (base64) — no third-party file host needed.
@@ -267,12 +263,10 @@ straight to them.
   (~4MB base64 ≈ Vercel's hard 4.5MB request-body limit) since the client-side check is
   trivially bypassable by posting to the endpoint directly.
 - `api/vergaderen-contact.js` → `info@deestilburg.nl`, subject `Vergaderruimte aanvraag —
-  {naam}`. Also collects `datum` (gewenste datum), `boeking` (per uur / ochtend / middag / hele
-  dag), `personen` and `arrangement` (drankarrangement) on top of the usual
-  naam/email/telefoon/bericht fields. This is a temporary stand-in for the
-  client's own booking/reservation system (not wired in yet) — once that's available,
-  update the `#reservering-module` block in `vergaderen.html` rather than building a
-  parallel section.
+  {naam}`. Also collects `datum` (gewenste datum) and `personen` (aantal personen) on top
+  of the usual naam/email/telefoon/bericht fields. This is a temporary stand-in for the
+  PlanPanther booking widget (not wired in yet) — once that's available, update the
+  `#planpanther-module` block in `vergaderen.html` rather than building a parallel section.
 
 All three endpoints share `api/_utils.js`: `sanitizeHeaderValue` (strips `\r\n`/`"<>"` from
 the name before it's interpolated into the From/Subject headers — prevents header
@@ -335,11 +329,11 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
 - `contact.html` embeds a Google Maps iframe (no API key, the `output=embed` URL format),
   which needed `frame-src https://www.google.com` added to the CSP in `vercel.json` —
   the only relaxation of an otherwise locked-down policy.
-- `vergaderen.html`'s booking section (`#reservering-module`) currently shows a plain
-  contact form (`api/vergaderen-contact.js`) instead of a real booking widget — the
-  client doesn't have that embed/link yet. Swap it in once available. Room prices,
-  arrangements and photos come from the client's flyer (`brand/vergaderen/Workspees.pdf`;
-  "Workspees" is the flyer's working title, not the room's name — don't use it as a name).
+- `vergaderen.html`'s booking section (`#planpanther-module`) currently shows a plain
+  contact form (`api/vergaderen-contact.js`) instead of the real **PlanPanther** booking
+  widget — the client doesn't have that embed/link yet. Swap it in once available; don't
+  invent pricing or availability details for the meeting room beyond what's already on
+  the page (capacity, airco, screen, lunch/drink arrangements) since none were given.
 
 ## Git workflow
 
