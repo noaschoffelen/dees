@@ -91,9 +91,10 @@ api/
   ateliers-contact.js   Serverless function behind the ateliers/bureau contact form (see below)
   crew-apply.js         Serverless function behind the sollicitatie form (see below)
   vergaderen-contact.js Serverless function behind the vergaderen booking-request form (see
-                        below) — temporary stand-in until the PlanPanther booking widget is
-                        wired in; vergaderen.html has a `#planpanther-module` wrapper around
-                        this section specifically so that swap is contained to one block
+                        below) — temporary stand-in until the client's own booking/
+                        reservation system is wired in; vergaderen.html has a
+                        `#reservering-module` wrapper around this section specifically so
+                        that swap is contained to one block
   _utils.js             Shared helpers (header sanitizing, email validation, rate limit) —
                        the `_` prefix keeps it from becoming its own route
 css/
@@ -265,8 +266,9 @@ straight to them.
 - `api/vergaderen-contact.js` → `info@deestilburg.nl`, subject `Vergaderruimte aanvraag —
   {naam}`. Also collects `datum` (gewenste datum) and `personen` (aantal personen) on top
   of the usual naam/email/telefoon/bericht fields. This is a temporary stand-in for the
-  PlanPanther booking widget (not wired in yet) — once that's available, update the
-  `#planpanther-module` block in `vergaderen.html` rather than building a parallel section.
+  client's own booking/reservation system (not wired in yet) — once that's available,
+  update the `#reservering-module` block in `vergaderen.html` rather than building a
+  parallel section.
 
 All three endpoints share `api/_utils.js`: `sanitizeHeaderValue` (strips `\r\n`/`"<>"` from
 the name before it's interpolated into the From/Subject headers — prevents header
@@ -329,10 +331,10 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
 - `contact.html` embeds a Google Maps iframe (no API key, the `output=embed` URL format),
   which needed `frame-src https://www.google.com` added to the CSP in `vercel.json` —
   the only relaxation of an otherwise locked-down policy.
-- `vergaderen.html`'s booking section (`#planpanther-module`) currently shows a plain
-  contact form (`api/vergaderen-contact.js`) instead of the real **PlanPanther** booking
-  widget — the client doesn't have that embed/link yet. Swap it in once available; don't
-  invent pricing or availability details for the meeting room beyond what's already on
+- `vergaderen.html`'s booking section (`#reservering-module`) currently shows a plain
+  contact form (`api/vergaderen-contact.js`) instead of a real booking widget — the
+  client doesn't have that embed/link yet. Swap it in once available; don't invent
+  pricing or availability details for the meeting room beyond what's already on
   the page (capacity, airco, screen, lunch/drink arrangements) since none were given.
 
 ## Git workflow
