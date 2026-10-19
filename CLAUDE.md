@@ -197,7 +197,10 @@ Every page carries its own `<title>`, `meta description`, and matching
 `assets/img/graphic/og-image.png` social-share card). The homepage additionally has
 JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, `telephone`,
 `openingHoursSpecification` (Tue–Fri 08:00–17:00, Sat–Sun 09:00–16:00, closed Monday) and
-`sameAs` links (Instagram, Google Business Profile, LinkedIn). Search Console is verified
+`sameAs` links (Instagram, Google Business Profile, LinkedIn). The JSON-LD blocks on
+`index.html` and `menu.html` are whitelisted by **sha256 hash** in the CSP `script-src` in
+`vercel.json` — any edit to their contents (even one character) needs that hash
+recomputed and replaced, or the block no longer matches the policy. Search Console is verified
 via the `google-site-verification` meta tag on `index.html` only — don't remove it.
 
 ## Known placeholders / intentional TODOs
