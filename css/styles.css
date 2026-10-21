@@ -136,7 +136,14 @@ p { margin: 0 0 1em; }
   display: flex; align-items: center; justify-content: space-between;
   padding-block: .7rem; gap: 1rem;
 }
-.nav__logo img { height: 34px; width: auto; }
+.nav__logo { display: block; }
+/* Wordmark als masker, zodat js/logo-kleur.js de kleur per pagina kan wisselen */
+.nav__logo-mark {
+  display: block; height: 34px; aspect-ratio: 984.273 / 463.58;
+  background-color: var(--logo-kleur, var(--ink));
+  -webkit-mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
+          mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
+}
 .nav__links { display: none; align-items: center; gap: clamp(1rem, 2.5vw, 2.2rem); }
 .nav__links a {
   font-family: var(--font-display); font-weight: 600; text-transform: uppercase;

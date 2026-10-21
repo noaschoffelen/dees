@@ -85,6 +85,8 @@ css/
   styles.css         Design system: color/type/spacing tokens in :root, then components
   fonts.css           Local @font-face rules (Serial B Neue: regular + heavy)
 js/main.js            Vanilla JS, no dependencies (see below)
+js/logo-kleur.js       Tiny <head> script: gives the nav logo a different brand color on every
+                       page load (see below)
 assets/
   fonts/              Locally hosted Serial B Neue webfonts (.woff2/.woff) — just the
                        Regular/Heavy files actually used; the full 10-weight source
@@ -151,6 +153,14 @@ the same way rather than introducing a framework or build step:
    `/api/*` endpoint. Client-side blocks file uploads over ~3MB combined (see "Email &
    forms backend" for why) and shows inline status in `.form__status`, disabling the
    submit button while in flight.
+
+`js/logo-kleur.js` is deliberately separate from `main.js` and loaded synchronously in
+`<head>` on all seven pages: it picks a random brand color (red/purple/blue/ink, never
+the same as the previous page via `sessionStorage`) and sets `--logo-kleur` on `<html>`
+before first paint, so the logo doesn't visibly flash from one color to another. The
+nav logo is a `<span class="nav__logo-mark">` that uses the wordmark SVG as a CSS
+`mask` with `background-color: var(--logo-kleur)` — not an `<img>` — which is what makes
+the color swappable.
 
 ## Email & forms backend (`/api/*`)
 
