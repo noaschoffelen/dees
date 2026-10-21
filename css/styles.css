@@ -241,15 +241,10 @@ p { margin: 0 0 1em; }
   font-size: clamp(1.2rem, min(4.2vw, 7vh), 7rem); color: var(--hero-fg);
   display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; white-space: nowrap; gap: .25em;
 }
-/* Logo + kop als één lockup, in de verhouding van het officiële logo met byline
-   (dees-lockup-white.svg): de regel eronder is ~96% zo breed als het woordmerk, met een
-   kleine tussenruimte. Het blok is zo breed als de kop; het logo steekt 2,25% aan
-   weerszijden uit. Percentages bij margin rekenen t.o.v. die breedte. */
-.hero__lockup { width: max-content; max-width: 100%; margin-inline: auto; }
 .hero__logo {
-  display: block; width: 104.5%; margin: 0 -2.25% 2%;
-  aspect-ratio: 984.273 / 463.58;
-  background-color: var(--hero-fg);
+  display: block; margin: 0 auto clamp(1.5rem, 3vw, 2.75rem);
+  height: clamp(64px, 9vw, 150px); aspect-ratio: 984.273 / 463.58; max-width: 100%;
+  background-color: var(--paper);
   -webkit-mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
           mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
 }
