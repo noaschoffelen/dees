@@ -242,8 +242,8 @@ p { margin: 0 0 1em; }
   display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; white-space: nowrap; gap: .25em;
 }
 .hero__logo {
-  display: block; margin: 0 auto clamp(1.5rem, 3vw, 2.75rem);
-  height: clamp(64px, 9vw, 150px); aspect-ratio: 984.273 / 463.58; max-width: 100%;
+  display: block; margin: 0 auto clamp(1.25rem, 2.5vw, 2.5rem);
+  height: clamp(80px, 13vw, 230px); aspect-ratio: 984.273 / 463.58; max-width: 100%;
   background-color: var(--paper);
   -webkit-mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
           mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
@@ -262,8 +262,7 @@ p { margin: 0 0 1em; }
   .hero { min-height: 0; flex: 1 1 auto; padding-block: clamp(3.5rem, 16vw, 6rem); flex-direction: column; justify-content: center; }
   .home-fold .marquee { flex: 0 0 auto; }
   .hero__brood { white-space: normal; flex-wrap: wrap; font-size: clamp(2.6rem, 17vw, 4.5rem); row-gap: .15em; }
-  .hero__lockup { width: auto; }
-  .hero__logo { width: auto; height: clamp(80px, 30vw, 140px); margin: 0 auto clamp(1.25rem, 5vw, 2rem); }
+  .hero__logo { height: clamp(80px, 30vw, 140px); }
   .hero__addr-corner { position: static; display: block; text-align: center; margin-top: 2rem; }
   .hero__scroll-hint {
     display: block; position: absolute; left: 50%; bottom: 14px; z-index: 3;
