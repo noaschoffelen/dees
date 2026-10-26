@@ -238,7 +238,7 @@ p { margin: 0 0 1em; }
 :root[data-hero="blauw"] .hero { --hero-bg: var(--blue); --hero-fg: var(--purple); --hero-hand: var(--ink); --hero-addr: var(--ink); }
 .hero__inner { position: relative; z-index: 3; width: 100%; max-width: 1700px; margin-inline: auto; text-align: center; }
 .hero__brood {
-  font-size: clamp(1.2rem, min(4.2vw, 7vh), 7rem); color: var(--paper);
+  font-size: clamp(1.2rem, min(4.2vw, 7vh), 7rem); color: var(--hero-fg);
   display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; white-space: nowrap; gap: .25em;
 }
 /* Logo + kop als één lockup, in de verhouding van het officiële logo met byline
@@ -249,7 +249,7 @@ p { margin: 0 0 1em; }
 .hero__logo {
   display: block; width: 104.5%; margin: 0 -2.25% 2%;
   aspect-ratio: 984.273 / 463.58;
-  background-color: var(--paper);
+  background-color: var(--hero-fg);
   -webkit-mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
           mask: url("../assets/img/logo/dees-wordmark-black.svg") center / contain no-repeat;
 }

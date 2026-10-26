@@ -112,7 +112,34 @@
         <div class="container hero__inner">
           <div class="hero__lockup">
             <span class="hero__logo" role="img" aria-label="Dees"></span>
-            <h1 class="display hero__brood">Brood<img class="hand-inline hand-point-left" src="assets/img/hands/h-right.svg" alt="">Ateliers<img class="hand-inline" src="assets/img/hands/h-right.svg" alt="">Koffie</h1>
+            <h1 class="display hero__brood"><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-brood">Brood</button><span class="hand-inline hand-point-left hero__hand-icon" aria-hidden="true"></span><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-ateliers">Ateliers</button><span class="hand-inline hero__hand-icon" aria-hidden="true"></span><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-koffie">Koffie</button></h1>
+          </div>
+
+          <!-- Pop-ups bij Brood / Ateliers / Koffie (buiten de h1, zodat de hoofdkop voor
+               Google kort blijft). Gepositioneerd door js/main.js. -->
+          <div class="hero__pop hero__pop--brood" id="pop-brood">
+            <img src="assets/img/photo/Horeca/DEESopening-43.jpg" alt="Lachende gast aan de balie van Dees." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Brood</p>
+              <p>Vers desembrood uit onze eigen bakkerij. Proef het bij ontbijt, lunch of als focaccia.</p>
+              <a href="menu" class="hero__pop-link">Bekijk het menu</a>
+            </div>
+          </div>
+          <div class="hero__pop hero__pop--ateliers" id="pop-ateliers">
+            <img src="assets/img/photo/Ateliers/DeesdoorPien-edit2-25.jpg" alt="Deur van een atelier bij Dees." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Ateliers</p>
+              <p>In onze ateliers werken creatieve makers aan hun eigen werk. Zelf een plek nodig? Je kunt bij ons een bureau huren.</p>
+              <a href="ateliers" class="hero__pop-link">Over de ateliers</a>
+            </div>
+          </div>
+          <div class="hero__pop hero__pop--koffie" id="pop-koffie">
+            <img src="assets/img/photo/Horeca/DEESopening-13.jpg" alt="Crew van Dees achter de kassa." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Koffie</p>
+              <p>Een goede kop koffie, met iets lekkers uit de vitrine erbij. Di–vr 08:30–16:30, za–zo 09:00–16:00.</p>
+              <a href="contact" class="hero__pop-link">Kom langs</a>
+            </div>
           </div>
         </div>
         <p class="hero__addr-corner payoff">Korte Tuinstraat 20 &amp; 22, Tilburg</p>
