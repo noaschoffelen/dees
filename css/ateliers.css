@@ -260,22 +260,3 @@
   .maker__logo { left: -1%; }
   .maker__extra { right: -3%; }
 }
-
-/* ==========================================================================
-   KADER-VARIANT (tijdelijk, ter vergelijking): ?kader=blob
-   js/ateliers.js zet data-kader op <html>. Zonder parameter: het standaardkader.
-   ========================================================================== */
-[data-kader="blob"] .maker__deur,
-[data-kader="blob"] .maker-kaart__foto {
-  border-radius: 47% 53% 44% 56% / 52% 46% 54% 48%;
-  animation: blob-vorm 30s ease-in-out infinite alternate;
-}
-[data-kader="blob"] .maker:nth-child(odd of .maker) .maker__deur,
-[data-kader="blob"] .maker-kaart:nth-child(even) .maker-kaart__foto { animation-delay: -12s; animation-duration: 36s; }
-@keyframes blob-vorm {
-  0%   { border-radius: 47% 53% 44% 56% / 52% 46% 54% 48%; }
-  33%  { border-radius: 56% 44% 52% 48% / 45% 54% 46% 55%; }
-  66%  { border-radius: 43% 57% 58% 42% / 55% 47% 53% 45%; }
-  100% { border-radius: 52% 48% 45% 55% / 47% 56% 44% 53%; }
-}
-@media (prefers-reduced-motion: reduce) { [data-kader="blob"] .maker__deur, [data-kader="blob"] .maker-kaart__foto { animation: none; } }

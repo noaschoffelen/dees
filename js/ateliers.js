@@ -7,16 +7,59 @@
 (function () {
   "use strict";
 
-  // Tijdelijk ter vergelijking: ?kader=blob kiest de bewegende blob-vorm
-  var kader = new URLSearchParams(location.search).get("kader");
-  if (kader) document.documentElement.setAttribute("data-kader", kader);
-
   var sectie = document.querySelector(".makers");
   if (!sectie) return;
   var sticky = sectie.querySelector(".makers__sticky");
   var track = sectie.querySelector(".makers__track");
   var panelen = Array.prototype.slice.call(track.children);
   var makers = panelen.filter(function (p) { return p.id; });
+  /* ---- Elke keer een andere volgorde, zodat geen maker "voorrang" krijgt ---- */
+  var schud = function (lijst) {
+    for (var i = lijst.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = lijst[i]; lijst[i] = lijst[j]; lijst[j] = t;
+    }
+    return lijst;
+  };
+  var volgorde = schud(makers.map(function (m) { return m.id; }));
+
+  // Rail: panelen in de nieuwe volgorde, kleuren op volgorde zodat er nooit twee gelijke naast elkaar staan
+  var paneelKleuren = ["blauw", "inkt", "papier", "rood", "paars"];
+  volgorde.forEach(function (id, i) {
+    var p = document.getElementById(id);
+    p.className = p.className.replace(/\bmaker--(rood|blauw|paars|papier|inkt)\b/, "maker--" + paneelKleuren[i % paneelKleuren.length]);
+    track.appendChild(p);
+  });
+  panelen = Array.prototype.slice.call(track.children);
+  makers = panelen.filter(function (p) { return p.id; });
+
+  // Navigatie onderin de rail
+  var navLijst = sectie.querySelector(".makers__nav");
+  volgorde.forEach(function (id) { navLijst.appendChild(navLijst.querySelector('[data-maker="' + id + '"]')); });
+
+  // Hero-collage: de kaarten wisselen van plek (posities blijven, wie waar staat wisselt)
+  var collage = document.querySelector(".makers-hero__stickers");
+  if (collage) {
+    var kaarten = Array.prototype.slice.call(collage.querySelectorAll(".maker-kaart"));
+    var plekken = kaarten.map(function (k) { return k.getAttribute("style"); });
+    volgorde.forEach(function (id, i) {
+      var k = collage.querySelector('.maker-kaart[data-maker="' + id + '"]');
+      if (!k) return;
+      k.setAttribute("style", plekken[i]);
+      collage.appendChild(k);
+    });
+  }
+
+  // Lopende band met namen
+  var band = document.querySelector(".marquee--makers .marquee__track");
+  if (band) {
+    var hand = '<img src="assets/img/hands/h-right.svg" alt="">';
+    var tekst = volgorde.map(function (id) {
+      return document.getElementById(id + "-naam").textContent.replace(/\u00ad/g, "") + hand;
+    }).join("");
+    Array.prototype.forEach.call(band.children, function (span) { span.innerHTML = tekst; });
+  }
+
   var navKnoppen = sectie.querySelectorAll(".makers__nav button");
   var voortgang = sectie.querySelector(".makers__voortgang span");
   var nav = document.querySelector(".nav");

@@ -219,9 +219,14 @@ loaded only by this page, so it can change without touching the rest of the site
   `--d` (-1..1, distance from centre) that `ateliers.css` uses for the photo/name parallax.
   On mobile / reduced motion the panels just stack and slide in via IntersectionObserver.
 - Each maker is an `<article class="maker maker--{kleur}">` (kleur: rood/blauw/paars/
-  papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`;
-  `?kader=blob` previews a slowly morphing blob instead), optional `.maker__extra` round
+  papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`),
+  optional `.maker__extra` round
   photo and `.maker__logo` sticker (`--masker` variant recolours single-colour logos).
+- Order is shuffled on every page load by `js/ateliers.js` (rail panels, rail nav, hero
+  collage positions, marquee) so no maker gets "voorrang" — that's a client wish, don't
+  replace it with a fixed order. Panel colours are reassigned in sequence after the
+  shuffle (blauw/inkt/papier/rood/paars), so the `maker--{kleur}` in the HTML is only
+  the no-JS fallback.
 - Texts marked "PLACEHOLDER" (Daycare, Het Kleinste Wijndoosje, Kaapstad) still need the
   maker's own copy; Studio Bouks.' text is a Dutch translation of their English blurb.
   Source material from the makers lives in `brand/makers/<naam>/` (not served).
