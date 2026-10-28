@@ -7,6 +7,10 @@
 (function () {
   "use strict";
 
+  // Tijdelijk ter beoordeling: ?kader=polaroid|sticker|blob kiest een andere fotovorm
+  var kader = new URLSearchParams(location.search).get("kader");
+  if (kader) document.documentElement.setAttribute("data-kader", kader);
+
   var sectie = document.querySelector(".makers");
   if (!sectie) return;
   var sticky = sectie.querySelector(".makers__sticky");
@@ -49,6 +53,7 @@
   var teken = function () {
     gepland = false;
     if (!railAan) return;
+    if (sticky.scrollLeft) sticky.scrollLeft = 0; // vangnet voor browsers zonder overflow: clip
     var p = voortgangVan();
     var x = p * afstand;
     track.style.transform = "translate3d(" + (-x) + "px,0,0)";
