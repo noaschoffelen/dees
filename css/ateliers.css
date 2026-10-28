@@ -15,7 +15,8 @@
 .makers-hero__inner { position: relative; z-index: 2; }
 .makers-hero .kicker { color: var(--red); }
 .makers-hero__titel {
-  font-size: clamp(3rem, 10vw, 8.5rem); line-height: .92; text-transform: uppercase;
+  /* niet krapper dan ~1.05: anders steekt het accent van EÉN omhoog in de regel erboven */
+  font-size: clamp(3rem, 10vw, 8.5rem); line-height: 1.06; text-transform: uppercase;
   margin-top: .6rem; max-width: 9ch;
 }
 .makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
