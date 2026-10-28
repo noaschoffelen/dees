@@ -254,8 +254,9 @@ straight to them.
   (~4MB base64 ≈ Vercel's hard 4.5MB request-body limit) since the client-side check is
   trivially bypassable by posting to the endpoint directly.
 - `api/vergaderen-contact.js` → `info@deestilburg.nl`, subject `Vergaderruimte aanvraag —
-  {naam}`. Also collects `datum` (gewenste datum) and `personen` (aantal personen) on top
-  of the usual naam/email/telefoon/bericht fields. This is a temporary stand-in for the
+  {naam}`. Also collects `datum` (gewenste datum), `boeking` (per uur / ochtend / middag / hele
+  dag), `personen` and `arrangement` (drankarrangement) on top of the usual
+  naam/email/telefoon/bericht fields. This is a temporary stand-in for the
   client's own booking/reservation system (not wired in yet) — once that's available,
   update the `#reservering-module` block in `vergaderen.html` rather than building a
   parallel section.
@@ -323,9 +324,9 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
   the only relaxation of an otherwise locked-down policy.
 - `vergaderen.html`'s booking section (`#reservering-module`) currently shows a plain
   contact form (`api/vergaderen-contact.js`) instead of a real booking widget — the
-  client doesn't have that embed/link yet. Swap it in once available; don't invent
-  pricing or availability details for the meeting room beyond what's already on
-  the page (capacity, airco, screen, lunch/drink arrangements) since none were given.
+  client doesn't have that embed/link yet. Swap it in once available. Room prices,
+  arrangements and photos come from the client's flyer (`brand/vergaderen/Workspees.pdf`;
+  "Workspees" is the flyer's working title, not the room's name — don't use it as a name).
 
 ## Git workflow
 

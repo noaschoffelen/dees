@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { naam, email, telefoon, datum, personen, bericht, website } = req.body || {};
+  const { naam, email, telefoon, datum, boeking, personen, arrangement, bericht, website } = req.body || {};
 
   /* Honeypot: onzichtbaar veld voor mensen, bots vullen het vaak in.
      Doe alsof het gelukt is, zonder daadwerkelijk te versturen. */
@@ -52,7 +52,9 @@ module.exports = async function handler(req, res) {
           `E-mail: ${email}\n` +
           `Telefoon: ${telefoon || "-"}\n` +
           `Gewenste datum: ${datum || "-"}\n` +
-          `Aantal personen: ${personen || "-"}\n\n` +
+          `Boeking: ${boeking || "-"}\n` +
+          `Aantal personen: ${personen || "-"}\n` +
+          `Drankarrangement: ${arrangement || "geen / van de kaart"}\n\n` +
           `Bericht:\n${bericht || "-"}`,
       }),
     });
