@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Vergaderpagina: beeld-eerst hero en beweging. Alleen geladen door
+   vergaderen.html; de parallax van de hero-foto zit in js/vergaderen.js.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.vg-hero {
+  position: relative; overflow: hidden;
+  background: var(--purple); color: var(--blue);
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 5.5rem);
+}
+.vg-hero__inner { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: center; }
+@media (min-width: 900px) {
+  .vg-hero { min-height: min(88vh, 860px); display: flex; align-items: center; }
+  .vg-hero__inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+}
+.vg-hero h1 { font-size: clamp(2.6rem, 5.2vw, 5.6rem); line-height: 1.02; text-transform: uppercase; color: var(--blue); margin-top: .6rem; }
+.vg-hero .lead { max-width: 40ch; margin-top: 1.2rem; color: var(--paper); }
+.vg-hero .btn { margin-top: 2rem; }
+
+.vg-hero__beeld { position: relative; justify-self: center; width: min(100%, 560px); }
+.vg-hero__foto {
+  aspect-ratio: 4 / 5; overflow: hidden;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg);
+  box-shadow: 14px 16px 0 var(--ink); background: var(--ink);
+  transform: translateY(calc(var(--s, 0) * -40px)) rotate(calc(2deg - var(--s, 0) * 3deg));
+  will-change: transform;
+}
+.vg-hero__foto img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.08 - var(--s, 0) * .08)); }
+
+.vg-sticker {
+  position: absolute; left: var(--x); top: var(--y); z-index: 2;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase; white-space: nowrap;
+  font-size: clamp(.85rem, 1.3vw, 1.15rem); line-height: 1;
+  padding: .7em 1.05em .62em; border-radius: 100px;
+  background: var(--st-bg); color: var(--st-fg);
+  border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(var(--r));
+  animation: vg-zweef var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+.vg-sticker--rood   { --st-bg: var(--red);   --st-fg: var(--paper); }
+.vg-sticker--blauw  { --st-bg: var(--blue);  --st-fg: var(--ink); }
+.vg-sticker--papier { --st-bg: var(--paper); --st-fg: var(--purple); }
+@keyframes vg-zweef {
+  0%   { transform: translate(0, 0) rotate(var(--r)); }
+  50%  { transform: translate(10px, -12px) rotate(calc(var(--r) + 3deg)); }
+  100% { transform: translate(-8px, 8px) rotate(calc(var(--r) - 2deg)); }
+}
+@media (max-width: 899px) {
+  .vg-hero__foto { aspect-ratio: 4 / 4.4; }
+  .vg-sticker { font-size: .8rem; left: max(var(--x), -1%); }
+}
+
+/* ---------- Prijstegels poppen een voor een in ---------- */
+.reveal .vg-pop > * { opacity: 0; transform: translateY(30px) scale(.9) rotate(-3deg); transition: opacity .5s var(--ease), transform .6s cubic-bezier(.34,1.56,.64,1); }
+.reveal .vg-pop > *:nth-child(2) { transition-delay: .1s; }
+.reveal .vg-pop > *:nth-child(3) { transition-delay: .2s; }
+.reveal .vg-pop > *:nth-child(4) { transition-delay: .3s; }
+.reveal.in .vg-pop > * { opacity: 1; transform: none; }
+.reveal.in .vg-pop > .price-tile--uitgelicht { transform: rotate(-2deg); }
+
+/* ---------- Twee foto's die van opzij binnenschuiven ---------- */
+.vg-duo { display: grid; gap: clamp(1.25rem, 3vw, 2rem); margin-top: clamp(3rem, 7vw, 5rem); }
+@media (min-width: 760px) { .vg-duo { grid-template-columns: 1.25fr 1fr; align-items: end; } }
+.vg-duo img {
+  width: 100%; object-fit: cover; aspect-ratio: 4 / 3;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink);
+  transition: transform .9s var(--ease), opacity .9s var(--ease);
+}
+.vg-duo img:last-child { aspect-ratio: 4 / 5; }
+.vg-duo.reveal { opacity: 1; transform: none; }
+.vg-duo.reveal:not(.in) img:first-child { transform: translateX(-12vw) rotate(-4deg); opacity: 0; }
+.vg-duo.reveal:not(.in) img:last-child  { transform: translateX(12vw) rotate(4deg); opacity: 0; }
+.vg-duo.in img:first-child { transform: rotate(-1.5deg); }
+.vg-duo.in img:last-child  { transform: rotate(2deg); }
+
+/* ---------- Arrangementen van opzij ---------- */
+.vg-zijwaarts.reveal { opacity: 1; transform: none; }
+.vg-zijwaarts > * { transition: transform .8s var(--ease), opacity .8s var(--ease); }
+.vg-zijwaarts.reveal:not(.in) > :first-child { transform: translateX(-8vw); opacity: 0; }
+.vg-zijwaarts.reveal:not(.in) > :last-child  { transform: translateX(8vw); opacity: 0; }
+.vg-zijwaarts.in > :last-child { transform: rotate(1.5deg); }
+
+#reservering-module { scroll-margin-top: 90px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-sticker { animation: none; }
+  .vg-hero__foto, .vg-hero__foto img { transform: rotate(2deg); }
+  .reveal .vg-pop > *, .vg-duo img, .vg-zijwaarts > * { transition: none; opacity: 1; transform: none; }
+}

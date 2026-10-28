@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="assets/img/logo/favicon.png" />
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/vergaderen.css" />
   <script src="js/logo-kleur.js"></script>
   <meta property="og:title" content="Vergaderruimte huren in Tilburg (6–16 personen) | Dees" />
   <meta property="og:description" content="Kom vergaderen bij Dees! Vergaderruimte voor 6 tot 16 personen in Tilburg, met goede koffie en lunch erbij." />
@@ -67,15 +68,24 @@
 
   <main>
 
-    <section class="page-hero page-hero--purple">
-      <div class="container">
-        <p class="kicker eyebrow-red">Vergaderen bij Dees · 6 tot 16 personen</p>
-        <h1>Kom vergaderen<br>bij Dees!</h1>
-        <p class="lead" style="max-width:48ch;margin-top:1rem;color:var(--paper)">Een eigen ruimte, goeie koffie en een lunch waar je voor blijft zitten. Vergaderen smaakt beter bij Dees.</p>
+    <!-- HERO: beeld eerst — de open deur van de vergaderruimte, met zwevende stickers -->
+    <section class="vg-hero">
+      <div class="container vg-hero__inner">
+        <div class="vg-hero__tekst">
+          <p class="kicker eyebrow-red">Vergaderen bij Dees</p>
+          <h1>Kom vergaderen<br>bij Dees!</h1>
+          <p class="lead">Een eigen ruimte, goeie koffie en een lunch waar je voor blijft zitten. Vergaderen smaakt beter bij Dees.</p>
+          <a href="#reservering-module" class="btn btn--red">Plan je vergadering <img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="filter:brightness(0) invert(1)"></a>
+        </div>
+        <div class="vg-hero__beeld">
+          <div class="vg-hero__foto">
+            <img src="assets/img/photo/Vergaderen/vergaderruimte-deur.jpg" alt="De open blauwe deur van de vergaderruimte van Dees, met de tafels en stoelen erachter." />
+          </div>
+          <span class="vg-sticker vg-sticker--rood" style="--x:-8%;--y:12%;--r:-7deg;--dur:9s">6 tot 16 personen</span>
+          <span class="vg-sticker vg-sticker--blauw" style="--x:66%;--y:4%;--r:6deg;--dur:11s;--delay:-3s">Koffie erbij</span>
+          <span class="vg-sticker vg-sticker--papier" style="--x:58%;--y:84%;--r:-4deg;--dur:10s;--delay:-6s">TV-scherm &amp; flip-over</span>
+        </div>
       </div>
-      <svg class="page-hero__scroll-hint" width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
-        <path d="M2 2L14 14L26 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
     </section>
 
     <div class="marquee" aria-hidden="true">
@@ -103,7 +113,7 @@
         </div>
 
         <div class="reveal" style="margin-top:clamp(2rem,5vw,3rem)">
-          <div class="price-grid price-grid--4">
+          <div class="price-grid price-grid--4 vg-pop">
           <div class="tile price-tile">
           <p class="price-tile__term">Per uur</p>
           <p class="price-tile__amount">€60</p>
@@ -128,8 +138,7 @@
           <p class="perks__note">Prijzen per ruimte, exclusief btw. Huren na 17:00 uur is in overleg en tegen meerprijs mogelijk.</p>
         </div>
 
-        <div class="photo-row reveal" style="margin-top:clamp(3rem,7vw,5rem)">
-          <img src="assets/img/photo/Vergaderen/vergaderruimte-deur.jpg" alt="Blauwe glazen deur naar de vergaderruimte van Dees, met een plant ernaast." loading="lazy" />
+        <div class="vg-duo reveal">
           <img src="assets/img/photo/Vergaderen/vergaderruimte-tafels.jpg" alt="De vergaderruimte met rode en lichtblauwe tafels in een U-opstelling." loading="lazy" />
           <img src="assets/img/photo/Vergaderen/vergaderruimte-koffie.jpg" alt="Koffie, verse muntthee en tafelwater op de vergadertafel." loading="lazy" />
         </div>
@@ -146,7 +155,7 @@
             <p>Dranken, lunch en lekkers bestel je van de kaart, op nacalculatie. Of kies vooraf een arrangement of break. Onderstaande prijzen zijn per persoon.</p>
           </div>
         </div>
-        <div class="two-col reveal" style="margin-top:2rem">
+        <div class="two-col reveal vg-zijwaarts" style="margin-top:2rem">
           <div class="tile tarief">
             <table class="tarief__tabel">
               <caption>Drankarrangement</caption>
@@ -288,5 +297,6 @@
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/vergaderen.js"></script>
 </body>
 </html>

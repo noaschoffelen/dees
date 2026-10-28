@@ -84,7 +84,9 @@ ateliers.html        Ateliers — "de makers van Dees": the 7 makers in the atel
 werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
 team.html            Team (was `crew.html` / "Dees Crew"; `/crew` 301-redirects to `/team` via
                      `redirects` in vercel.json) + sollicitatie (application) form
-vergaderen.html      Vergaderen — meeting room info + booking-request contact form
+vergaderen.html      Vergaderen — meeting room info + booking-request contact form; own
+                     css/vergaderen.css + js/vergaderen.js (image-first hero with floating
+                     stickers + light scroll parallax, pop-in price tiles, slide-in photos)
 privacy.html          Privacybeleid — linked from every footer and both forms
 contact.html          Contact — address, phone, email, socials, embedded Google Map
 robots.txt            Allow-all + sitemap pointer
