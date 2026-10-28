@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Ateliers-pagina: de makers van Dees
+   Alleen geladen door ateliers.html. Gedrag (horizontale rail, stickers,
+   reveal) zit in js/ateliers.js.
+   ========================================================================== */
+
+/* ---------- Hero met zwevende naam-stickers ---------- */
+.makers-hero {
+  position: relative; overflow: hidden;
+  background: var(--purple); color: var(--blue);
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem);
+  min-height: min(78vh, 720px);
+  display: flex; align-items: center;
+}
+.makers-hero__inner { position: relative; z-index: 2; }
+.makers-hero .kicker { color: var(--red); }
+.makers-hero__titel {
+  font-size: clamp(3rem, 10vw, 8.5rem); line-height: .92; text-transform: uppercase;
+  margin-top: .6rem; max-width: 9ch;
+}
+.makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
+
+.makers-hero__stickers { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.naam-sticker {
+  position: absolute; left: var(--x); top: var(--y);
+  pointer-events: auto;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(.95rem, 1.5vw, 1.35rem); line-height: 1; white-space: nowrap;
+  padding: .7em 1.05em .62em; border-radius: 100px;
+  background: var(--s-bg); color: var(--s-fg);
+  border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(var(--r));
+  animation: sticker-zweef var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
+  transition: box-shadow .15s var(--ease), filter .15s;
+}
+.naam-sticker:hover, .naam-sticker:focus-visible {
+  animation-play-state: paused; box-shadow: 8px 8px 0 var(--ink); filter: saturate(1.15);
+}
+.naam-sticker:focus-visible { outline: 3px solid var(--paper); outline-offset: 4px; }
+.naam-sticker--rood   { --s-bg: var(--red);    --s-fg: var(--paper); }
+.naam-sticker--blauw  { --s-bg: var(--blue);   --s-fg: var(--ink); }
+.naam-sticker--papier { --s-bg: var(--paper);  --s-fg: var(--purple); }
+@keyframes sticker-zweef {
+  0%   { transform: translate(0, 0) rotate(var(--r)); }
+  50%  { transform: translate(var(--dx, 14px), calc(var(--dy, 10px) * -1)) rotate(calc(var(--r) + 3deg)); }
+  100% { transform: translate(calc(var(--dx, 14px) * -.6), var(--dy, 10px)) rotate(calc(var(--r) - 2deg)); }
+}
+
+@media (max-width: 899px) {
+  .makers-hero { display: block; min-height: 0; }
+  .makers-hero__stickers {
+    position: static; display: flex; flex-wrap: wrap; gap: .8rem .6rem;
+    padding: 2rem var(--gutter) 0; max-width: var(--maxw); margin-inline: auto;
+  }
+  .naam-sticker { position: static; font-size: 1rem; }
+}
+
+/* ---------- Ateliers-vol sticker (bestaande .hero-sticker), iets lager ---------- */
+.makers-vol { background: var(--purple); padding-bottom: clamp(1rem, 3vw, 2rem); }
+.makers-vol .hero-sticker { margin-top: 0; }
+
+/* ---------- De rail ---------- */
+.makers { position: relative; background: var(--ink); }
+.makers__sticky { position: relative; }
+.makers__track { display: block; }
+
+/* Rail-modus (desktop, gezet door js/ateliers.js): verticaal scrollen schuift
+   de panelen horizontaal voorbij. De sectie krijgt via JS een hoogte zodat de
+   scrollafstand precies de breedte van de track is. */
+.makers.is-rail .makers__sticky {
+  position: sticky; top: var(--nav-h, 64px);
+  height: calc(100vh - var(--nav-h, 64px)); overflow: hidden;
+}
+.makers.is-rail .makers__track {
+  display: flex; height: 100%; width: max-content;
+  will-change: transform;
+}
+.makers.is-rail .maker { width: 100vw; height: 100%; flex: 0 0 auto; }
+
+/* ---------- Eén maker ---------- */
+.maker {
+  --m-bg: var(--blue); --m-fg: var(--purple); --m-accent: var(--red); --m-tekst: var(--ink);
+  position: relative; overflow: hidden;
+  background: var(--m-bg); color: var(--m-fg);
+  border-bottom: 3px solid var(--ink);
+}
+.maker--rood   { --m-bg: var(--red);        --m-fg: var(--paper);  --m-accent: var(--ink);    --m-tekst: var(--paper); }
+.maker--blauw  { --m-bg: var(--blue);       --m-fg: var(--purple); --m-accent: var(--red);    --m-tekst: var(--ink); }
+.maker--paars  { --m-bg: var(--purple);     --m-fg: var(--blue);   --m-accent: var(--red);    --m-tekst: var(--paper); }
+.maker--papier { --m-bg: var(--paper-warm); --m-fg: var(--ink);    --m-accent: var(--red);    --m-tekst: var(--ink); }
+.maker--inkt   { --m-bg: var(--ink);        --m-fg: var(--paper);  --m-accent: var(--red);    --m-tekst: var(--paper); }
+
+.maker__inner {
+  height: 100%; max-width: 1320px; margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--gutter);
+  display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+}
+@media (min-width: 900px) {
+  .maker__inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .maker:nth-child(even of .maker) .maker__media { order: 2; }
+}
+
+/* Foto in de vorm van een atelierdeur (boog bovenaan) */
+.maker__media { position: relative; justify-self: center; width: min(100%, 440px); }
+.makers.is-rail .maker__media {
+  transform: translateX(calc(var(--d, 0) * -7vw)) rotate(calc(var(--d, 0) * -5deg));
+}
+.maker__deur {
+  aspect-ratio: 3 / 4; width: 100%;
+  border: 3px solid var(--ink); border-radius: 999px 999px var(--radius) var(--radius);
+  box-shadow: 12px 14px 0 var(--ink); overflow: hidden; background: var(--ink);
+  transform: rotate(var(--deur-r, -2deg));
+}
+.makers.is-rail .maker__deur { max-height: calc(100vh - var(--nav-h, 64px) - 9rem); width: auto; height: 100%; margin-inline: auto; }
+.maker__deur img { width: 100%; height: 100%; object-fit: cover; object-position: var(--foto-pos, center); }
+.maker:nth-child(odd of .maker) { --deur-r: 2deg; }
+
+.maker__extra {
+  position: absolute; width: 42%; aspect-ratio: 1; right: -8%; bottom: -6%;
+  border: 3px solid var(--ink); border-radius: 50%; object-fit: cover;
+  box-shadow: 6px 6px 0 var(--ink); transform: rotate(8deg);
+}
+.maker__logo {
+  position: absolute; left: -6%; top: 6%; z-index: 2;
+  display: grid; place-items: center;
+  width: clamp(84px, 9vw, 120px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(-12deg); animation: logo-tik 6s ease-in-out infinite;
+}
+.maker__logo img { width: 92%; height: 92%; object-fit: contain; border-radius: 50%; }
+.maker__logo--masker { background: var(--ink); }
+.maker__logo--masker span {
+  width: 72%; height: 60%; background: var(--paper);
+  -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
+}
+@keyframes logo-tik { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(-4deg) scale(1.05); } }
+
+/* Placeholder-deur voor makers waarvan nog geen foto is */
+.maker__deur--leeg {
+  display: grid; place-items: center; background: var(--m-accent);
+  color: var(--m-bg); text-align: center;
+}
+.maker__deur--leeg span {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1.4rem, 3vw, 2.2rem); line-height: 1.05; padding: 1rem;
+}
+.maker__deur--leeg .hand-inline { display: block; margin: .6rem auto 0; height: 1.6em; filter: invert(1); }
+
+.maker__tekst { position: relative; min-width: 0; }
+.makers.is-rail .maker__tekst { transform: translateX(calc(var(--d, 0) * 9vw)); }
+.maker__tag {
+  display: inline-block; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  font-size: .82rem; padding: .45em .9em .4em; border-radius: 100px;
+  background: var(--m-accent); color: var(--m-bg); border: 2px solid var(--ink);
+}
+.maker--rood .maker__tag { color: var(--paper); }
+.maker__naam {
+  font-size: clamp(2.4rem, 5.8vw, 6.2rem); line-height: .9; text-transform: uppercase;
+  margin-top: .9rem; overflow-wrap: break-word; hyphens: manual;
+}
+.maker__bio { margin-top: 1.4rem; color: var(--m-tekst); max-width: 52ch; display: grid; gap: .8rem; }
+.maker__bio p { margin: 0; }
+.maker__links { list-style: none; padding: 0; margin: 1.6rem 0 0; display: flex; flex-wrap: wrap; gap: .7rem; }
+.maker__links a {
+  display: inline-flex; align-items: center; gap: .45em;
+  font-weight: 800; text-transform: uppercase; font-size: .9rem; letter-spacing: .03em;
+  padding: .65em 1.1em .6em; border-radius: 100px; border: 3px solid var(--ink);
+  background: var(--paper); color: var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+}
+.maker__links a:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.maker__links a::after { content: "\261E"; }
+.maker__credit { margin-top: 1rem; font-size: .78rem; opacity: .7; color: var(--m-tekst); }
+
+/* Intro-paneel (eerste paneel van de rail) */
+.maker--intro { --m-bg: var(--ink); --m-fg: var(--paper); }
+.maker--intro .maker__inner { grid-template-columns: 1fr; align-content: center; }
+.maker--intro h2 {
+  font-size: clamp(3.4rem, 11vw, 11rem); line-height: .85; text-transform: uppercase; color: var(--paper);
+}
+.maker--intro h2 em { font-style: normal; color: var(--red); }
+.maker--intro p { margin-top: 1.5rem; color: var(--blue); font-weight: 800; text-transform: uppercase; display: flex; align-items: center; gap: .6em; }
+.maker--intro .hand-inline { height: 1.6em; filter: invert(1); }
+.makers:not(.is-rail) .alleen-rail { display: none; }
+
+/* Navigatie onderin de rail: namen + voortgang */
+.makers__nav { display: none; }
+.makers.is-rail .makers__nav {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem;
+  padding: .7rem var(--gutter) .9rem;
+  background: linear-gradient(to top, rgba(14,14,14,.55), rgba(14,14,14,0));
+}
+.makers__nav button {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: .78rem;
+  padding: .45em .85em .4em; border-radius: 100px; border: 2px solid var(--ink);
+  background: var(--paper); color: var(--ink); opacity: .75;
+  transition: opacity .2s, background .2s, transform .2s var(--ease);
+}
+.makers__nav button:hover { opacity: 1; }
+.makers__nav button[aria-current="true"] { background: var(--red); color: var(--paper); opacity: 1; transform: translateY(-3px); }
+.makers__voortgang { position: absolute; left: 0; top: 0; height: 5px; width: 100%; z-index: 5; background: rgba(255,255,255,.15); }
+.makers:not(.is-rail) .makers__voortgang { display: none; }
+.makers__voortgang span { display: block; height: 100%; width: 100%; background: var(--red); transform-origin: left; transform: scaleX(var(--p, 0)); }
+
+/* Stapel-modus (mobiel / reduced motion): panelen schuiven om en om in */
+.makers:not(.is-rail) .maker .maker__media,
+.makers:not(.is-rail) .maker .maker__tekst {
+  transition: transform .8s var(--ease), opacity .8s var(--ease);
+}
+.makers.kan-onthullen:not(.is-rail) .maker:not(.is-in) .maker__media { transform: translateX(-18vw) rotate(-6deg); opacity: 0; }
+.makers.kan-onthullen:not(.is-rail) .maker:not(.is-in) .maker__tekst { transform: translateX(18vw); opacity: 0; }
+.makers.kan-onthullen:not(.is-rail) .maker:nth-child(even of .maker):not(.is-in) .maker__media { transform: translateX(18vw) rotate(6deg); }
+.makers.kan-onthullen:not(.is-rail) .maker:nth-child(even of .maker):not(.is-in) .maker__tekst { transform: translateX(-18vw); }
+
+/* Marquee met de namen */
+.marquee--makers { background: var(--red); color: var(--paper); }
+
+/* CTA onderaan */
+.makers-cta { background: var(--blue); color: var(--purple); text-align: center; }
+.makers-cta h2 { font-size: var(--fs-h2); text-transform: uppercase; }
+.makers-cta p { max-width: 44ch; margin: 1rem auto 1.8rem; color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .naam-sticker, .maker__logo { animation: none !important; }
+  .makers .maker__media, .makers .maker__tekst { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
+
+@media (max-width: 899px) {
+  .maker__logo { left: -1%; }
+  .maker__extra { right: -3%; }
+}

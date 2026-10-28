@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ateliers &amp; makers — Dees Tilburg</title>
-  <meta name="description" content="In de ateliers van Dees, midden in het Dwaalgebied van Tilburg, werken creatieve makers aan hun eigen werk. Maak kennis met de makers van Dees." />
+  <meta name="description" content="Maak kennis met de makers in de ateliers van Dees, midden in het Dwaalgebied van Tilburg: Arts of Abby, Daycare, Jamland, Kristie van der Wekke, Studio Bouks. en meer." />
   <link rel="canonical" href="https://www.deestilburg.nl/ateliers" />
   <link rel="icon" type="image/png" href="assets/img/logo/favicon.png" />
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/ateliers.css" />
   <script src="js/logo-kleur.js"></script>
   <meta property="og:title" content="Ateliers & makers — Dees Tilburg" />
   <meta property="og:description" content="Maak kennis met de creatieve makers in de ateliers van Dees, in het Dwaalgebied van Tilburg." />
@@ -67,44 +68,187 @@
 
   <main>
 
-    <section class="page-hero page-hero--purple">
-      <div class="container">
-        <p class="kicker">Maken &amp; ontmoeten</p>
-        <h1>Ateliers</h1>
-        <p class="lead" style="max-width:46ch;margin-top:1rem;color:var(--paper)">In ons pand midden in het Dwaalgebied werken creatieve makers aan hun eigen werk. Neem een kijkje!</p>
+    <!-- HERO: titel + zwevende naam-stickers (klik = naar die maker) -->
+    <section class="makers-hero">
+      <div class="container makers-hero__inner">
+        <p class="kicker">Ateliers bij Dees</p>
+        <h1 class="makers-hero__titel">Zeven makers. Eén pand.</h1>
+        <p class="lead makers-hero__lead">In de ateliers van Dees, midden in het Dwaalgebied, wordt elke dag gemaakt: met woorden, stof, inkt, code, wijn en muziek. Maak kennis met de makers!</p>
       </div>
-      <a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener" class="hero-sticker">
-        <div class="container">
-          <p>Onze ateliers zijn momenteel allemaal verhuurd. We werken niet met een wachtlijst. <span class="hero-sticker__sub">Volg Dees op Instagram</span> om als eerste op de hoogte te zijn van ruimtes die vrijkomen. Toch bij Dees werken? We verhuren ook werkplekken.</p>
-        </div>
-      </a>
-      <svg class="page-hero__scroll-hint" width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
-        <path d="M2 2L14 14L26 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <nav class="makers-hero__stickers" aria-label="Naar een maker">
+        <a href="#arts-of-abby" class="naam-sticker naam-sticker--rood" data-maker="arts-of-abby" style="--x:57%;--y:16%;--r:-6deg;--dur:9s;--delay:0s;--dx:16px;--dy:10px">Arts of Abby</a>
+        <a href="#daycare" class="naam-sticker naam-sticker--papier" data-maker="daycare" style="--x:79%;--y:10%;--r:5deg;--dur:11s;--delay:-3s;--dx:-12px;--dy:14px">Daycare</a>
+        <a href="#het-kleinste-wijndoosje" class="naam-sticker naam-sticker--blauw" data-maker="het-kleinste-wijndoosje" style="--x:58%;--y:33%;--r:-4deg;--dur:10s;--delay:-6s;--dx:10px;--dy:-12px">Het Kleinste Wijndoosje</a>
+        <a href="#jamland" class="naam-sticker naam-sticker--rood" data-maker="jamland" style="--x:83%;--y:37%;--r:7deg;--dur:12s;--delay:-2s;--dx:-14px;--dy:8px">Jamland</a>
+        <a href="#kaapstad" class="naam-sticker naam-sticker--papier" data-maker="kaapstad" style="--x:62%;--y:53%;--r:-8deg;--dur:9.5s;--delay:-5s;--dx:12px;--dy:12px">Kaapstad</a>
+        <a href="#kristie" class="naam-sticker naam-sticker--blauw" data-maker="kristie" style="--x:67%;--y:64%;--r:3deg;--dur:10.5s;--delay:-1s;--dx:-10px;--dy:-10px">Kristie van der Wekke</a>
+        <a href="#studio-bouks" class="naam-sticker naam-sticker--papier" data-maker="studio-bouks" style="--x:57%;--y:81%;--r:-3deg;--dur:11.5s;--delay:-4s;--dx:14px;--dy:-8px">Studio Bouks.</a>
+      </nav>
     </section>
 
-    <div class="marquee marquee--blue" aria-hidden="true">
+    <div class="makers-vol">
+      <a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener" class="hero-sticker">
+        <div class="container">
+          <p>Onze ateliers zijn momenteel allemaal verhuurd. We werken niet met een wachtlijst. <span class="hero-sticker__sub">Volg Dees op Instagram</span> om als eerste op de hoogte te zijn van ruimtes die vrijkomen.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="marquee marquee--makers" aria-hidden="true">
       <div class="marquee__track">
-        <span>Brood<img src="assets/img/hands/h-right.svg" alt="">Ateliers<img src="assets/img/hands/h-right.svg" alt="">Koffie<img src="assets/img/hands/h-right.svg" alt="">Dees<img src="assets/img/hands/h-right.svg" alt=""></span>
-        <span>Brood<img src="assets/img/hands/h-right.svg" alt="">Ateliers<img src="assets/img/hands/h-right.svg" alt="">Koffie<img src="assets/img/hands/h-right.svg" alt="">Dees<img src="assets/img/hands/h-right.svg" alt=""></span>
+        <span>Arts of Abby<img src="assets/img/hands/h-right.svg" alt="">Daycare<img src="assets/img/hands/h-right.svg" alt="">Het Kleinste Wijndoosje<img src="assets/img/hands/h-right.svg" alt="">Jamland<img src="assets/img/hands/h-right.svg" alt="">Kaapstad<img src="assets/img/hands/h-right.svg" alt="">Kristie van der Wekke<img src="assets/img/hands/h-right.svg" alt="">Studio Bouks.<img src="assets/img/hands/h-right.svg" alt=""></span>
+        <span>Arts of Abby<img src="assets/img/hands/h-right.svg" alt="">Daycare<img src="assets/img/hands/h-right.svg" alt="">Het Kleinste Wijndoosje<img src="assets/img/hands/h-right.svg" alt="">Jamland<img src="assets/img/hands/h-right.svg" alt="">Kaapstad<img src="assets/img/hands/h-right.svg" alt="">Kristie van der Wekke<img src="assets/img/hands/h-right.svg" alt="">Studio Bouks.<img src="assets/img/hands/h-right.svg" alt=""></span>
       </div>
     </div>
 
-    <section class="section" id="makers">
-      <div class="container stack">
-        <p class="kicker eyebrow-red">De makers</p>
-        <h2 style="font-size:var(--fs-h2)">Wie werken er<br>bij Dees?</h2>
-        <!-- Makers-overzicht: per maker naam, korte omschrijving, foto en link volgen nog
-             van de klant. Niet zelf invullen. -->
-        <div class="tekst-blok"><p>Binnenkort stellen we hier de makers in onze ateliers aan je voor.</p></div>
+    <!-- DE MAKERS: op desktop een horizontale rail die meeschuift met scrollen
+         (js/ateliers.js), op mobiel onder elkaar. Teksten met "PLACEHOLDER" wachten
+         nog op input van de maker zelf. -->
+    <section class="makers" id="makers" aria-label="De makers">
+      <div class="makers__sticky">
+        <div class="makers__voortgang" aria-hidden="true"><span></span></div>
+        <div class="makers__track">
+        <div class="maker maker--intro" aria-hidden="true">
+          <div class="maker__inner">
+            <h2>De makers<br>van <em>Dees</em></h2>
+            <p class="alleen-rail">Blijf scrollen<img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></p>
+          </div>
+        </div>
+        <article class="maker maker--blauw" id="arts-of-abby" aria-labelledby="arts-of-abby-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur" style="--foto-pos:22% center"><img src="assets/img/makers/arts-of-abby.jpg" alt="Abby met getatoeëerde armen, met daarnaast drie voorbeelden van tattoos." loading="lazy" /></div>
+              <span class="maker__logo"><img src="assets/img/makers/arts-of-abby-logo.png" alt="Logo Arts of Abby" loading="lazy" /></span>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Tattoo&#x27;s</p>
+              <h3 class="maker__naam" id="arts-of-abby-naam">Arts of Abby</h3>
+              <div class="maker__bio">
+                <p>In de studio streef ik naar een warme, rustige en vooral veilige plek waar inclusiviteit centraal staat. Een plek waar queer en neurodiverse mensen zich op hun gemak kunnen voelen tijdens het zetten van een tattoo.</p>
+                <p>Je geborgen voelen tijdens deze ervaring is belangrijk, en daarom neem ik de tijd, bied ik een luisterend oor en denk ik graag met je mee. Hier ben je even echt in het moment. Een plek waar niks raar of verkeerd is, waar jij jezelf mag zijn.</p>
+              </div>
+              <ul class="maker__links">
+                <li><a href="https://www.instagram.com/arts.of.abby" target="_blank" rel="noopener">Instagram</a></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--inkt" id="daycare" aria-labelledby="daycare-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur"><img src="assets/img/makers/daycare-dj.jpg" alt="DJ achter de draaitafels tijdens een Daycare-feest, met een volle zaal in rood licht." loading="lazy" /></div>
+              <img class="maker__extra" src="assets/img/makers/daycare-publiek.jpg" alt="Volle zaal tijdens een Daycare-feest." loading="lazy" />
+              <span class="maker__logo maker__logo--masker" role="img" aria-label="Logo Daycare"><span style="--logo:url(/assets/img/makers/daycare-logo.svg)"></span></span>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Events</p>
+              <h3 class="maker__naam" id="daycare-naam">Daycare</h3>
+              <div class="maker__bio">
+                <p>PLACEHOLDER: Hier vertelt Daycare binnenkort zelf wie ze zijn en wat ze maken.</p>
+              </div>
+              <p class="maker__credit">Foto&#x27;s: Ian Moerings</p>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--papier" id="het-kleinste-wijndoosje" aria-labelledby="het-kleinste-wijndoosje-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur"><img src="assets/img/makers/kleinste-wijndoosje.jpg" alt="Poster van Het Kleinste Wijndoosje: het leukste wijn-uitje in het kleinste doosje, coming soon." loading="lazy" /></div>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Wijn</p>
+              <h3 class="maker__naam" id="het-kleinste-wijndoosje-naam">Het Kleinste Wijn&shy;doosje</h3>
+              <div class="maker__bio">
+                <p>Het leukste wijn-uitje in het kleinste doosje. PLACEHOLDER: binnenkort meer!</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--rood" id="jamland" aria-labelledby="jamland-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur" style="--foto-pos:48% center"><img src="assets/img/makers/jamland.jpg" alt="Portret van Roel Ezendam van Jamland." loading="lazy" /></div>
+              <span class="maker__logo maker__logo--masker" role="img" aria-label="Logo Jamland"><span style="--logo:url(/assets/img/makers/jamland-logo.svg)"></span></span>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Kunst &amp; code</p>
+              <h3 class="maker__naam" id="jamland-naam">Jamland</h3>
+              <div class="maker__bio">
+                <p>Roel Ezendam is een creatieve developer die onder de naam Jamland de intersectie opzoekt tussen kunst en code. Hij heeft een achtergrond in game development, en met het project Jamland zet hij een stap verder dan enkel digitale creaties maar zoekt hij ook het analoge op, spelend met de wisselwerking tussen digitale perfectie en analoge imperfecties.</p>
+                <p>Een ander belangrijk onderdeel bij Roel&#x27;s creaties is de interactiviteit, de mogelijkheid voor het publiek om zelf een creatief onderdeel te zijn van het werk in plaats van enkel een toeschouwer.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--blauw" id="kaapstad" aria-labelledby="kaapstad-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur maker__deur--leeg"><span>Binnenkort<br>meer<img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></span></div>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Binnenkort</p>
+              <h3 class="maker__naam" id="kaapstad-naam">Kaapstad</h3>
+              <div class="maker__bio">
+                <p>PLACEHOLDER: Hier stellen we binnenkort Kaapstad aan je voor.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--paars" id="kristie" aria-labelledby="kristie-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur" style="--foto-pos:center 30%"><img src="assets/img/makers/kristie.jpg" alt="Kristie van der Wekke, met achter haar een spiegel met handgeschreven tekst." loading="lazy" /></div>
+              <img class="maker__extra" src="assets/img/makers/kristie-spiegel.jpg" alt="Spiegel met de handgeschreven tekst: even van jou weer terug naar mij." loading="lazy" />
+              <span class="maker__logo maker__logo--masker" role="img" aria-label="Logo Kristie van der Wekke"><span style="--logo:url(/assets/img/makers/kristie-logo.png)"></span></span>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Poëzie</p>
+              <h3 class="maker__naam" id="kristie-naam">Kristie van der Wekke</h3>
+              <div class="maker__bio">
+                <p>Hi! Mijn naam is Kristie, maar noem me vooral Kris!</p>
+                <p>In mijn atelier bij DEES schrijf, dicht en experimenteer ik met woorden. Het liefst ook buiten de lijntjes van het papier. Zo verschijnen mijn teksten tegenwoordig op spiegels. In mijn spiegelbeeld zoek ik de meest pure versie van mezelf. Dat gaat met vallen en opstaan, maar stapje voor stapje kom ik dichterbij. En dat engeltje? Dat herinnert me eraan om onderweg een beetje lief te zijn voor mezelf.</p>
+                <p>Graag neem ik je mee in deze zoektocht. Misschien ben jij ook wel onderweg en kunnen we elkaar een stapje verder helpen? Kom vooral gezellig langs bij mijn atelier. Ik klets er heel graag met je over!</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="maker maker--papier" id="studio-bouks" aria-labelledby="studio-bouks-naam">
+          <div class="maker__inner">
+            <div class="maker__media">
+              <div class="maker__deur" style="--foto-pos:72% center"><img src="assets/img/makers/studio-bouks.jpg" alt="Model in vintage kleding liggend op een crèmekleurige leren bank." loading="lazy" /></div>
+            </div>
+            <div class="maker__tekst">
+              <p class="maker__tag">Vintage &amp; reworked fashion</p>
+              <h3 class="maker__naam" id="studio-bouks-naam">Studio Bouks.</h3>
+              <div class="maker__bio">
+                <p>STUDIO BOUKS. is een bewust modemerk, opgebouwd rond zorgvuldig uitgezochte vintage, tweedehands en pre-loved mode, aangevuld met eigen reworked stukken. Door curatie en upcycling te combineren, viert het merk individualiteit, vakmanschap en circulaire mode.</p>
+                <p>Café, curated vintage fashion en interieur: de winkel vind je aan de Willem II straat 57 in Tilburg.</p>
+              </div>
+              <ul class="maker__links">
+                <li><a href="https://www.instagram.com/studio.bouks" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://studiobouks.com" target="_blank" rel="noopener">Website</a></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        </div>
+        <nav class="makers__nav" aria-label="Ga naar maker">
+          <button type="button" data-maker="arts-of-abby">Arts of Abby</button>
+          <button type="button" data-maker="daycare">Daycare</button>
+          <button type="button" data-maker="het-kleinste-wijndoosje">Het Kleinste Wijndoosje</button>
+          <button type="button" data-maker="jamland">Jamland</button>
+          <button type="button" data-maker="kaapstad">Kaapstad</button>
+          <button type="button" data-maker="kristie">Kristie van der Wekke</button>
+          <button type="button" data-maker="studio-bouks">Studio Bouks.</button>
+        </nav>
       </div>
     </section>
 
-    <section class="section bg-purple">
-      <div class="container stack" style="text-align:center">
-        <h2 style="font-size:var(--fs-h3)">Zelf bij Dees werken?</h2>
-        <p style="max-width:46ch;margin-inline:auto">De ateliers zijn vol, maar je kunt bij ons wel een werkplek huren, tussen de makers.</p>
-        <a href="werkplekken" class="btn btn--blue">Bekijk de werkplekken</a>
+    <section class="section makers-cta">
+      <div class="container">
+        <h2>Zelf bij Dees werken?</h2>
+        <p>De ateliers zijn vol, maar je kunt bij ons wel een werkplek huren, tussen de makers.</p>
+        <a href="werkplekken" class="btn btn--red">Bekijk de werkplekken</a>
       </div>
     </section>
 
@@ -145,5 +289,6 @@
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/ateliers.js"></script>
 </body>
 </html>
