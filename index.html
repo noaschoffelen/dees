@@ -70,10 +70,15 @@
       <nav class="nav__links" aria-label="Hoofdmenu">
         <a href="/" aria-current="page">Home</a>
         <a href="menu">Menu</a>
-        <a href="ateliers">Ateliers</a>
-        <a href="werkplekken">Werkplekken</a>
-        <a href="crew">Dees Crew</a>
-        <a href="vergaderen">Vergaderen</a>
+        <div class="nav__group">
+          <button type="button" class="nav__group-toggle" aria-expanded="false" aria-controls="nav-bij-ons">Bij ons</button>
+          <div class="nav__dropdown" id="nav-bij-ons">
+            <a href="ateliers">Ateliers</a>
+            <a href="werkplekken">Werkplekken</a>
+            <a href="vergaderen">Vergaderen</a>
+            <a href="team">Team</a>
+          </div>
+        </div>
         <a href="contact">Contact</a>
       </nav>
       <button class="nav__toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
@@ -88,10 +93,11 @@
       <ul>
         <li><a href="/"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Home</a></li>
         <li><a href="menu"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Menu</a></li>
-        <li><a href="ateliers"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Ateliers</a></li>
-        <li><a href="werkplekken"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Werkplekken</a></li>
-        <li><a href="crew"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Dees Crew</a></li>
-        <li><a href="vergaderen"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Vergaderen</a></li>
+        <li class="menu__group-label" aria-hidden="true">Bij ons</li>
+        <li class="menu__sub"><a href="ateliers"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Ateliers</a></li>
+        <li class="menu__sub"><a href="werkplekken"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Werkplekken</a></li>
+        <li class="menu__sub"><a href="vergaderen"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Vergaderen</a></li>
+        <li class="menu__sub"><a href="team"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Team</a></li>
         <li><a href="contact"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Contact</a></li>
       </ul>
     </nav>
@@ -115,7 +121,7 @@
             <img src="assets/img/photo/Horeca/brood-desem.jpg" alt="Vers gebakken desembroden op een bakplaat bij Dees." loading="lazy" />
             <div class="hero__pop-body">
               <p class="hero__pop-kicker">Brood</p>
-              <p>We bakken ons eigen zuurdesembrood, elke dag vers. Kom je een keer proeven?</p>
+              <p>We bakken ons eigen zuurdesembrood elke dag vers. Kom je een keer proeven?</p>
               <a href="menu" class="hero__pop-link">Bekijk het menu</a>
             </div>
           </div>
