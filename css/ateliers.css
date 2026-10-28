@@ -20,6 +20,7 @@
   margin-top: .6rem; max-width: 9ch;
 }
 .makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
+.makers-hero__adres { margin-top: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem; color: var(--blue); }
 
 .makers-hero__stickers { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 /* Foto-collage: elke maker als deurvormige foto met naamsticker, zwevend */
