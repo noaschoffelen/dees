@@ -67,15 +67,23 @@
 
   <main>
 
-    <section class="page-hero page-hero--blue">
-      <div class="container">
-        <p class="kicker">Werken bij Dees</p>
-        <h1>Werkplekken</h1>
-        <p class="lead" style="max-width:46ch;margin-top:1rem;color:var(--ink)">Een vaste werkplek tussen creatieve makers, midden in het Dwaalgebied van Tilburg. Met verse koffie en een vergaderruimte binnen handbereik.</p>
+    <section class="beeld-hero beeld-hero--blauw">
+      <div class="container beeld-hero__inner">
+        <div class="beeld-hero__tekst">
+          <p class="kicker eyebrow-red">Je bureau is er al!</p>
+          <h1>Werkplek<br>bij Dees</h1>
+          <p class="lead">Je eigen bureau tussen de makers. Met goeie koffie &amp; vers brood. Alle ruimte voor goede ideeën, midden in het Dwaalgebied van Tilburg.</p>
+          <a href="#aanvraag" class="btn btn--red">Werkplek aanvragen <img class="hand-inline" src="assets/img/hands/h-right.svg" alt="" style="filter:brightness(0) invert(1)"></a>
+        </div>
+        <div class="beeld-hero__beeld">
+          <div class="beeld-hero__foto">
+            <img src="assets/img/photo/Ateliers/werkplek-bureau.jpg" alt="Iemand aan het werk aan een bureau bij Dees, tussen planten en boekenkasten." />
+          </div>
+          <span class="zweef-sticker zweef-sticker--rood" style="--x:-8%;--y:10%;--r:-7deg;--dur:9s">Vanaf €200 p/m</span>
+          <span class="zweef-sticker zweef-sticker--papier" style="--x:62%;--y:3%;--r:6deg;--dur:11s;--delay:-3s">€50 koffietegoed</span>
+          <span class="zweef-sticker zweef-sticker--paars" style="--x:52%;--y:85%;--r:-4deg;--dur:10s;--delay:-6s">20% korting bij Dees</span>
+        </div>
       </div>
-      <svg class="page-hero__scroll-hint" width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
-        <path d="M2 2L14 14L26 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
     </section>
 
     <div class="marquee marquee--blue" aria-hidden="true">
@@ -94,7 +102,7 @@
             <p>Liever een vaste werkplek tussen andere makers? Bij Dees kun je een bureau huren, met koffie, korting en een vergaderruimte binnen handbereik.</p>
           </div>
 
-          <div class="price-grid">
+          <div class="price-grid pop-in">
             <div class="tile price-tile">
               <p class="price-tile__term">Jaarcontract</p>
               <p class="price-tile__amount">€200</p>
@@ -118,12 +126,10 @@
             <li><img src="assets/img/hands/h-right-blue.svg" alt="" aria-hidden="true">Vergaderruimte vrij te gebruiken, behalve wanneer die aan een externe partij is verhuurd</li>
           </ul>
           <p class="perks__note">We werken graag eerst twee weken op proef — koffietegoed en korting zijn dan nog niet inbegrepen.</p>
-
-          <img src="assets/img/photo/Ateliers/werkplek-bureau.jpg" alt="Iemand aan het werk aan een bureau bij Dees, tussen planten en boekenkasten." loading="lazy" style="width:100%;border:3px solid var(--ink);border-radius:var(--radius-lg);box-shadow:10px 12px 0 var(--ink);margin-top:2rem" />
         </div>
 
         <div class="reveal">
-          <div class="tile" style="color:var(--ink)">
+          <div class="tile" id="aanvraag" style="color:var(--ink)">
             <h2 style="font-size:var(--fs-h3);margin-bottom:1rem">Interesse in een bureau?</h2>
             <form class="form" action="/api/ateliers-contact" method="POST" novalidate>
               <div style="position:absolute;left:-9999px" aria-hidden="true">
@@ -154,6 +160,8 @@
         </div>
       </div>
     </section>
+
+    <a href="#aanvraag" class="zwevende-knop" data-zichtbaar="false">Werkplek aanvragen <img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></a>
 
   </main>
 

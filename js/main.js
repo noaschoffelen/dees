@@ -227,4 +227,52 @@
     window.addEventListener("scroll", sluit, { passive: true });
     window.addEventListener("resize", sluit);
   }
+
+  /* ---- Beeld-hero: foto beweegt licht mee met scrollen (--s, 0..1) ---- */
+  var beeldHero = document.querySelector(".beeld-hero");
+  var rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (beeldHero && !rustig) {
+    var heroGepland = false;
+    var tekenHero = function () {
+      heroGepland = false;
+      var r = beeldHero.getBoundingClientRect();
+      beeldHero.style.setProperty("--s", Math.min(Math.max(-r.top / Math.max(r.height, 1), 0), 1).toFixed(3));
+    };
+    window.addEventListener("scroll", function () {
+      if (!heroGepland) { heroGepland = true; window.requestAnimationFrame(tekenHero); }
+    }, { passive: true });
+    tekenHero();
+  }
+
+  /* ---- Zwevende actieknop: zichtbaar na de hero, verborgen bij het doel ---- */
+  var zweefKnop = document.querySelector(".zwevende-knop");
+  if (zweefKnop && "IntersectionObserver" in window) {
+    var doel = document.querySelector(zweefKnop.getAttribute("href"));
+    var startBlok = document.querySelector("main > section");
+    var voorbijStart = false, doelInBeeld = false;
+    var zetKnop = function () { zweefKnop.dataset.zichtbaar = (voorbijStart && !doelInBeeld) ? "true" : "false"; };
+    if (startBlok) new IntersectionObserver(function (e) { voorbijStart = !e[0].isIntersecting; zetKnop(); }).observe(startBlok);
+    if (doel) new IntersectionObserver(function (e) { doelInBeeld = e[0].isIntersecting; zetKnop(); }, { threshold: 0.15 }).observe(doel);
+  }
+
+  /* ---- Navigatiehoogte als CSS-variabele (voor sticky elementen onder de nav) ---- */
+  var navEl = document.querySelector(".nav");
+  var zetNavH = function () { if (navEl) document.documentElement.style.setProperty("--nav-h", navEl.offsetHeight + "px"); };
+  zetNavH(); window.addEventListener("resize", zetNavH);
+
+  /* ---- Menukaart: actieve categorie in de balk oplichten ---- */
+  var chipLinks = document.querySelectorAll(".menu-chips a");
+  if (chipLinks.length && "IntersectionObserver" in window) {
+    var chipVoor = {};
+    Array.prototype.forEach.call(chipLinks, function (a) { chipVoor[a.getAttribute("href").slice(1)] = a; });
+    var chipIo = new IntersectionObserver(function (items) {
+      items.forEach(function (it) {
+        if (!it.isIntersecting) return;
+        Array.prototype.forEach.call(chipLinks, function (a) { a.removeAttribute("aria-current"); });
+        var a = chipVoor[it.target.id];
+        if (a) { a.setAttribute("aria-current", "true"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    Object.keys(chipVoor).forEach(function (id) { var el = document.getElementById(id); if (el) chipIo.observe(el); });
+  }
 })();

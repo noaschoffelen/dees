@@ -67,61 +67,60 @@
 
   <main>
 
-    <section class="page-hero page-hero--red">
-      <div class="container">
-        <p class="kicker">Tot bij Dees!</p>
-        <h1>Contact</h1>
-        <p class="lead" style="max-width:46ch;margin-top:1rem;color:var(--paper)">Kom langs voor een vers brood, een kop koffie of een van de makers.</p>
+    <!-- HERO: beeld eerst, met de belangrijkste info (adres, tijden) direct in beeld -->
+    <section class="beeld-hero beeld-hero--rood">
+      <div class="container beeld-hero__inner">
+        <div class="beeld-hero__tekst">
+          <p class="kicker">Tot bij Dees!</p>
+          <h1>Loop gerust<br>even binnen</h1>
+          <p class="lead">Korte Tuinstraat 20-22, 5038 SJ Tilburg. Midden in het Dwaalgebied, voor een vers brood, een kop koffie of een van de makers.</p>
+          <div class="knoppen-rij">
+            <a href="https://share.google/hM1Qlh8XC3pnGNWWY" target="_blank" rel="noopener" class="btn btn--blue">Route plannen <img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></a>
+            <a href="tel:+31628966205" class="btn btn--wit">Bel ons</a>
+          </div>
+        </div>
+        <div class="beeld-hero__beeld">
+          <div class="beeld-hero__foto">
+            <img src="assets/img/photo/Horeca/DEESopening-43.jpg" alt="Lachende gast aan de balie van Dees." />
+          </div>
+          <span class="zweef-sticker zweef-sticker--paars" style="--x:-8%;--y:10%;--r:-6deg;--dur:12s">Ma–vr 08:30–16:30</span>
+          <span class="zweef-sticker zweef-sticker--blauw" style="--x:60%;--y:4%;--r:5deg;--dur:13s;--delay:-4s">Za–zo 09:00–16:00</span>
+          <span class="zweef-sticker zweef-sticker--papier" style="--x:46%;--y:86%;--r:-3deg;--dur:12s;--delay:-7s">Dwaalgebied Tilburg</span>
+        </div>
       </div>
-      <img class="page-hero__hand" src="assets/img/hands/h-downleft.png" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)" />
-      <svg class="page-hero__scroll-hint" width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
-        <path d="M2 2L14 14L26 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
     </section>
 
-    <div class="marquee marquee--purple" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Brood<img src="assets/img/hands/h-right.svg" alt="">Ateliers<img src="assets/img/hands/h-right.svg" alt="">Koffie<img src="assets/img/hands/h-right.svg" alt="">Dees<img src="assets/img/hands/h-right.svg" alt=""></span>
-        <span>Brood<img src="assets/img/hands/h-right.svg" alt="">Ateliers<img src="assets/img/hands/h-right.svg" alt="">Koffie<img src="assets/img/hands/h-right.svg" alt="">Dees<img src="assets/img/hands/h-right.svg" alt=""></span>
-      </div>
-    </div>
-
     <section class="section">
-      <div class="container two-col">
-        <div class="stack reveal">
-          <p class="kicker eyebrow-red">Bezoekadres</p>
-          <h2 style="font-size:var(--fs-h2)">Loop gerust<br>even binnen</h2>
-          <div class="tekst-blok">
-            <p>Korte Tuinstraat 20-22<br>5038 SJ Tilburg, midden in het Dwaalgebied.</p>
+      <div class="container">
+        <div class="contact-tegels pop-in reveal">
+          <div class="tile">
+            <p class="kicker eyebrow-red">Bezoekadres</p>
+            <p class="contact-tegels__groot">Korte Tuinstraat 20-22<br>5038 SJ Tilburg</p>
+            <p><a href="https://share.google/hM1Qlh8XC3pnGNWWY" target="_blank" rel="noopener" class="onderstreept">Bekijk op Google</a></p>
           </div>
-
-          <p class="kicker eyebrow-red" style="margin-top:2rem">Openingstijden</p>
-          <dl style="display:grid;grid-template-columns:auto 1fr;column-gap:1.5rem;row-gap:.6rem;margin:0;font-weight:400;font-size:1.4rem">
-            <dt>Ma–vr</dt><dd style="margin:0">08:30–16:30</dd>
-            <dt>Za–zo</dt><dd style="margin:0">09:00–16:00</dd>
-          </dl>
-
-          <p class="kicker eyebrow-red" style="margin-top:2rem">Rechtstreeks contact</p>
-          <div class="tile" style="display:block;width:fit-content;max-width:100%;color:var(--ink);margin-top:1rem">
-            <ul style="list-style:none;padding:0;margin:0;display:grid;gap:.6rem;font-weight:700;font-size:1.1rem">
+          <div class="tile">
+            <p class="kicker eyebrow-red">Openingstijden</p>
+            <dl class="contact-tegels__tijden">
+              <dt>Ma–vr</dt><dd>08:30–16:30</dd>
+              <dt>Za–zo</dt><dd>09:00–16:00</dd>
+            </dl>
+          </div>
+          <div class="tile">
+            <p class="kicker eyebrow-red">Rechtstreeks contact</p>
+            <ul class="contact-tegels__lijst">
               <li><a href="tel:+31628966205">+31 6 28966205</a></li>
               <li><a href="mailto:info@deestilburg.nl">info@deestilburg.nl</a></li>
-              <li><a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener">Instagram</a></li>
-              <li><a href="https://www.linkedin.com/company/129854213" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="https://www.facebook.com/profile.php?id=61591080532676" target="_blank" rel="noopener">Facebook</a></li>
+              <li><a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.linkedin.com/company/129854213" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.facebook.com/profile.php?id=61591080532676" target="_blank" rel="noopener">Facebook</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="reveal">
-          <div style="width:100%;aspect-ratio:4/3;border:3px solid var(--ink);border-radius:var(--radius-lg);box-shadow:10px 12px 0 var(--ink);overflow:hidden">
-            <iframe
-              src="https://www.google.com/maps?q=Dees+Tilburg,+Korte+Tuinstraat+22,+5038+SJ+Tilburg&output=embed"
-              width="100%" height="100%" style="border:0;display:block"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              title="Kaart met de locatie van Dees, Korte Tuinstraat 20-22, Tilburg"></iframe>
-          </div>
-          <p style="margin-top:1.6rem"><a href="https://share.google/hM1Qlh8XC3pnGNWWY" target="_blank" rel="noopener" class="btn btn--ghost">Open in Google Maps <img class="hand-inline" src="assets/img/hands/h-right.svg" alt=""></a></p>
+        <div class="contact-kaart reveal">
+          <iframe
+            src="https://www.google.com/maps?q=Dees+Tilburg,+Korte+Tuinstraat+22,+5038+SJ+Tilburg&output=embed"
+            width="100%" height="100%" style="border:0;display:block"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Kaart met de locatie van Dees, Korte Tuinstraat 20-22, Tilburg"></iframe>
         </div>
       </div>
     </section>

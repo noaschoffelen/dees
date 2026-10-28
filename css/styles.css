@@ -318,13 +318,16 @@ p { margin: 0 0 1em; }
 .form { display: grid; gap: 1.1rem; max-width: 620px; }
 .field { display: grid; gap: .4rem; }
 .field label { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: .95rem; letter-spacing: .02em; }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   font-family: var(--font-body); font-size: 1.05rem; color: var(--ink);
   padding: .85em 1em; border: 3px solid var(--ink); border-radius: 14px;
   background: var(--paper); width: 100%;
 }
 .field textarea { min-height: 150px; resize: vertical; }
-.field input:focus, .field textarea:focus { outline: 3px solid var(--red); outline-offset: 1px; }
+.field select { appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 1.3rem) 55%, calc(100% - .95rem) 55%; background-size: .35rem .35rem; background-repeat: no-repeat; padding-right: 2.5rem; }
+.field input:focus, .field textarea:focus, .field select:focus { outline: 3px solid var(--red); outline-offset: 1px; }
 .form__note { font-size: .9rem; opacity: .8; }
 
 /* ---------- Formulier tijdelijk gesloten ---------- */
@@ -348,6 +351,26 @@ p { margin: 0 0 1em; }
 /* ---------- Prijs-tegels (bureauverhuur) ---------- */
 .price-grid { display: grid; gap: 1.25rem; margin-top: 2rem; }
 @media (min-width: 760px) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
+.price-grid--4 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) { .price-grid--4 { grid-template-columns: repeat(4, 1fr); } }
+.price-tile--uitgelicht { background: var(--blue); box-shadow: 8px 9px 0 var(--ink); }
+
+/* ---------- Tarieven-tabel (vergaderen: arrangementen) ---------- */
+.tarief { color: var(--ink); }
+.tarief--paars { background: var(--purple); color: var(--paper); }
+.tarief__tabel { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.tarief__tabel caption {
+  text-align: left; font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: var(--fs-h3); line-height: 1; margin-bottom: 1rem; color: var(--purple);
+}
+.tarief--paars .tarief__tabel caption { color: var(--blue); }
+.tarief__tabel th, .tarief__tabel td { padding: .75rem 0; border-bottom: 2px solid currentColor; text-align: right; white-space: nowrap; }
+.tarief__tabel tbody tr:last-child th, .tarief__tabel tbody tr:last-child td { border-bottom: 0; }
+.tarief__tabel th[scope="row"] { text-align: left; white-space: normal; font-weight: 700; padding-right: 1rem; }
+.tarief__tabel td + td { padding-left: 1.2rem; }
+.tarief__tabel thead th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; opacity: .7; padding-top: 0; }
+.tarief__noot { margin-top: .8rem; font-size: .85rem; opacity: .7; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .price-tile { text-align: center; color: var(--ink); }
 .price-tile__term {
   display: flex; align-items: center; justify-content: center; min-height: 2.6em;
@@ -522,3 +545,176 @@ p { margin: 0 0 1em; }
 /* Info tegels layout hulp */
 .two-col { display: grid; gap: clamp(1.5rem,4vw,3rem); }
 @media (min-width: 820px) { .two-col { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* ==========================================================================
+   Beweging & beeld-eerst (gedeeld): .beeld-hero (foto groot naast de titel, met
+   zwevende stickers en lichte scroll-parallax via --s uit js/main.js), .pop-in
+   (kinderen poppen een voor een in), .foto-duo, .zijwaarts en .zwevende-knop.
+   Gebruikt door vergaderen.html en werkplekken.html.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.beeld-hero {
+  position: relative; overflow: hidden;
+  background: var(--purple); color: var(--blue);
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 5.5rem);
+}
+.beeld-hero--blauw { background: var(--blue); color: var(--purple); }
+.beeld-hero--rood { background: var(--red); color: var(--paper); }
+.beeld-hero--rood h1 { color: var(--paper) !important; }
+.beeld-hero--rood .kicker { color: var(--ink); }
+.beeld-hero--rood .lead { color: var(--paper) !important; }
+.beeld-hero--blauw h1 { color: var(--purple) !important; }
+.beeld-hero--blauw .lead { color: var(--ink) !important; }
+.beeld-hero__inner { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: center; }
+@media (min-width: 900px) {
+  .beeld-hero { min-height: min(88vh, 860px); display: flex; align-items: center; }
+  .beeld-hero__inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+}
+.beeld-hero h1 { font-size: clamp(2.6rem, 5.2vw, 5.6rem); line-height: 1.02; text-transform: uppercase; color: var(--blue); margin-top: .6rem; }
+.beeld-hero .lead { max-width: 40ch; margin-top: 1.2rem; color: var(--paper); }
+.beeld-hero .btn { margin-top: 2rem; }
+
+.beeld-hero__beeld { position: relative; justify-self: center; width: min(100%, 560px); }
+.beeld-hero__foto {
+  aspect-ratio: 4 / 5; overflow: hidden;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg);
+  box-shadow: 14px 16px 0 var(--ink); background: var(--ink);
+  transform: translateY(calc(var(--s, 0) * -18px)) rotate(1.5deg);
+  will-change: transform;
+}
+.beeld-hero__foto img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.04 - var(--s, 0) * .04)); }
+
+.zweef-sticker {
+  position: absolute; left: var(--x); top: var(--y); z-index: 2;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase; white-space: nowrap;
+  font-size: clamp(.85rem, 1.3vw, 1.15rem); line-height: 1;
+  padding: .7em 1.05em .62em; border-radius: 100px;
+  background: var(--st-bg); color: var(--st-fg);
+  border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(var(--r));
+  animation: zweef var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+.zweef-sticker--rood   { --st-bg: var(--red);   --st-fg: var(--paper); }
+.zweef-sticker--blauw  { --st-bg: var(--blue);  --st-fg: var(--ink); }
+.zweef-sticker--papier { --st-bg: var(--paper); --st-fg: var(--purple); }
+.zweef-sticker--paars  { --st-bg: var(--purple); --st-fg: var(--blue); }
+@keyframes zweef {
+  0%   { transform: translate(0, 0) rotate(var(--r)); }
+  50%  { transform: translate(3px, -5px) rotate(var(--r)); }
+  100% { transform: translate(-2px, 3px) rotate(var(--r)); }
+}
+@media (max-width: 899px) {
+  .beeld-hero__foto { aspect-ratio: 4 / 4.4; }
+  .zweef-sticker { font-size: .8rem; left: max(var(--x), -1%); }
+}
+
+/* ---------- Prijstegels poppen een voor een in ---------- */
+.reveal .pop-in > * { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .7s var(--ease); }
+.reveal .pop-in > *:nth-child(2) { transition-delay: .1s; }
+.reveal .pop-in > *:nth-child(3) { transition-delay: .2s; }
+.reveal .pop-in > *:nth-child(4) { transition-delay: .3s; }
+.reveal.in .pop-in > * { opacity: 1; transform: none; }
+
+/* ---------- Twee foto's die van opzij binnenschuiven ---------- */
+.foto-duo { display: grid; gap: clamp(1.25rem, 3vw, 2rem); margin-top: clamp(3rem, 7vw, 5rem); }
+@media (min-width: 760px) { .foto-duo { grid-template-columns: 1.25fr 1fr; align-items: end; } }
+.foto-duo img {
+  width: 100%; object-fit: cover; aspect-ratio: 4 / 3;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink);
+  transition: transform .9s var(--ease), opacity .9s var(--ease);
+}
+.foto-duo img:last-child { aspect-ratio: 4 / 5; }
+.foto-duo.reveal { opacity: 1; transform: none; }
+.foto-duo.reveal:not(.in) img:first-child { transform: translateX(-3vw); opacity: 0; }
+.foto-duo.reveal:not(.in) img:last-child  { transform: translateX(3vw); opacity: 0; }
+
+/* ---------- Arrangementen van opzij ---------- */
+.zijwaarts.reveal { opacity: 1; transform: none; }
+.zijwaarts > * { transition: transform .8s var(--ease), opacity .8s var(--ease); }
+.zijwaarts.reveal:not(.in) > :first-child { transform: translateX(-2.5vw); opacity: 0; }
+.zijwaarts.reveal:not(.in) > :last-child  { transform: translateX(2.5vw); opacity: 0; }
+
+[id] { scroll-margin-top: 90px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zweef-sticker { animation: none; }
+  .beeld-hero__foto, .beeld-hero__foto img { transform: rotate(2deg); }
+  .reveal .pop-in > *, .foto-duo img, .zijwaarts > * { transition: none; opacity: 1; transform: none; }
+}
+
+/* ---------- Zwevende actieknop (bijv. "Afspraak plannen") ----------
+   Verschijnt zodra de hero uit beeld is en verdwijnt als het doel (het formulier)
+   in beeld is; gestuurd door js/main.js via data-zichtbaar. */
+.zwevende-knop {
+  position: fixed; right: max(var(--gutter), env(safe-area-inset-right, 0px)); z-index: 80;
+  bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: 1rem;
+  padding: .95em 1.4em .9em; border-radius: 100px;
+  background: var(--red); color: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: translateY(30px); opacity: 0; pointer-events: none;
+  transition: transform .4s var(--ease), opacity .3s var(--ease), box-shadow .15s;
+}
+.zwevende-knop[data-zichtbaar="true"] { transform: none; opacity: 1; pointer-events: auto; }
+.zwevende-knop:hover { box-shadow: 8px 8px 0 var(--ink); }
+.zwevende-knop:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.zwevende-knop .hand-inline { filter: brightness(0) invert(1); }
+@media (max-width: 599px) {
+  .zwevende-knop { left: var(--gutter); right: var(--gutter); justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .zwevende-knop { transition: opacity .2s; transform: none; } }
+
+/* ---------- Menukaart: categorieënbalk die blijft staan ---------- */
+.menu-chips {
+  position: sticky; top: var(--nav-h, 66px); z-index: 20;
+  display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none;
+  max-width: 640px; margin: 0 auto 1.5rem; padding: .7rem .2rem;
+  background: var(--paper);
+}
+.menu-chips::-webkit-scrollbar { display: none; }
+.menu-chips a {
+  flex: 0 0 auto; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: .85rem;
+  padding: .5em .95em .45em; border-radius: 100px; border: 2px solid var(--ink); background: var(--paper);
+  transition: background .2s, color .2s;
+}
+.menu-chips a:hover { background: var(--blue); }
+.menu-chips a[aria-current="true"] { background: var(--purple); color: var(--blue); }
+.menu-board__band { scroll-margin-top: calc(var(--nav-h, 66px) + 4.5rem); }
+
+/* ---------- Formulier: velden in paren naast elkaar ---------- */
+.form-rij { display: grid; gap: inherit; }
+@media (min-width: 600px) { .form-rij { grid-template-columns: 1fr 1fr; gap: 1rem; } }
+
+/* ---------- Kolom die naast een lang formulier blijft staan ---------- */
+@media (min-width: 820px) {
+  .kolom-plakt { position: sticky; top: calc(var(--nav-h, 66px) + 2rem); align-self: start; }
+}
+.kolom-plakt__foto {
+  width: 100%; max-width: 420px; aspect-ratio: 4 / 3; object-fit: cover;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink);
+}
+.direct-contact { color: var(--ink); width: fit-content; max-width: 100%; }
+.direct-contact__kop { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: .95rem; margin-bottom: .6rem; }
+.direct-contact ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; font-weight: 700; font-size: 1.1rem; }
+.direct-contact a:hover { color: var(--red); }
+
+/* ---------- Contactpagina ---------- */
+.knoppen-rij { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+.knoppen-rij .btn { margin-top: 0; }
+.btn--wit { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+.contact-tegels { display: grid; gap: 1.25rem; }
+@media (min-width: 820px) { .contact-tegels { grid-template-columns: repeat(3, 1fr); } }
+.contact-tegels .tile { color: var(--ink); display: grid; gap: .8rem; align-content: start; box-shadow: 8px 9px 0 var(--ink); }
+.contact-tegels .kicker { margin: 0; }
+.contact-tegels__groot { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1.25; }
+.contact-tegels__tijden { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.4rem; margin: 0; font-size: 1.25rem; }
+.contact-tegels__tijden dt { font-weight: 800; }
+.contact-tegels__tijden dd { margin: 0; font-variant-numeric: tabular-nums; }
+.contact-tegels__lijst { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; font-weight: 700; }
+.contact-tegels a:hover, .onderstreept:hover { color: var(--red); }
+.onderstreept { text-decoration: underline; text-underline-offset: .2em; font-weight: 700; }
+.contact-kaart {
+  margin-top: clamp(2.5rem, 6vw, 4rem); width: 100%; aspect-ratio: 16 / 7; min-height: 320px;
+  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink); overflow: hidden;
+}

@@ -33,6 +33,17 @@ die je deelt, bijv. `http://localhost:8000/?v=<timestamp>` (of op de
 specifieke pagina, bijv. `index.html?v=<timestamp>`), zodat de gebruiker
 zonder hard-refresh altijd de laatste versie ziet.
 
+Een query-parameter op de pagina-URL helpt alleen voor de HTML, niet voor de CSS/JS
+die de pagina laadt. Start de lokale server daarom liever zó, dan stuurt hij
+`Cache-Control: no-store` mee en laadt de browser CSS/JS altijd vers:
+
+```bash
+python3 -c 'import http.server as h
+class H(h.SimpleHTTPRequestHandler):
+    def end_headers(self): self.send_header("Cache-Control","no-store"); super().end_headers()
+h.ThreadingHTTPServer(("",8000),H).serve_forever()'
+```
+
 ## Hosting
 
 Deployed on **Vercel**, connected to this GitHub repo (`noaschoffelen/dees`), root as
@@ -68,8 +79,8 @@ records (see below).
 ```
 index.html          Home — "Ken je Dees?"
 menu.html            Menu — full menu, pulled from the client's own physical menu card
-ateliers.html        Ateliers (fully rented, no waitlist) + #makers section (placeholder until the
-                     client supplies maker names/photos/links — don't invent them)
+ateliers.html        Ateliers — "de makers van Dees": the 7 makers in the ateliers, with its own
+                     css/ateliers.css + js/ateliers.js (see "Ateliers-pagina" below)
 werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
 team.html            Team (was `crew.html` / "Dees Crew"; `/crew` 301-redirects to `/team` via
                      `redirects` in vercel.json) + sollicitatie (application) form
@@ -193,6 +204,46 @@ The same script also picks a homepage hero theme (`data-hero="rood|paars|blauw"`
 rules override them — add a theme there plus its name in `logo-kleur.js`. The hero hands
 are mask-based spans (`.hero__hand-icon`), not `<img>`s, so they can follow the theme.
 
+## Ateliers-pagina (`ateliers.html`, `css/ateliers.css`, `js/ateliers.js`)
+
+The showcase page for the 7 makers (Arts of Abby, Daycare, Het Kleinste Wijndoosje,
+Jamland, Kaapstad, Kristie van der Wekke, Studio Bouks.). Its CSS/JS are separate files
+loaded only by this page, so it can change without touching the rest of the site.
+
+- Hero with a floating photo collage: each maker is an `a.maker-kaart` (framed photo +
+  name sticker), positioned via `--x/--y/--r/--g` inline vars on desktop and laid out in a
+  grid on mobile. Clicking one jumps to that maker.
+- `.makers` rail: on desktop (≥900px, no reduced motion) `js/ateliers.js` adds `is-rail`,
+  makes `.makers__sticky` sticky, sizes the section so vertical scroll distance equals the
+  track's horizontal overflow, and translates `.makers__track` sideways. Every panel gets a
+  `--d` (-1..1, distance from centre) that `ateliers.css` uses for the photo/name parallax.
+  On mobile / reduced motion the panels just stack and slide in via IntersectionObserver.
+- Each maker is an `<article class="maker maker--{kleur}">` (kleur: rood/blauw/paars/
+  papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`),
+  optional `.maker__extra` round
+  photo and `.maker__logo` sticker (`--masker` variant recolours single-colour logos).
+- Order is shuffled on every page load by `js/ateliers.js` (rail panels, rail nav, hero
+  collage positions, marquee) so no maker gets "voorrang" — that's a client wish, don't
+  replace it with a fixed order. Panel colours are reassigned in sequence after the
+  shuffle (blauw/inkt/papier/rood/paars), so the `maker--{kleur}` in the HTML is only
+  the no-JS fallback.
+- Texts marked "PLACEHOLDER" (Daycare, Het Kleinste Wijndoosje, Kaapstad) still need the
+  maker's own copy; Studio Bouks.' text is a Dutch translation of their English blurb.
+  Source material from the makers lives in `brand/makers/<naam>/` (not served).
+
+## Beweging (gedeeld, in `css/styles.css` + `js/main.js`)
+
+Client wish: the site should feel dynamic but **subtle** — small fades and short slides,
+no bouncing, spinning or large movements ("niet misselijk"). The shared pieces:
+`.beeld-hero` (big photo next to the title, gently floating `.zweef-sticker`s, light scroll
+parallax via `--s`), `.pop-in` (children fade up one by one inside a `.reveal`),
+`.foto-duo`, `.zijwaarts`, and `.zwevende-knop` (fixed CTA such as "Afspraak plannen",
+shown after the first section and hidden while its `href` target is in view). `.beeld-hero`
+is used on `vergaderen.html`, `werkplekken.html` and `contact.html` (variants `--blauw`,
+`--rood`); long forms sit in a `.form-rij` grid next to a sticky `.kolom-plakt` column. `menu.html` has a sticky `.menu-chips` category
+bar (sits under the nav via `--nav-h`, set in `main.js`). The ateliers page has its own,
+bolder motion in `css/ateliers.css` — the client explicitly liked that one.
+
 ## Email & forms backend (`/api/*`)
 
 Both forms post JSON to their own Vercel serverless function (plain Node.js,
@@ -216,8 +267,9 @@ straight to them.
   (~4MB base64 ≈ Vercel's hard 4.5MB request-body limit) since the client-side check is
   trivially bypassable by posting to the endpoint directly.
 - `api/vergaderen-contact.js` → `info@deestilburg.nl`, subject `Vergaderruimte aanvraag —
-  {naam}`. Also collects `datum` (gewenste datum) and `personen` (aantal personen) on top
-  of the usual naam/email/telefoon/bericht fields. This is a temporary stand-in for the
+  {naam}`. Also collects `datum` (gewenste datum), `boeking` (per uur / ochtend / middag / hele
+  dag), `personen` and `arrangement` (drankarrangement) on top of the usual
+  naam/email/telefoon/bericht fields. This is a temporary stand-in for the
   client's own booking/reservation system (not wired in yet) — once that's available,
   update the `#reservering-module` block in `vergaderen.html` rather than building a
   parallel section.
@@ -275,9 +327,9 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
   the only relaxation of an otherwise locked-down policy.
 - `vergaderen.html`'s booking section (`#reservering-module`) currently shows a plain
   contact form (`api/vergaderen-contact.js`) instead of a real booking widget — the
-  client doesn't have that embed/link yet. Swap it in once available; don't invent
-  pricing or availability details for the meeting room beyond what's already on
-  the page (capacity, airco, screen, lunch/drink arrangements) since none were given.
+  client doesn't have that embed/link yet. Swap it in once available. Room prices,
+  arrangements and photos come from the client's flyer (`brand/vergaderen/Workspees.pdf`;
+  "Workspees" is the flyer's working title, not the room's name — don't use it as a name).
 
 ## Git workflow
 
