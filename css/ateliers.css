@@ -33,7 +33,7 @@
 }
 .maker-kaart__foto {
   display: block; aspect-ratio: 3 / 4; overflow: hidden;
-  border: 3px solid var(--ink); border-radius: 999px 999px 14px 14px;
+  border: 3px solid var(--ink); border-radius: 20px;
   box-shadow: 7px 8px 0 var(--ink); background: var(--ink);
   transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s var(--ease);
 }
@@ -123,15 +123,15 @@
   .maker:nth-child(even of .maker) .maker__media { order: 2; }
 }
 
-/* Foto in de vorm van een atelierdeur (boog bovenaan) */
+/* Foto-kader: zelfde vorm als de fotorij op de homepage (.photo-row img) */
 .maker__media { position: relative; justify-self: center; width: min(100%, 440px); }
 .makers.is-rail .maker__media {
   transform: translateX(calc(var(--d, 0) * -7vw)) rotate(calc(var(--d, 0) * -5deg));
 }
 .maker__deur {
   aspect-ratio: 3 / 4; width: 100%;
-  border: 3px solid var(--ink); border-radius: 999px 999px var(--radius) var(--radius);
-  box-shadow: 12px 14px 0 var(--ink); overflow: hidden; background: var(--ink);
+  border: 3px solid var(--ink); border-radius: var(--radius-lg);
+  box-shadow: 10px 12px 0 var(--ink); overflow: hidden; background: var(--ink);
   transform: rotate(var(--deur-r, -2deg));
 }
 .makers.is-rail .maker__deur { max-height: calc(100vh - var(--nav-h, 64px) - 9rem); width: auto; height: 100%; margin-inline: auto; }
@@ -262,52 +262,20 @@
 }
 
 /* ==========================================================================
-   KADER-VARIANTEN (tijdelijk, ter beoordeling): ?kader=polaroid | sticker | blob
-   js/ateliers.js zet data-kader op <html>. Zonder parameter: de boog ("deur").
+   KADER-VARIANT (tijdelijk, ter vergelijking): ?kader=blob
+   js/ateliers.js zet data-kader op <html>. Zonder parameter: het standaardkader.
    ========================================================================== */
-
-/* 1. Polaroid met plakband */
-[data-kader="polaroid"] .maker__deur,
-[data-kader="polaroid"] .maker-kaart__foto {
-  position: relative; overflow: visible; border-radius: 4px;
-  background: var(--paper); padding: 5% 5% 20%;
-}
-[data-kader="polaroid"] .maker__deur img,
-[data-kader="polaroid"] .maker-kaart__foto img { border: 2px solid var(--ink); border-radius: 2px; }
-[data-kader="polaroid"] .maker__deur::before,
-[data-kader="polaroid"] .maker-kaart__foto::before {
-  content: ""; position: absolute; top: -4%; left: 50%; width: 40%; height: 9%; z-index: 2;
-  background: rgba(148, 197, 237, .8); transform: translateX(-50%) rotate(-5deg);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08);
-}
-[data-kader="polaroid"] .maker:nth-child(odd of .maker) .maker__deur::before { background: rgba(241, 31, 10, .7); transform: translateX(-50%) rotate(4deg); }
-[data-kader="polaroid"] .maker__deur--logo,
-[data-kader="polaroid"] .maker-kaart__foto--logo { background: var(--paper); }
-[data-kader="polaroid"] .maker__deur--logo img,
-[data-kader="polaroid"] .maker-kaart__foto--logo img { border: 0; }
-
-/* 2. Sticker met witte uitsnijrand */
-[data-kader="sticker"] .maker__deur {
-  border-radius: var(--radius-lg); border: 3px solid var(--ink);
-  box-shadow: 0 0 0 9px var(--paper), 0 0 0 12px var(--ink), 14px 16px 0 12px var(--ink);
-}
-[data-kader="sticker"] .maker-kaart__foto {
-  border-radius: 18px;
-  box-shadow: 0 0 0 5px var(--paper), 0 0 0 8px var(--ink), 7px 8px 0 8px var(--ink);
-}
-
-/* 3. Blob die langzaam van vorm verandert */
 [data-kader="blob"] .maker__deur,
 [data-kader="blob"] .maker-kaart__foto {
-  border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%;
-  animation: blob-vorm 14s ease-in-out infinite alternate;
+  border-radius: 47% 53% 44% 56% / 52% 46% 54% 48%;
+  animation: blob-vorm 30s ease-in-out infinite alternate;
 }
 [data-kader="blob"] .maker:nth-child(odd of .maker) .maker__deur,
-[data-kader="blob"] .maker-kaart:nth-child(even) .maker-kaart__foto { animation-delay: -6s; animation-duration: 17s; }
+[data-kader="blob"] .maker-kaart:nth-child(even) .maker-kaart__foto { animation-delay: -12s; animation-duration: 36s; }
 @keyframes blob-vorm {
-  0%   { border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%; }
-  33%  { border-radius: 61% 39% 44% 56% / 38% 57% 43% 62%; }
-  66%  { border-radius: 37% 63% 55% 45% / 58% 42% 58% 42%; }
-  100% { border-radius: 55% 45% 38% 62% / 47% 61% 39% 53%; }
+  0%   { border-radius: 47% 53% 44% 56% / 52% 46% 54% 48%; }
+  33%  { border-radius: 56% 44% 52% 48% / 45% 54% 46% 55%; }
+  66%  { border-radius: 43% 57% 58% 42% / 55% 47% 53% 45%; }
+  100% { border-radius: 52% 48% 45% 55% / 47% 56% 44% 53%; }
 }
 @media (prefers-reduced-motion: reduce) { [data-kader="blob"] .maker__deur, [data-kader="blob"] .maker-kaart__foto { animation: none; } }

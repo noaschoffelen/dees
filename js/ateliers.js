@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  // Tijdelijk ter beoordeling: ?kader=polaroid|sticker|blob kiest een andere fotovorm
+  // Tijdelijk ter vergelijking: ?kader=blob kiest de bewegende blob-vorm
   var kader = new URLSearchParams(location.search).get("kader");
   if (kader) document.documentElement.setAttribute("data-kader", kader);
 

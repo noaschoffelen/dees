@@ -210,7 +210,7 @@ The showcase page for the 7 makers (Arts of Abby, Daycare, Het Kleinste Wijndoos
 Jamland, Kaapstad, Kristie van der Wekke, Studio Bouks.). Its CSS/JS are separate files
 loaded only by this page, so it can change without touching the rest of the site.
 
-- Hero with a floating photo collage: each maker is an `a.maker-kaart` (door-shaped photo +
+- Hero with a floating photo collage: each maker is an `a.maker-kaart` (framed photo +
   name sticker), positioned via `--x/--y/--r/--g` inline vars on desktop and laid out in a
   grid on mobile. Clicking one jumps to that maker.
 - `.makers` rail: on desktop (≥900px, no reduced motion) `js/ateliers.js` adds `is-rail`,
@@ -219,7 +219,8 @@ loaded only by this page, so it can change without touching the rest of the site
   `--d` (-1..1, distance from centre) that `ateliers.css` uses for the photo/name parallax.
   On mobile / reduced motion the panels just stack and slide in via IntersectionObserver.
 - Each maker is an `<article class="maker maker--{kleur}">` (kleur: rood/blauw/paars/
-  papier/inkt) with a door-shaped photo (`.maker__deur`), optional `.maker__extra` round
+  papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`;
+  `?kader=blob` previews a slowly morphing blob instead), optional `.maker__extra` round
   photo and `.maker__logo` sticker (`--masker` variant recolours single-colour logos).
 - Texts marked "PLACEHOLDER" (Daycare, Het Kleinste Wijndoosje, Kaapstad) still need the
   maker's own copy; Studio Bouks.' text is a Dutch translation of their English blurb.
