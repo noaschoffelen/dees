@@ -351,8 +351,8 @@ p { margin: 0 0 1em; }
 /* ---------- Prijs-tegels (bureauverhuur) ---------- */
 .price-grid { display: grid; gap: 1.25rem; margin-top: 2rem; }
 @media (min-width: 760px) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
-.price-grid--2x2 { grid-template-columns: repeat(2, 1fr); }
-@media (min-width: 760px) { .price-grid--2x2 { grid-template-columns: repeat(2, 1fr); } }
+.price-grid--4 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) { .price-grid--4 { grid-template-columns: repeat(4, 1fr); } }
 .price-tile--uitgelicht { background: var(--blue); box-shadow: 8px 9px 0 var(--ink); }
 
 /* ---------- Tarieven-tabel (vergaderen: arrangementen) ---------- */
