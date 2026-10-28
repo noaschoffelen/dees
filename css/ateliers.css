@@ -28,7 +28,7 @@
   width: calc(clamp(105px, 11vw, 175px) * var(--g, 1));
   pointer-events: auto; display: block;
   transform: rotate(var(--r));
-  animation: sticker-zweef var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
+  animation: sticker-zweef calc(var(--dur, 9s) * 1.6) ease-in-out var(--delay, 0s) infinite alternate;
   transition: z-index 0s;
 }
 .maker-kaart__foto {
@@ -63,17 +63,17 @@
 .naam-sticker--papier { --s-bg: var(--paper);  --s-fg: var(--purple); }
 @keyframes sticker-zweef {
   0%   { transform: translate(0, 0) rotate(var(--r)); }
-  50%  { transform: translate(var(--dx, 14px), calc(var(--dy, 10px) * -1)) rotate(calc(var(--r) + 3deg)); }
-  100% { transform: translate(calc(var(--dx, 14px) * -.6), var(--dy, 10px)) rotate(calc(var(--r) - 2deg)); }
+  50%  { transform: translate(calc(var(--dx, 14px) * .25), calc(var(--dy, 10px) * -.3)) rotate(var(--r)); }
+  100% { transform: translate(calc(var(--dx, 14px) * -.15), calc(var(--dy, 10px) * .2)) rotate(var(--r)); }
 }
 
 @media (max-width: 899px) {
   .makers-hero { display: block; min-height: 0; }
   .makers-hero__stickers {
     position: static; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-    gap: 2.2rem 1rem; padding: 2.2rem var(--gutter) 1.5rem; max-width: var(--maxw); margin-inline: auto;
+    gap: 2.6rem 1.4rem; padding: 2.2rem var(--gutter) 1.5rem; max-width: var(--maxw); margin-inline: auto;
   }
-  .maker-kaart { position: relative; left: auto; top: auto; width: 100%; }
+  .maker-kaart { position: relative; left: auto; top: auto; width: 100%; animation: none; transform: rotate(calc(var(--r) * .5)); }
   .maker-kaart__naam { font-size: .68rem; max-width: 120%; }
 }
 
