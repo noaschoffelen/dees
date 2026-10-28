@@ -291,6 +291,16 @@ visually hidden, `tabindex="-1"`) — a filled-in honeypot makes the handler ret
 `.env.local` in this project (root cause not fully confirmed — possibly the space in
 the `/Users/noa/ Dees/Website` folder name).
 
+## Adres
+
+Dees is two buildings joined into one: the bakery, horeca and meeting room are at
+**Korte Tuinstraat 22** (the main/visitor address — footer, contact page, JSON-LD and the
+Google Business Profile should all say 22), the ateliers have their own front door at
+**Korte Tuinstraat 20** (mentioned as "ingang ateliers" on the contact and ateliers
+pages). The homepage hero corner deliberately says "Korte Tuinstraat 20 & 22" (the whole
+building). `privacy.html` still names "20-22" as the controller's address — check the
+KvK-registered address before changing it.
+
 ## SEO / social metadata
 
 Every page carries its own `<title>`, `meta description`, and matching

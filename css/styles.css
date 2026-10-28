@@ -718,6 +718,14 @@ p { margin: 0 0 1em; }
   margin-top: clamp(2.5rem, 6vw, 4rem); width: 100%; aspect-ratio: 16 / 7; min-height: 320px;
   border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink); overflow: hidden;
 }
+.uren-blok {
+  display: inline-grid; grid-template-columns: auto auto; gap: .35rem 1.4rem; margin: 1.4rem 0 0;
+  padding: .9rem 1.3rem; background: var(--paper); color: var(--ink);
+  border: 3px solid var(--ink); border-radius: 18px; box-shadow: 5px 5px 0 var(--ink);
+  font-size: 1.15rem; font-variant-numeric: tabular-nums;
+}
+.uren-blok dt { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; }
+.uren-blok dd { margin: 0; }
 
 /* ---------- Ateliers (tussenversie): banner "binnenkort de makers" ---------- */
 .makers-binnenkort {
