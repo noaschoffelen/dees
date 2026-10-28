@@ -718,3 +718,13 @@ p { margin: 0 0 1em; }
   margin-top: clamp(2.5rem, 6vw, 4rem); width: 100%; aspect-ratio: 16 / 7; min-height: 320px;
   border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink); overflow: hidden;
 }
+
+/* ---------- Ateliers (tussenversie): banner "binnenkort de makers" ---------- */
+.makers-binnenkort {
+  display: inline-flex; align-items: center; gap: .6em;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1rem, 2.2vw, 1.4rem); line-height: 1.2;
+  padding: .9em 1.4em .85em; border-radius: 100px;
+  background: var(--blue); color: var(--purple); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+.makers-binnenkort img { height: 1.1em; width: auto; flex-shrink: 0; }
