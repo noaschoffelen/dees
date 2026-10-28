@@ -184,8 +184,8 @@ the same way rather than introducing a framework or build step:
    (the hero has `overflow: hidden`) and placed by JS above the word, or below it when
    there's no room. Mouse: open on hover, stay open while over word or card. Touch:
    tap to toggle, tap elsewhere / scroll / Escape closes. Photos: `brood-desem.jpg` and
-   `koffie-espresso.jpg` (web-sized from the client's originals in `brand/images/`) and
-   the atelier-door photo. The short texts are a first draft based on existing site copy.
+   `koffie-espresso.jpg` and `Ateliers/atelier-werkplek.jpg` (a 4:3 crop) — all web-sized
+   from the client's originals in `brand/images/`. The short texts are a first draft based on existing site copy.
 
 `js/logo-kleur.js` is deliberately separate from `main.js` and loaded synchronously in
 `<head>` on all eight pages: it picks a random brand color (red/purple/blue/ink, never
