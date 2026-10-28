@@ -70,9 +70,15 @@
       <nav class="nav__links" aria-label="Hoofdmenu">
         <a href="/" aria-current="page">Home</a>
         <a href="menu">Menu</a>
-        <a href="ateliers">Ateliers</a>
-        <a href="crew">Dees Crew</a>
-        <a href="vergaderen">Vergaderen</a>
+        <div class="nav__group">
+          <button type="button" class="nav__group-toggle" aria-expanded="false" aria-controls="nav-bij-ons">Bij ons</button>
+          <div class="nav__dropdown" id="nav-bij-ons">
+            <a href="ateliers">Ateliers</a>
+            <a href="werkplekken">Werkplekken</a>
+            <a href="vergaderen">Vergaderen</a>
+            <a href="team">Team</a>
+          </div>
+        </div>
         <a href="contact">Contact</a>
       </nav>
       <button class="nav__toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
@@ -87,9 +93,11 @@
       <ul>
         <li><a href="/"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Home</a></li>
         <li><a href="menu"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Menu</a></li>
-        <li><a href="ateliers"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Ateliers</a></li>
-        <li><a href="crew"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Dees Crew</a></li>
-        <li><a href="vergaderen"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Vergaderen</a></li>
+        <li class="menu__group-label" aria-hidden="true">Bij ons</li>
+        <li class="menu__sub"><a href="ateliers"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Ateliers</a></li>
+        <li class="menu__sub"><a href="werkplekken"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Werkplekken</a></li>
+        <li class="menu__sub"><a href="vergaderen"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Vergaderen</a></li>
+        <li class="menu__sub"><a href="team"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Team</a></li>
         <li><a href="contact"><img class="point" src="assets/img/hands/h-right.svg" alt="" aria-hidden="true">Contact</a></li>
       </ul>
     </nav>
@@ -102,9 +110,39 @@
     <div class="home-fold">
       <section class="hero">
         <div class="container hero__inner">
-          <h1 class="display hero__brood">Brood<img class="hand-inline hand-point-left" src="assets/img/hands/h-right.svg" alt="">Ateliers<img class="hand-inline" src="assets/img/hands/h-right.svg" alt="">Koffie</h1>
+          <div class="hero__lockup">
+            <span class="hero__logo" role="img" aria-label="Dees"></span>
+            <h1 class="display hero__brood"><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-brood">Brood</button><span class="hand-inline hand-point-left hero__hand-icon" aria-hidden="true"></span><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-ateliers">Ateliers</button><span class="hand-inline hero__hand-icon" aria-hidden="true"></span><button type="button" class="hero__woord" aria-expanded="false" aria-controls="pop-koffie">Koffie</button></h1>
+          </div>
+
+          <!-- Pop-ups bij Brood / Ateliers / Koffie (buiten de h1, zodat de hoofdkop voor
+               Google kort blijft). Gepositioneerd door js/main.js. -->
+          <div class="hero__pop hero__pop--brood" id="pop-brood">
+            <img src="assets/img/photo/Horeca/brood-desem.jpg" alt="Vers gebakken desembroden op een bakplaat bij Dees." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Brood</p>
+              <p>We bakken ons eigen zuurdesembrood elke dag vers. Kom je een keer proeven?</p>
+              <a href="menu" class="hero__pop-link">Bekijk het menu</a>
+            </div>
+          </div>
+          <div class="hero__pop hero__pop--ateliers" id="pop-ateliers">
+            <img src="assets/img/photo/Ateliers/atelier-werkplek.jpg" alt="Iemand aan het werk in een atelier bij Dees, achter een open blauwe deur." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Ateliers</p>
+              <p>Neem een kijkje bij een van de makers in de ateliers bij Dees!</p>
+              <a href="ateliers#makers" class="hero__pop-link">Klik hier om iedereen te leren kennen</a>
+            </div>
+          </div>
+          <div class="hero__pop hero__pop--koffie" id="pop-koffie">
+            <img src="assets/img/photo/Horeca/koffie-espresso.jpg" alt="Espresso loopt uit de koffiemachine in een blauw kopje." loading="lazy" />
+            <div class="hero__pop-body">
+              <p class="hero__pop-kicker">Koffie</p>
+              <p>Pssst... Wist je al dat we bonen van Sprout gebruiken? Top koffie gewoon om de hoek uit Eindhoven!</p>
+              <a href="contact" class="hero__pop-link">Kom langs</a>
+            </div>
+          </div>
         </div>
-        <p class="hero__addr-corner payoff">Korte Tuinstraat 20-22</p>
+        <p class="hero__addr-corner payoff">Korte Tuinstraat 20 &amp; 22, Tilburg</p>
         <svg class="hero__scroll-hint" width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
           <path d="M2 2L14 14L26 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -123,7 +161,7 @@
     <section class="section bg-purple" id="kenjedees">
       <div class="container" style="text-align:center">
         <h2 style="font-size:var(--fs-h1)"><img class="hand-inline hand-point-text" src="assets/img/hands/h-right-blue.svg" alt="" style="height:.75em;margin-right:.3em">KEN JE DEES?</h2>
-        <p class="lead" style="max-width:52ch;margin:1.5rem auto 0;color:var(--paper)">Dees is een bakkerij en koffiebar met ateliers aan de Korte Tuinstraat, midden in het Dwaalgebied van Tilburg. Je komt bij ons voor <a href="menu" style="text-decoration:underline">vers desembrood, ontbijt, lunch en focaccia</a> uit eigen bakkerij, en natuurlijk voor goede koffie. In onze ateliers werken creatieve makers, en je kunt bij ons een <a href="ateliers" style="text-decoration:underline">bureau</a> of de <a href="vergaderen" style="text-decoration:underline">vergaderruimte</a> huren.</p>
+        <p class="lead" style="max-width:52ch;margin:1.5rem auto 0;color:var(--paper)">Dees is een bakkerij en koffiebar met ateliers aan de Korte Tuinstraat, midden in het Dwaalgebied van Tilburg. Je komt bij ons voor <a href="menu" style="text-decoration:underline">vers desembrood, ontbijt, lunch en focaccia</a> uit eigen bakkerij, en natuurlijk voor goede koffie. In onze ateliers werken creatieve makers, en je kunt bij ons een <a href="werkplekken" style="text-decoration:underline">werkplek</a> of de <a href="vergaderen" style="text-decoration:underline">vergaderruimte</a> huren.</p>
         <p style="margin-top:1rem;color:var(--paper);opacity:.85">Di–vr 08:30–16:30 · za–zo 09:00–16:00</p>
         <div class="hero__cta" style="justify-content:center;margin-top:2rem">
           <a href="https://www.instagram.com/deestilburg" target="_blank" rel="noopener" class="btn btn--blue">Up to date blijven</a>
@@ -132,7 +170,7 @@
       <div class="container" style="margin-top:clamp(3rem,7vw,5rem)">
         <div class="photo-row">
           <img src="assets/img/photo/Horeca/DEESopening-43.jpg" alt="Lachende gast aan de balie van Dees." loading="lazy" />
-          <img src="assets/img/photo/Horeca/DEESopening-13.jpg" alt="Crew van Dees achter de kassa met het Dees-logo op de rug." loading="lazy" />
+          <img src="assets/img/photo/Horeca/DEESopening-13.jpg" alt="Team van Dees achter de kassa met het Dees-logo op de rug." loading="lazy" />
           <img src="assets/img/photo/Horeca/DEESopening-30.jpg" alt="Gasten aan tafel in het interieur van Dees." loading="lazy" />
         </div>
       </div>

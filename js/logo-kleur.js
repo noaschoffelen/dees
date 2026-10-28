@@ -1,15 +1,21 @@
-/* Logo-kleur: geeft het logo linksboven bij elke paginawissel een andere merkkleur.
-   Staat in <head> (niet in main.js) zodat de kleur al vastligt vóór de eerste render
-   en het logo niet zichtbaar van kleur verspringt. */
+/* Logo-kleur: geeft het logo linksboven (en op de homepage de hero) bij elke
+   paginawissel een andere merkkleur. Staat in <head> (niet in main.js) zodat de kleur
+   al vastligt vóór de eerste render en er niets zichtbaar van kleur verspringt. */
 (function () {
+  // Kies willekeurig uit n opties, maar nooit dezelfde als op de vorige pagina
+  function kies(sleutel, n) {
+    var vorige = -1;
+    try { vorige = parseInt(sessionStorage.getItem(sleutel), 10); } catch (e) {}
+    var i = Math.floor(Math.random() * (n - 1));
+    if (vorige >= 0 && vorige < n && i >= vorige) i++;
+    try { sessionStorage.setItem(sleutel, String(i)); } catch (e) {}
+    return i;
+  }
+
   var kleuren = ['--red', '--purple', '--blue', '--ink'];
-  var vorige = -1;
-  try { vorige = parseInt(sessionStorage.getItem('dees-logo-kleur'), 10); } catch (e) {}
+  document.documentElement.style.setProperty('--logo-kleur', 'var(' + kleuren[kies('dees-logo-kleur', kleuren.length)] + ')');
 
-  // Kies willekeurig, maar nooit dezelfde kleur als op de vorige pagina
-  var i = Math.floor(Math.random() * (kleuren.length - 1));
-  if (vorige >= 0 && vorige < kleuren.length && i >= vorige) i++;
-
-  document.documentElement.style.setProperty('--logo-kleur', 'var(' + kleuren[i] + ')');
-  try { sessionStorage.setItem('dees-logo-kleur', String(i)); } catch (e) {}
+  // Hero-thema's (alleen gebruikt op de homepage, zie .hero in styles.css)
+  var heroThemas = ['rood', 'paars', 'blauw'];
+  document.documentElement.setAttribute('data-hero', heroThemas[kies('dees-hero-kleur', heroThemas.length)]);
 })();

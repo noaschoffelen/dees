@@ -67,26 +67,34 @@ records (see below).
 
 ```
 index.html          Home — "Ken je Dees?"
-menu.html            Menu (Coming Soon)
-ateliers.html        Ateliers + contact form
-crew.html            Dees Crew + sollicitatie (application) form
-vergaderen.html      Vergaderen (coming soon)
+menu.html            Menu — full menu, pulled from the client's own physical menu card
+ateliers.html        Ateliers (fully rented, no waitlist) + #makers section (placeholder until the
+                     client supplies maker names/photos/links — don't invent them)
+werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
+team.html            Team (was `crew.html` / "Dees Crew"; `/crew` 301-redirects to `/team` via
+                     `redirects` in vercel.json) + sollicitatie (application) form
+vergaderen.html      Vergaderen — meeting room info + booking-request contact form
 privacy.html          Privacybeleid — linked from every footer and both forms
 contact.html          Contact — address, phone, email, socials, embedded Google Map
 robots.txt            Allow-all + sitemap pointer
-sitemap.xml            The 7 pages, extensionless URLs
+sitemap.xml            The 8 pages, extensionless URLs
 vercel.json            cleanUrls + trailingSlash + security headers (CSP etc.) config
 api/
-  ateliers-contact.js  Serverless function behind the ateliers contact form (see below)
-  crew-apply.js        Serverless function behind the sollicitatie form (see below)
-  _utils.js            Shared helpers (header sanitizing, email validation, rate limit) —
+  ateliers-contact.js   Serverless function behind the ateliers/bureau contact form (see below)
+  crew-apply.js         Serverless function behind the sollicitatie form (see below)
+  vergaderen-contact.js Serverless function behind the vergaderen booking-request form (see
+                        below) — temporary stand-in until the client's own booking/
+                        reservation system is wired in; vergaderen.html has a
+                        `#reservering-module` wrapper around this section specifically so
+                        that swap is contained to one block
+  _utils.js             Shared helpers (header sanitizing, email validation, rate limit) —
                        the `_` prefix keeps it from becoming its own route
 css/
   styles.css         Design system: color/type/spacing tokens in :root, then components
   fonts.css           Local @font-face rules (Serial B Neue: regular + heavy)
 js/main.js            Vanilla JS, no dependencies (see below)
-js/logo-kleur.js       Tiny <head> script: gives the nav logo a different brand color on every
-                       page load (see below)
+js/logo-kleur.js       Tiny <head> script: gives the nav logo (and the homepage hero) a
+                       different brand color on every page load (see below)
 assets/
   fonts/              Locally hosted Serial B Neue webfonts (.woff2/.woff) — just the
                        Regular/Heavy files actually used; the full 10-weight source
@@ -106,8 +114,14 @@ site, before being processed into `assets/`.
 Every HTML page follows the same shape: `<header class="nav">` with the same nav links,
 a `#mobile-menu` panel, page content, and a shared footer — copy-paste consistent across
 pages rather than templated (there's no templating system). When changing shared chrome
-(nav, footer, mobile menu), update it identically across all seven pages (the five main
-pages plus `privacy.html` and `contact.html`).
+(nav, footer, mobile menu), update it identically across all eight pages (`index`, `menu`, `ateliers`,
+`werkplekken`, `team`, `vergaderen`, `contact`, `privacy`).
+
+The nav is: Home · Menu · **Bij ons** ▾ (Ateliers, Werkplekken, Vergaderen, Team) · Contact.
+On desktop "Bij ons" is a `.nav__group` with a `<button class="nav__group-toggle">` and a
+`.nav__dropdown`; the current page's link gets `aria-current="page"` and, when it's one of the
+four sub-pages, the group gets `is-current`. The mobile menu lists the same items flat, with
+a `menu__group-label` "Bij ons" and the four sub-pages as `li.menu__sub`.
 
 ## Design system (`css/styles.css`)
 
@@ -144,23 +158,40 @@ Single IIFE, no dependencies, covers these independent concerns — keep additio
 the same way rather than introducing a framework or build step:
 
 1. Footer year (`#jaar`)
-2. Mobile nav toggle (`.nav__toggle` / `#mobile-menu`, syncs `aria-expanded`)
+2. Mobile nav toggle (`.nav__toggle` / `#mobile-menu`, syncs `aria-expanded`), plus the
+   desktop "Bij ons" dropdown (hover opens; click/Enter toggles; Escape / click outside closes)
 3. Scroll-reveal via `IntersectionObserver` for any `.reveal` element (falls back to
    immediately showing content if unsupported)
-4. Contact forms (`form[action^="/api/"]`) — used by `ateliers.html` and `crew.html`.
+4. Contact forms (`form[action^="/api/"]`) — used by `werkplekken.html`, `team.html` and
+   `vergaderen.html`.
    Intercepts submit, converts any `<input type="file">` fields to `{filename, content}`
    (base64) via `FileReader`, then POSTs everything as one JSON body to the form's own
    `/api/*` endpoint. Client-side blocks file uploads over ~3MB combined (see "Email &
    forms backend" for why) and shows inline status in `.form__status`, disabling the
    submit button while in flight.
+5. Homepage hero pop-ups: the words Brood / Ateliers / Koffie in the hero `<h1>` are
+   `<button class="hero__woord" aria-controls="pop-…">`; each opens its own `.hero__pop`
+   card (photo + short text + link). The cards live *outside* the `<h1>` on purpose, so
+   the heading Google sees stays just "Brood Ateliers Koffie". They are `position: fixed`
+   (the hero has `overflow: hidden`) and placed by JS above the word, or below it when
+   there's no room. Mouse: open on hover, stay open while over word or card. Touch:
+   tap to toggle, tap elsewhere / scroll / Escape closes. Photos: `brood-desem.jpg` and
+   `koffie-espresso.jpg` and `Ateliers/atelier-werkplek.jpg` (a 4:3 crop) — all web-sized
+   from the client's originals in `brand/images/`. The short texts are a first draft based on existing site copy.
 
 `js/logo-kleur.js` is deliberately separate from `main.js` and loaded synchronously in
-`<head>` on all seven pages: it picks a random brand color (red/purple/blue/ink, never
+`<head>` on all eight pages: it picks a random brand color (red/purple/blue/ink, never
 the same as the previous page via `sessionStorage`) and sets `--logo-kleur` on `<html>`
 before first paint, so the logo doesn't visibly flash from one color to another. The
 nav logo is a `<span class="nav__logo-mark">` that uses the wordmark SVG as a CSS
 `mask` with `background-color: var(--logo-kleur)` — not an `<img>` — which is what makes
 the color swappable.
+
+The same script also picks a homepage hero theme (`data-hero="rood|paars|blauw"` on
+`<html>`, again never the same twice in a row). `.hero` defines `--hero-bg`, `--hero-fg`
+(logo + heading), `--hero-hand` and `--hero-addr`, and the `:root[data-hero=…] .hero`
+rules override them — add a theme there plus its name in `logo-kleur.js`. The hero hands
+are mask-based spans (`.hero__hand-icon`), not `<img>`s, so they can follow the theme.
 
 ## Email & forms backend (`/api/*`)
 
@@ -176,14 +207,22 @@ that, by design). `reply_to` is set to the visitor's address so replying in Gmai
 straight to them.
 
 - `api/ateliers-contact.js` → `ateliers@deestilburg.nl`, subject `Interesse atelier — {naam}`.
+  Used by the bureau (desk) rental enquiry form on `werkplekken.html` (it lived on
+  `ateliers.html` until the two pages were split; the endpoint name stayed).
 - `api/crew-apply.js` → `info@deestilburg.nl`, subject `Sollicitatie website — {naam}`.
   Accepts `cv`/`motivatie` as `{filename, content}` and attaches them directly to the
   email via Resend's `attachments` field (base64) — no third-party file host needed.
   Server-side re-validates file extension (`.pdf`/`.doc`/`.docx`) and combined size
   (~4MB base64 ≈ Vercel's hard 4.5MB request-body limit) since the client-side check is
   trivially bypassable by posting to the endpoint directly.
+- `api/vergaderen-contact.js` → `info@deestilburg.nl`, subject `Vergaderruimte aanvraag —
+  {naam}`. Also collects `datum` (gewenste datum) and `personen` (aantal personen) on top
+  of the usual naam/email/telefoon/bericht fields. This is a temporary stand-in for the
+  client's own booking/reservation system (not wired in yet) — once that's available,
+  update the `#reservering-module` block in `vergaderen.html` rather than building a
+  parallel section.
 
-Both endpoints share `api/_utils.js`: `sanitizeHeaderValue` (strips `\r\n`/`"<>"` from
+All three endpoints share `api/_utils.js`: `sanitizeHeaderValue` (strips `\r\n`/`"<>"` from
 the name before it's interpolated into the From/Subject headers — prevents header
 injection), `isValidEmail` (basic format check), and `isRateLimited` (in-memory,
 per-IP, 5 requests / 10 min). That rate limiter is **best-effort only** — its `Map`
@@ -226,7 +265,7 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
   non-commercial use — technically out of compliance for a revenue-generating business
   site. Flagged to the client; upgrading to Pro is their call, not something to do
   unprompted.
-- The sollicitatie form on `crew.html` is temporarily closed (team is fully staffed): the
+- The sollicitatie form on `team.html` is temporarily closed (team is fully staffed): the
   form stays visible but faded and `inert` behind an overlay pointing to Instagram, and
   `api/crew-apply.js` has `SOLLICITATIES_OPEN = false` as a server-side backstop. Flip
   that constant back to `true` (and remove the `inert`/overlay markup) once hiring
@@ -234,6 +273,11 @@ via the `google-site-verification` meta tag on `index.html` only — don't remov
 - `contact.html` embeds a Google Maps iframe (no API key, the `output=embed` URL format),
   which needed `frame-src https://www.google.com` added to the CSP in `vercel.json` —
   the only relaxation of an otherwise locked-down policy.
+- `vergaderen.html`'s booking section (`#reservering-module`) currently shows a plain
+  contact form (`api/vergaderen-contact.js`) instead of a real booking widget — the
+  client doesn't have that embed/link yet. Swap it in once available; don't invent
+  pricing or availability details for the meeting room beyond what's already on
+  the page (capacity, airco, screen, lunch/drink arrangements) since none were given.
 
 ## Git workflow
 

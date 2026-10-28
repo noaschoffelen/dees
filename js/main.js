@@ -27,6 +27,38 @@
     });
   }
 
+  /* ---- "Bij ons"-uitklapmenu in de nav ----
+     Muis: openen bij hover. Klik/Enter: openen en sluiten. Escape of klik ernaast sluit. */
+  var groep = document.querySelector(".nav__group");
+  if (groep) {
+    var groepKnop = groep.querySelector(".nav__group-toggle");
+    var groepTimer = null;
+    var muisErop = false; // open door hover: een klik moet het dan niet meteen weer sluiten
+    var zetGroep = function (open) {
+      clearTimeout(groepTimer);
+      groep.dataset.open = open ? "true" : "false";
+      groepKnop.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    groepKnop.addEventListener("click", function () { zetGroep(muisErop || groep.dataset.open !== "true"); });
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      groep.addEventListener("mouseenter", function () { muisErop = true; zetGroep(true); });
+      groep.addEventListener("mouseleave", function () {
+        muisErop = false;
+        clearTimeout(groepTimer);
+        groepTimer = setTimeout(function () { zetGroep(false); }, 200);
+      });
+    }
+    groep.addEventListener("focusout", function (e) {
+      if (!groep.contains(e.relatedTarget)) zetGroep(false);
+    });
+    document.addEventListener("click", function (e) {
+      if (!groep.contains(e.target)) zetGroep(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && groep.dataset.open === "true") { zetGroep(false); groepKnop.focus(); }
+    });
+  }
+
   /* ---- Scroll reveal ---- */
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && reveals.length) {
@@ -124,4 +156,75 @@
         });
     });
   });
+
+  /* ---- Hero-pop-ups bij Brood / Ateliers / Koffie (homepage) ----
+     Muis: openen bij hover, open blijven zolang de muis op woord of pop-up staat.
+     Touch/toetsenbord: openen en sluiten met tik/Enter, sluiten met Escape of tik ernaast.
+     De pop-up is position: fixed (de hero heeft overflow: hidden) en komt boven het
+     woord te staan, of eronder als er boven niet genoeg ruimte is. */
+  var woorden = document.querySelectorAll(".hero__woord[aria-controls]");
+  if (woorden.length) {
+    var kanHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    var openWoord = null;
+    var sluitTimer = null;
+
+    var popVan = function (woord) { return document.getElementById(woord.getAttribute("aria-controls")); };
+
+    var plaats = function (woord, pop) {
+      var r = woord.getBoundingClientRect();
+      var w = pop.offsetWidth, h = pop.offsetHeight, marge = 12;
+      var navH = (document.querySelector(".nav") || { offsetHeight: 0 }).offsetHeight;
+      var left = Math.min(Math.max(r.left + r.width / 2 - w / 2, marge), window.innerWidth - w - marge);
+      var top = r.top - h - 14;
+      if (top < navH + marge) top = Math.min(r.bottom + 14, window.innerHeight - h - marge);
+      pop.style.left = left + "px";
+      pop.style.top = Math.max(top, navH + marge) + "px";
+    };
+
+    var sluit = function () {
+      if (!openWoord) return;
+      popVan(openWoord).dataset.open = "false";
+      openWoord.setAttribute("aria-expanded", "false");
+      openWoord = null;
+    };
+
+    var open = function (woord) {
+      clearTimeout(sluitTimer);
+      if (openWoord === woord) return;
+      sluit();
+      var pop = popVan(woord);
+      plaats(woord, pop);
+      pop.dataset.open = "true";
+      woord.setAttribute("aria-expanded", "true");
+      openWoord = woord;
+    };
+
+    var sluitStraks = function () {
+      clearTimeout(sluitTimer);
+      sluitTimer = setTimeout(sluit, 180);
+    };
+
+    Array.prototype.forEach.call(woorden, function (woord) {
+      var pop = popVan(woord);
+      if (!pop) return;
+      woord.addEventListener("click", function () {
+        if (openWoord === woord && !kanHover) sluit(); else open(woord);
+      });
+      if (kanHover) {
+        woord.addEventListener("mouseenter", function () { open(woord); });
+        woord.addEventListener("mouseleave", sluitStraks);
+        pop.addEventListener("mouseenter", function () { clearTimeout(sluitTimer); });
+        pop.addEventListener("mouseleave", sluitStraks);
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (openWoord && !e.target.closest(".hero__woord, .hero__pop")) sluit();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && openWoord) { var w = openWoord; sluit(); w.focus(); }
+    });
+    window.addEventListener("scroll", sluit, { passive: true });
+    window.addEventListener("resize", sluit);
+  }
 })();
