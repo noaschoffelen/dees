@@ -245,7 +245,7 @@ Every page carries its own `<title>`, `meta description`, and matching
 `og:*`/`twitter:*` tags (title, description, `og:url`, and a shared
 `assets/img/graphic/og-image.png` social-share card). The homepage additionally has
 JSON-LD (`Bakery`/`CafeOrCoffeeShop`) structured data with name, address, `telephone`,
-`openingHoursSpecification` (Tue–Fri 08:00–17:00, Sat–Sun 09:00–16:00, closed Monday) and
+`openingHoursSpecification` (Mon–Fri 08:30–16:30, Sat–Sun 09:00–16:00) and
 `sameAs` links (Instagram, Google Business Profile, LinkedIn). The JSON-LD blocks on
 `index.html` and `menu.html` are whitelisted by **sha256 hash** in the CSP `script-src` in
 `vercel.json` — any edit to their contents (even one character) needs that hash
