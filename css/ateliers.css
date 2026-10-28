@@ -157,6 +157,13 @@
 @keyframes logo-tik { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(-4deg) scale(1.05); } }
 
 /* Placeholder-deur voor makers waarvan nog geen foto is */
+/* Deur met alleen een logo (maker zonder foto) */
+.maker__deur--logo, .maker-kaart__foto--logo { display: grid; place-items: center; background: var(--purple); }
+.maker__deur--logo img, .maker-kaart__foto--logo img {
+  width: 82%; height: auto; object-fit: contain; transform: rotate(-8deg);
+  filter: drop-shadow(4px 4px 0 var(--ink));
+}
+.maker-kaart__foto--logo img { width: 86%; filter: drop-shadow(2px 2px 0 var(--ink)); }
 .maker__deur--leeg {
   display: grid; place-items: center; background: var(--m-accent);
   color: var(--m-bg); text-align: center;
