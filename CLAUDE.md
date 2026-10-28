@@ -84,9 +84,7 @@ ateliers.html        Ateliers — "de makers van Dees": the 7 makers in the atel
 werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
 team.html            Team (was `crew.html` / "Dees Crew"; `/crew` 301-redirects to `/team` via
                      `redirects` in vercel.json) + sollicitatie (application) form
-vergaderen.html      Vergaderen — meeting room info + booking-request contact form; own
-                     css/vergaderen.css + js/vergaderen.js (image-first hero with floating
-                     stickers + light scroll parallax, pop-in price tiles, slide-in photos)
+vergaderen.html      Vergaderen — meeting room info + booking-request contact form
 privacy.html          Privacybeleid — linked from every footer and both forms
 contact.html          Contact — address, phone, email, socials, embedded Google Map
 robots.txt            Allow-all + sitemap pointer
@@ -232,6 +230,18 @@ loaded only by this page, so it can change without touching the rest of the site
 - Texts marked "PLACEHOLDER" (Daycare, Het Kleinste Wijndoosje, Kaapstad) still need the
   maker's own copy; Studio Bouks.' text is a Dutch translation of their English blurb.
   Source material from the makers lives in `brand/makers/<naam>/` (not served).
+
+## Beweging (gedeeld, in `css/styles.css` + `js/main.js`)
+
+Client wish: the site should feel dynamic but **subtle** — small fades and short slides,
+no bouncing, spinning or large movements ("niet misselijk"). The shared pieces:
+`.beeld-hero` (big photo next to the title, gently floating `.zweef-sticker`s, light scroll
+parallax via `--s`), `.pop-in` (children fade up one by one inside a `.reveal`),
+`.foto-duo`, `.zijwaarts`, and `.zwevende-knop` (fixed CTA such as "Afspraak plannen",
+shown after the first section and hidden while its `href` target is in view). Used on
+`vergaderen.html` and `werkplekken.html`. `menu.html` has a sticky `.menu-chips` category
+bar (sits under the nav via `--nav-h`, set in `main.js`). The ateliers page has its own,
+bolder motion in `css/ateliers.css` — the client explicitly liked that one.
 
 ## Email & forms backend (`/api/*`)
 

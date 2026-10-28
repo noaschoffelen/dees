@@ -560,10 +560,6 @@ p { margin: 0 0 1em; }
   padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 5.5rem);
 }
 .beeld-hero--blauw { background: var(--blue); color: var(--purple); }
-.beeld-hero--rood { background: var(--red); color: var(--paper); }
-.beeld-hero--rood h1 { color: var(--paper) !important; }
-.beeld-hero--rood .kicker { color: var(--ink); }
-.beeld-hero--rood .lead { color: var(--paper) !important; }
 .beeld-hero--blauw h1 { color: var(--purple) !important; }
 .beeld-hero--blauw .lead { color: var(--ink) !important; }
 .beeld-hero__inner { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: center; }
@@ -681,58 +677,3 @@ p { margin: 0 0 1em; }
 .menu-chips a:hover { background: var(--blue); }
 .menu-chips a[aria-current="true"] { background: var(--purple); color: var(--blue); }
 .menu-board__band { scroll-margin-top: calc(var(--nav-h, 66px) + 4.5rem); }
-
-/* ---------- Formulier: velden in paren naast elkaar ---------- */
-.form-rij { display: grid; gap: inherit; }
-@media (min-width: 600px) { .form-rij { grid-template-columns: 1fr 1fr; gap: 1rem; } }
-
-/* ---------- Kolom die naast een lang formulier blijft staan ---------- */
-@media (min-width: 820px) {
-  .kolom-plakt { position: sticky; top: calc(var(--nav-h, 66px) + 2rem); align-self: start; }
-}
-.kolom-plakt__foto {
-  width: 100%; max-width: 420px; aspect-ratio: 4 / 3; object-fit: cover;
-  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink);
-}
-.direct-contact { color: var(--ink); width: fit-content; max-width: 100%; }
-.direct-contact__kop { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: .95rem; margin-bottom: .6rem; }
-.direct-contact ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; font-weight: 700; font-size: 1.1rem; }
-.direct-contact a:hover { color: var(--red); }
-
-/* ---------- Contactpagina ---------- */
-.knoppen-rij { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-.knoppen-rij .btn { margin-top: 0; }
-.btn--wit { --btn-bg: var(--paper); --btn-fg: var(--ink); }
-.contact-tegels { display: grid; gap: 1.25rem; }
-@media (min-width: 820px) { .contact-tegels { grid-template-columns: repeat(3, 1fr); } }
-.contact-tegels .tile { color: var(--ink); display: grid; gap: .8rem; align-content: start; box-shadow: 8px 9px 0 var(--ink); }
-.contact-tegels .kicker { margin: 0; }
-.contact-tegels__groot { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1.25; }
-.contact-tegels__tijden { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.4rem; margin: 0; font-size: 1.25rem; }
-.contact-tegels__tijden dt { font-weight: 800; }
-.contact-tegels__tijden dd { margin: 0; font-variant-numeric: tabular-nums; }
-.contact-tegels__lijst { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; font-weight: 700; }
-.contact-tegels a:hover, .onderstreept:hover { color: var(--red); }
-.onderstreept { text-decoration: underline; text-underline-offset: .2em; font-weight: 700; }
-.contact-kaart {
-  margin-top: clamp(2.5rem, 6vw, 4rem); width: 100%; aspect-ratio: 16 / 7; min-height: 320px;
-  border: 3px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 10px 12px 0 var(--ink); overflow: hidden;
-}
-.uren-blok {
-  display: inline-grid; grid-template-columns: auto auto; gap: .35rem 1.4rem; margin: 1.4rem 0 0;
-  padding: .9rem 1.3rem; background: var(--paper); color: var(--ink);
-  border: 3px solid var(--ink); border-radius: 18px; box-shadow: 5px 5px 0 var(--ink);
-  font-size: 1.15rem; font-variant-numeric: tabular-nums;
-}
-.uren-blok dt { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; }
-.uren-blok dd { margin: 0; }
-
-/* ---------- Ateliers (tussenversie): banner "binnenkort de makers" ---------- */
-.makers-binnenkort {
-  display: inline-flex; align-items: center; gap: .6em;
-  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(1rem, 2.2vw, 1.4rem); line-height: 1.2;
-  padding: .9em 1.4em .85em; border-radius: 100px;
-  background: var(--blue); color: var(--purple); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
-}
-.makers-binnenkort img { height: 1.1em; width: auto; flex-shrink: 0; }
