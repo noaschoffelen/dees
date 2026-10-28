@@ -81,7 +81,7 @@ index.html          Home — "Ken je Dees?"
 menu.html            Menu — full menu, pulled from the client's own physical menu card
 ateliers.html        Ateliers (fully rented, no waitlist) + #makers section (placeholder until the
                      client supplies maker names/photos/links — don't invent them)
-flexplekken.html     Flexplekken — bureau (desk) rental: prices, perks + contact form
+werkplekken.html     Werkplekken — bureau (desk) rental: prices, perks + contact form
 crew.html            Dees Crew + sollicitatie (application) form
 vergaderen.html      Vergaderen — meeting room info + booking-request contact form
 privacy.html          Privacybeleid — linked from every footer and both forms
@@ -125,7 +125,7 @@ Every HTML page follows the same shape: `<header class="nav">` with the same nav
 a `#mobile-menu` panel, page content, and a shared footer — copy-paste consistent across
 pages rather than templated (there's no templating system). When changing shared chrome
 (nav, footer, mobile menu), update it identically across all eight pages (`index`, `menu`, `ateliers`,
-`flexplekken`, `crew`, `vergaderen`, `contact`, `privacy`).
+`werkplekken`, `crew`, `vergaderen`, `contact`, `privacy`).
 
 ## Design system (`css/styles.css`)
 
@@ -166,7 +166,7 @@ the same way rather than introducing a framework or build step:
    desktop "Bij ons" dropdown (hover opens; click/Enter toggles; Escape / click outside closes)
 3. Scroll-reveal via `IntersectionObserver` for any `.reveal` element (falls back to
    immediately showing content if unsupported)
-4. Contact forms (`form[action^="/api/"]`) — used by `flexplekken.html`, `crew.html` and
+4. Contact forms (`form[action^="/api/"]`) — used by `werkplekken.html`, `crew.html` and
    `vergaderen.html`.
    Intercepts submit, converts any `<input type="file">` fields to `{filename, content}`
    (base64) via `FileReader`, then POSTs everything as one JSON body to the form's own
@@ -251,7 +251,7 @@ that, by design). `reply_to` is set to the visitor's address so replying in Gmai
 straight to them.
 
 - `api/ateliers-contact.js` → `ateliers@deestilburg.nl`, subject `Interesse atelier — {naam}`.
-  Used by the bureau (desk) rental enquiry form on `flexplekken.html` (it lived on
+  Used by the bureau (desk) rental enquiry form on `werkplekken.html` (it lived on
   `ateliers.html` until the two pages were split; the endpoint name stayed).
 - `api/crew-apply.js` → `info@deestilburg.nl`, subject `Sollicitatie website — {naam}`.
   Accepts `cv`/`motivatie` as `{filename, content}` and attaches them directly to the
