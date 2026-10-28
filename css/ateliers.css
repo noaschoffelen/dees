@@ -9,7 +9,7 @@
   position: relative; overflow: hidden;
   background: var(--purple); color: var(--blue);
   padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem);
-  min-height: min(78vh, 720px);
+  min-height: min(86vh, 780px);
   display: flex; align-items: center;
 }
 .makers-hero__inner { position: relative; z-index: 2; }
@@ -21,22 +21,42 @@
 .makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
 
 .makers-hero__stickers { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-.naam-sticker {
+/* Foto-collage: elke maker als deurvormige foto met naamsticker, zwevend */
+.maker-kaart {
   position: absolute; left: var(--x); top: var(--y);
-  pointer-events: auto;
-  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(.95rem, 1.5vw, 1.35rem); line-height: 1; white-space: nowrap;
-  padding: .7em 1.05em .62em; border-radius: 100px;
-  background: var(--s-bg); color: var(--s-fg);
-  border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  width: calc(clamp(105px, 11vw, 175px) * var(--g, 1));
+  pointer-events: auto; display: block;
   transform: rotate(var(--r));
   animation: sticker-zweef var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
-  transition: box-shadow .15s var(--ease), filter .15s;
+  transition: z-index 0s;
 }
-.naam-sticker:hover, .naam-sticker:focus-visible {
-  animation-play-state: paused; box-shadow: 8px 8px 0 var(--ink); filter: saturate(1.15);
+.maker-kaart__foto {
+  display: block; aspect-ratio: 3 / 4; overflow: hidden;
+  border: 3px solid var(--ink); border-radius: 999px 999px 14px 14px;
+  box-shadow: 7px 8px 0 var(--ink); background: var(--ink);
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s var(--ease);
 }
-.naam-sticker:focus-visible { outline: 3px solid var(--paper); outline-offset: 4px; }
+.maker-kaart__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.maker-kaart__foto--leeg {
+  display: grid; place-items: center; background: var(--blue); color: var(--purple);
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+.maker-kaart__naam {
+  position: absolute; left: 50%; bottom: -.9em; transform: translateX(-50%) rotate(-4deg);
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(.72rem, .95vw, .95rem); line-height: 1.05; text-align: center;
+  width: max-content; max-width: 135%;
+  padding: .55em .9em .5em; border-radius: 100px;
+  background: var(--s-bg); color: var(--s-fg);
+  border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+}
+.maker-kaart:hover, .maker-kaart:focus-visible { z-index: 5; animation-play-state: paused; }
+.maker-kaart:hover .maker-kaart__foto, .maker-kaart:focus-visible .maker-kaart__foto {
+  transform: rotate(calc(var(--r) * -1)) scale(1.12); box-shadow: 11px 12px 0 var(--ink);
+}
+.maker-kaart:hover img { transform: scale(1.08); }
+.maker-kaart:focus-visible { outline: none; }
+.maker-kaart:focus-visible .maker-kaart__foto { outline: 3px solid var(--paper); outline-offset: 4px; }
 .naam-sticker--rood   { --s-bg: var(--red);    --s-fg: var(--paper); }
 .naam-sticker--blauw  { --s-bg: var(--blue);   --s-fg: var(--ink); }
 .naam-sticker--papier { --s-bg: var(--paper);  --s-fg: var(--purple); }
@@ -49,10 +69,11 @@
 @media (max-width: 899px) {
   .makers-hero { display: block; min-height: 0; }
   .makers-hero__stickers {
-    position: static; display: flex; flex-wrap: wrap; gap: .8rem .6rem;
-    padding: 2rem var(--gutter) 0; max-width: var(--maxw); margin-inline: auto;
+    position: static; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 2.2rem 1rem; padding: 2.2rem var(--gutter) 1.5rem; max-width: var(--maxw); margin-inline: auto;
   }
-  .naam-sticker { position: static; font-size: 1rem; }
+  .maker-kaart { position: relative; left: auto; top: auto; width: 100%; }
+  .maker-kaart__naam { font-size: .68rem; max-width: 120%; }
 }
 
 /* ---------- Ateliers-vol sticker (bestaande .hero-sticker), iets lager ---------- */
@@ -222,7 +243,7 @@
 .makers-cta p { max-width: 44ch; margin: 1rem auto 1.8rem; color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .naam-sticker, .maker__logo { animation: none !important; }
+  .maker-kaart, .maker__logo { animation: none !important; }
   .makers .maker__media, .makers .maker__tekst { transition: none !important; transform: none !important; opacity: 1 !important; }
 }
 
