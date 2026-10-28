@@ -229,7 +229,7 @@
 }
 .makers__nav button:hover { opacity: 1; }
 .makers__nav button[aria-current="true"] { background: var(--red); color: var(--paper); opacity: 1; transform: translateY(-3px); }
-.makers__voortgang { position: absolute; left: 0; top: 0; height: 5px; width: 100%; z-index: 5; background: rgba(255,255,255,.15); }
+.makers__voortgang { position: absolute; left: 0; top: 0; height: 5px; width: 100%; z-index: 5; background: transparent; }
 .makers:not(.is-rail) .makers__voortgang { display: none; }
 .makers__voortgang span { display: block; height: 100%; width: 100%; background: var(--red); transform-origin: left; transform: scaleX(var(--p, 0)); }
 
