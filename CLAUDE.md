@@ -238,8 +238,9 @@ no bouncing, spinning or large movements ("niet misselijk"). The shared pieces:
 `.beeld-hero` (big photo next to the title, gently floating `.zweef-sticker`s, light scroll
 parallax via `--s`), `.pop-in` (children fade up one by one inside a `.reveal`),
 `.foto-duo`, `.zijwaarts`, and `.zwevende-knop` (fixed CTA such as "Afspraak plannen",
-shown after the first section and hidden while its `href` target is in view). Used on
-`vergaderen.html` and `werkplekken.html`. `menu.html` has a sticky `.menu-chips` category
+shown after the first section and hidden while its `href` target is in view). `.beeld-hero`
+is used on `vergaderen.html`, `werkplekken.html` and `contact.html` (variants `--blauw`,
+`--rood`); long forms sit in a `.form-rij` grid next to a sticky `.kolom-plakt` column. `menu.html` has a sticky `.menu-chips` category
 bar (sits under the nav via `--nav-h`, set in `main.js`). The ateliers page has its own,
 bolder motion in `css/ateliers.css` — the client explicitly liked that one.
 

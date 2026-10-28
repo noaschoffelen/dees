@@ -184,12 +184,20 @@
     <!-- BOEKEN -->
     <section class="section bg-purple">
       <div class="container two-col">
-        <div class="stack reveal">
+        <div class="stack reveal kolom-plakt">
           <p class="kicker eyebrow-red">Boeken</p>
           <h2 style="font-size:var(--fs-h2)">Plannen<br>maken?</h2>
           <div class="tekst-blok">
             <p>Laat ons weten wanneer je wilt vergaderen, met hoeveel personen en wat je erbij wilt. We nemen snel contact met je op om alles rond te maken.</p>
           </div>
+          <div class="tile direct-contact">
+            <p class="direct-contact__kop">Liever direct contact?</p>
+            <ul>
+              <li><a href="tel:+31628966205">+31 6 28966205</a></li>
+              <li><a href="mailto:info@deestilburg.nl">info@deestilburg.nl</a></li>
+            </ul>
+          </div>
+          <img class="kolom-plakt__foto" src="assets/img/photo/Vergaderen/vergaderruimte-koffie.jpg" alt="" loading="lazy" />
         </div>
         <!--
         Reserveringssysteem-module komt hier. Zodra de embed/link bekend is: vervang de
@@ -205,36 +213,42 @@
                 <label for="website">Laat dit veld leeg</label>
                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
-              <div class="field">
-                <label for="naam">Naam</label>
-                <input id="naam" name="naam" type="text" autocomplete="name" required />
+              <div class="form-rij">
+                <div class="field">
+                  <label for="naam">Naam</label>
+                  <input id="naam" name="naam" type="text" autocomplete="name" required />
+                </div>
+                <div class="field">
+                  <label for="email">E-mailadres</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required />
+                </div>
               </div>
-              <div class="field">
-                <label for="email">E-mailadres</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
+              <div class="form-rij">
+                <div class="field">
+                  <label for="telefoon">Telefoonnummer</label>
+                  <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" />
+                </div>
+                <div class="field">
+                  <label for="datum">Gewenste datum</label>
+                  <input id="datum" name="datum" type="text" placeholder="bijv. 14 november" />
+                </div>
               </div>
-              <div class="field">
-                <label for="telefoon">Telefoonnummer</label>
-                <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" />
-              </div>
-              <div class="field">
-                <label for="datum">Gewenste datum</label>
-                <input id="datum" name="datum" type="text" placeholder="bijv. 14 november" />
-              </div>
-              <div class="field">
-                <label for="boeking">Wat wil je boeken?</label>
-                <select id="boeking" name="boeking">
-                  <option value="">Kies…</option>
-                  <option>Per uur</option>
-                  <option>Ochtend (08:30 – 12:30)</option>
-                  <option>Middag (13:00 – 17:00)</option>
-                  <option>Hele dag</option>
-                  <option>Weet ik nog niet</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="personen">Aantal personen</label>
-                <input id="personen" name="personen" type="number" min="6" max="16" inputmode="numeric" placeholder="6 tot 16" />
+              <div class="form-rij">
+                <div class="field">
+                  <label for="boeking">Wat wil je boeken?</label>
+                  <select id="boeking" name="boeking">
+                    <option value="">Kies…</option>
+                    <option>Per uur</option>
+                    <option>Ochtend (08:30 – 12:30)</option>
+                    <option>Middag (13:00 – 17:00)</option>
+                    <option>Hele dag</option>
+                    <option>Weet ik nog niet</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="personen">Aantal personen</label>
+                  <input id="personen" name="personen" type="number" min="6" max="16" inputmode="numeric" placeholder="6 tot 16" />
+                </div>
               </div>
               <div class="field">
                 <label for="arrangement">Drankarrangement</label>
