@@ -211,7 +211,8 @@ Jamland, Kaapstad, Kristie van der Wekke, Studio Bouks.). Its CSS/JS are separat
 loaded only by this page, so it can change without touching the rest of the site.
 
 - Hero: a small heading ("De makers van Dees" — the client found a big title too
-  bombastic) above a centred flex row of `a.maker-kaart` cards (framed photo + name
+  bombastic) above a row of `a.maker-kaart` cards — on desktop all seven in ONE row (grid
+  of 7) so they're visible at a glance without scrolling, a client requirement; (framed photo + name
   sticker, slight tilt via `--r`). No absolute positioning: an earlier floating collage
   overlapped at some viewport sizes. Clicking a card jumps to that maker.
 - `.makers` rail: on desktop (≥900px, no reduced motion) `js/ateliers.js` adds `is-rail`,

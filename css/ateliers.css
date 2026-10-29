@@ -9,7 +9,7 @@
    de kaarten staan in een gewone, centrerende flex-rij. */
 .makers-hero {
   background: var(--purple); color: var(--blue);
-  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 4.5rem);
+  padding-block: clamp(1.8rem, 4vw, 3rem) clamp(2.6rem, 5vw, 3.5rem);
   text-align: center;
 }
 .makers-hero .kicker { color: var(--red); }
@@ -19,8 +19,16 @@
 
 .makers-hero__stickers {
   display: flex; flex-wrap: wrap; justify-content: center;
-  gap: clamp(2.2rem, 4vw, 3rem) clamp(1rem, 2.5vw, 2rem);
-  max-width: 1100px; margin: clamp(2.5rem, 5vw, 3.5rem) auto 0; padding-inline: var(--gutter);
+  gap: 2.4rem clamp(.8rem, 1.6vw, 1.4rem);
+  max-width: 1280px; margin: clamp(1.8rem, 3.5vw, 2.6rem) auto 0; padding-inline: var(--gutter);
+}
+/* Desktop: alle zeven in één rij, zodat ze in één oogopslag zichtbaar zijn */
+@media (min-width: 900px) {
+  .makers-hero__stickers { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+  .maker-kaart { width: 100% !important; }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .maker-kaart { width: calc((100% - 3 * 1.2rem) / 4); }
 }
 .maker-kaart {
   position: relative; display: block; width: clamp(128px, 19vw, 220px);
