@@ -66,10 +66,6 @@
   .maker-kaart__naam { font-size: .62rem; }
 }
 
-/* ---------- Ateliers-vol sticker (bestaande .hero-sticker), iets lager ---------- */
-.makers-vol { background: var(--purple); padding-bottom: clamp(1rem, 3vw, 2rem); }
-.makers-vol .hero-sticker { margin-top: 0; }
-
 /* ---------- De rail ---------- */
 .makers { position: relative; background: var(--ink); }
 .makers__sticky { position: relative; }
@@ -242,6 +238,8 @@
 .makers-cta { background: var(--blue); color: var(--purple); text-align: center; }
 .makers-cta h2 { font-size: var(--fs-h2); text-transform: uppercase; }
 .makers-cta p { max-width: 44ch; margin: 1rem auto 1.8rem; color: var(--ink); }
+.makers-cta .makers-cta__klein { font-size: .9rem; margin-top: 1.6rem; margin-bottom: 0; opacity: .85; }
+.makers-cta__klein a { text-decoration: underline; text-underline-offset: .2em; font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   .maker__logo { animation: none !important; }
