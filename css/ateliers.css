@@ -16,7 +16,7 @@
 .makers-hero .kicker { color: var(--red); }
 .makers-hero__titel {
   /* niet krapper dan ~1.05: anders steekt het accent van EÉN omhoog in de regel erboven */
-  font-size: clamp(3rem, 10vw, 8.5rem); line-height: 1.06; text-transform: uppercase;
+  font-size: clamp(2.4rem, 4.8vw, 4.6rem); line-height: 1.1; text-transform: uppercase;
   margin-top: .6rem; max-width: 9ch;
 }
 .makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
@@ -26,7 +26,7 @@
 /* Foto-collage: elke maker als deurvormige foto met naamsticker, zwevend */
 .maker-kaart {
   position: absolute; left: var(--x); top: var(--y);
-  width: calc(clamp(105px, 11vw, 175px) * var(--g, 1));
+  width: calc(clamp(120px, 12.5vw, 210px) * var(--g, 1));
   pointer-events: auto; display: block;
   transform: rotate(var(--r));
   animation: sticker-zweef calc(var(--dur, 9s) * 1.6) ease-in-out var(--delay, 0s) infinite alternate;
@@ -273,3 +273,8 @@
 .makers.is-rail .maker__naam { font-size: clamp(2.2rem, min(5.8vw, 8.5vh), 6.2rem); }
 .makers.is-rail .maker__bio { font-size: clamp(.84rem, 1.75vh, 1rem); line-height: 1.5; gap: .6rem; margin-top: 1rem; }
 .makers.is-rail .maker__links { margin-top: 1.1rem; }
+
+/* Hero: tekstkolom links houden, zodat de fotocollage (vanaf ~45%) vrij blijft */
+@media (min-width: 900px) {
+  .makers-hero__inner > * { max-width: 37vw; }
+}
