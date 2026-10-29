@@ -157,6 +157,9 @@
   width: 72%; height: 60%; background: var(--paper);
   -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
 }
+/* Tweede logo-sticker (bijv. Firma Defirma bij Het Kleinste Wijndoosje): rechtsonder */
+.maker__logo--tweede { left: auto; top: auto; right: -6%; bottom: 10%; transform: rotate(10deg); animation-delay: -3s; }
+.maker__logo--tweede span { width: 78%; height: 46%; }
 @keyframes logo-tik { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(-4deg) scale(1.05); } }
 
 /* Placeholder-deur voor makers waarvan nog geen foto is */
@@ -259,5 +262,6 @@
 
 @media (max-width: 899px) {
   .maker__logo { left: -1%; }
+  .maker__logo--tweede { left: auto; right: -1%; }
   .maker__extra { right: -3%; }
 }
