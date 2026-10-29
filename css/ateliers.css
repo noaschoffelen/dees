@@ -4,78 +4,58 @@
    reveal) zit in js/ateliers.js.
    ========================================================================== */
 
-/* ---------- Hero met zwevende naam-stickers ---------- */
+/* ---------- Hero: kleine intro + de makers als fotorij ----------
+   Geen absolute collage meer (schoof bij sommige schermformaten over elkaar):
+   de kaarten staan in een gewone, centrerende flex-rij. */
 .makers-hero {
-  position: relative; overflow: hidden;
   background: var(--purple); color: var(--blue);
-  padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem);
-  min-height: min(86vh, 780px);
-  display: flex; align-items: center;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
 }
-.makers-hero__inner { position: relative; z-index: 2; }
 .makers-hero .kicker { color: var(--red); }
-.makers-hero__titel {
-  /* niet krapper dan ~1.05: anders steekt het accent van EÉN omhoog in de regel erboven */
-  font-size: clamp(2.4rem, 4.8vw, 4.6rem); line-height: 1.1; text-transform: uppercase;
-  margin-top: .6rem; max-width: 9ch;
-}
-.makers-hero__lead { max-width: 40ch; margin-top: 1.4rem; color: var(--paper); }
-.makers-hero__adres { margin-top: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem; color: var(--blue); }
+.makers-hero__titel { font-size: clamp(1.8rem, 3.2vw, 2.8rem); line-height: 1.1; text-transform: uppercase; margin-top: .5rem; }
+.makers-hero__lead { max-width: 46ch; margin: .9rem auto 0; color: var(--paper); }
+.makers-hero__adres { margin-top: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: .85rem; color: var(--blue); }
 
-.makers-hero__stickers { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-/* Foto-collage: elke maker als deurvormige foto met naamsticker, zwevend */
+.makers-hero__stickers {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: clamp(2.2rem, 4vw, 3rem) clamp(1rem, 2.5vw, 2rem);
+  max-width: 1100px; margin: clamp(2.5rem, 5vw, 3.5rem) auto 0; padding-inline: var(--gutter);
+}
 .maker-kaart {
-  position: absolute; left: var(--x); top: var(--y);
-  width: calc(clamp(120px, 12.5vw, 210px) * var(--g, 1));
-  pointer-events: auto; display: block;
-  transform: rotate(var(--r));
-  animation: sticker-zweef calc(var(--dur, 9s) * 1.6) ease-in-out var(--delay, 0s) infinite alternate;
-  transition: z-index 0s;
+  position: relative; display: block; width: clamp(128px, 19vw, 220px);
+  transform: rotate(calc(var(--r, 0deg) * .5));
+  transition: transform .3s var(--ease);
 }
 .maker-kaart__foto {
   display: block; aspect-ratio: 3 / 4; overflow: hidden;
   border: 3px solid var(--ink); border-radius: 20px;
   box-shadow: 7px 8px 0 var(--ink); background: var(--ink);
-  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s var(--ease);
+  transition: box-shadow .3s var(--ease);
 }
 .maker-kaart__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
-.maker-kaart__foto--leeg {
-  display: grid; place-items: center; background: var(--blue); color: var(--purple);
-  font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem);
-}
 .maker-kaart__naam {
-  position: absolute; left: 50%; bottom: -.9em; transform: translateX(-50%) rotate(-4deg);
+  position: absolute; left: 50%; bottom: -1em; transform: translateX(-50%) rotate(-3deg);
   font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(.72rem, .95vw, .95rem); line-height: 1.05; text-align: center;
-  width: max-content; max-width: 135%;
+  font-size: clamp(.68rem, .95vw, .9rem); line-height: 1.1; text-align: center;
+  width: max-content; max-width: 115%;
   padding: .55em .9em .5em; border-radius: 100px;
   background: var(--s-bg); color: var(--s-fg);
   border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
 }
-.maker-kaart:hover, .maker-kaart:focus-visible { z-index: 5; animation-play-state: paused; }
-.maker-kaart:hover .maker-kaart__foto, .maker-kaart:focus-visible .maker-kaart__foto {
-  transform: rotate(calc(var(--r) * -1)) scale(1.12); box-shadow: 11px 12px 0 var(--ink);
-}
-.maker-kaart:hover img { transform: scale(1.08); }
+.maker-kaart:hover, .maker-kaart:focus-visible { transform: rotate(0deg) translateY(-4px); }
+.maker-kaart:hover .maker-kaart__foto { box-shadow: 10px 11px 0 var(--ink); }
+.maker-kaart:hover img { transform: scale(1.05); }
 .maker-kaart:focus-visible { outline: none; }
 .maker-kaart:focus-visible .maker-kaart__foto { outline: 3px solid var(--paper); outline-offset: 4px; }
 .naam-sticker--rood   { --s-bg: var(--red);    --s-fg: var(--paper); }
 .naam-sticker--blauw  { --s-bg: var(--blue);   --s-fg: var(--ink); }
 .naam-sticker--papier { --s-bg: var(--paper);  --s-fg: var(--purple); }
-@keyframes sticker-zweef {
-  0%   { transform: translate(0, 0) rotate(var(--r)); }
-  50%  { transform: translate(calc(var(--dx, 14px) * .25), calc(var(--dy, 10px) * -.3)) rotate(var(--r)); }
-  100% { transform: translate(calc(var(--dx, 14px) * -.15), calc(var(--dy, 10px) * .2)) rotate(var(--r)); }
-}
 
-@media (max-width: 899px) {
-  .makers-hero { display: block; min-height: 0; }
-  .makers-hero__stickers {
-    position: static; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-    gap: 2.6rem 1.4rem; padding: 2.2rem var(--gutter) 1.5rem; max-width: var(--maxw); margin-inline: auto;
-  }
-  .maker-kaart { position: relative; left: auto; top: auto; width: 100%; animation: none; transform: rotate(calc(var(--r) * .5)); }
-  .maker-kaart__naam { font-size: .68rem; max-width: 120%; }
+@media (max-width: 599px) {
+  .makers-hero__stickers { gap: 2.4rem .9rem; }
+  .maker-kaart { width: calc((100% - 1.8rem) / 3); }
+  .maker-kaart__naam { font-size: .62rem; }
 }
 
 /* ---------- Ateliers-vol sticker (bestaande .hero-sticker), iets lager ---------- */
@@ -256,7 +236,7 @@
 .makers-cta p { max-width: 44ch; margin: 1rem auto 1.8rem; color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .maker-kaart, .maker__logo { animation: none !important; }
+  .maker__logo { animation: none !important; }
   .makers .maker__media, .makers .maker__tekst { transition: none !important; transform: none !important; opacity: 1 !important; }
 }
 
@@ -274,7 +254,3 @@
 .makers.is-rail .maker__bio { font-size: clamp(.84rem, 1.75vh, 1rem); line-height: 1.5; gap: .6rem; margin-top: 1rem; }
 .makers.is-rail .maker__links { margin-top: 1.1rem; }
 
-/* Hero: tekstkolom links houden, zodat de fotocollage (vanaf ~45%) vrij blijft */
-@media (min-width: 900px) {
-  .makers-hero__inner > * { max-width: 37vw; }
-}

@@ -210,9 +210,10 @@ The showcase page for the 7 makers (Arts of Abby, Daycare, Het Kleinste Wijndoos
 Jamland, Kaapstad, Kristie van der Wekke, Studio Bouks.). Its CSS/JS are separate files
 loaded only by this page, so it can change without touching the rest of the site.
 
-- Hero with a floating photo collage: each maker is an `a.maker-kaart` (framed photo +
-  name sticker), positioned via `--x/--y/--r/--g` inline vars on desktop and laid out in a
-  grid on mobile. Clicking one jumps to that maker.
+- Hero: a small heading ("De makers van Dees" — the client found a big title too
+  bombastic) above a centred flex row of `a.maker-kaart` cards (framed photo + name
+  sticker, slight tilt via `--r`). No absolute positioning: an earlier floating collage
+  overlapped at some viewport sizes. Clicking a card jumps to that maker.
 - `.makers` rail: on desktop (≥900px, no reduced motion) `js/ateliers.js` adds `is-rail`,
   makes `.makers__sticky` sticky, sizes the section so vertical scroll distance equals the
   track's horizontal overflow, and translates `.makers__track` sideways. Every panel gets a
