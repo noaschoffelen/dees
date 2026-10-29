@@ -76,6 +76,21 @@
     railAan = breed.matches && !minderBeweging.matches;
     sectie.classList.toggle("is-rail", railAan);
     document.documentElement.style.setProperty("--nav-h", navHoogte() + "px");
+    // De rail heeft per maker precies één schermhoogte. Past een tekst daar niet in
+    // (laag venster), dan liever de gestapelde versie dan tekst die wegvalt.
+    if (railAan && makers.some(function (m) {
+      // alleen de tekstkolom telt (een uitstekende foto of sticker is niet erg)
+      var inner = m.querySelector(".maker__inner");
+      var tekst = m.querySelector(".maker__tekst");
+      if (!inner || !tekst) return false;
+      var stijl = window.getComputedStyle(inner);
+      var ib = inner.getBoundingClientRect(), tb = tekst.getBoundingClientRect();
+      return tb.bottom > ib.bottom - parseFloat(stijl.paddingBottom) + 4 ||
+             tb.top < ib.top + parseFloat(stijl.paddingTop) - 4;
+    })) {
+      railAan = false;
+      sectie.classList.remove("is-rail");
+    }
     if (railAan) {
       afstand = track.scrollWidth - window.innerWidth;
       // scrollhoogte van de sectie = zichtbare hoogte + horizontale afstand

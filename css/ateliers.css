@@ -258,8 +258,8 @@
 .makers.is-rail .maker__inner { padding-bottom: 5rem; padding-top: 2rem; }
 .makers.is-rail .maker__naam { font-size: clamp(2rem, min(5vw, 8vh), 5.6rem); }
 .makers.is-rail .maker--lang-naam .maker__naam { font-size: clamp(1.7rem, min(3.6vw, 6vh), 4.2rem); }
-/* vangnet: past de tekst echt niet, dan scrolt alleen de tekstkolom binnen het paneel */
-.makers.is-rail .maker__tekst { max-height: calc(100vh - var(--nav-h, 66px) - 7rem); overflow-y: auto; scrollbar-width: thin; padding: 0 1rem 1rem 0; }
-.makers.is-rail .maker__bio { font-size: clamp(.98rem, 2.15vh, 1.2rem); line-height: 1.5; gap: .65rem; margin-top: 1rem; }
+/* Past een tekst niet binnen één schermhoogte, dan zet js/ateliers.js de rail uit
+   en staan de makers onder elkaar (geen scrollende tekstkolom: dat werkte niet prettig). */
+.makers.is-rail .maker__bio { font-size: clamp(.96rem, 2vh, 1.15rem); line-height: 1.45; gap: .6rem; margin-top: .9rem; max-width: none; }
 .makers.is-rail .maker__links { margin-top: 1.1rem; }
 

@@ -220,6 +220,10 @@ loaded only by this page, so it can change without touching the rest of the site
   track's horizontal overflow, and translates `.makers__track` sideways. Every panel gets a
   `--d` (-1..1, distance from centre) that `ateliers.css` uses for the photo/name parallax.
   On mobile / reduced motion the panels just stack and slide in via IntersectionObserver.
+  The rail also switches itself off (→ stacked layout) when any maker's text column
+  doesn't fit inside one viewport height — e.g. on 1280×800 laptops or a low browser
+  window. Don't "fix" that with a scrolling text column inside the panel: the client
+  tried it and it scroll-fights with the page.
 - Each maker is an `<article class="maker maker--{kleur}">` (kleur: rood/blauw/paars/
   papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`),
   optional `.maker__extra` round
