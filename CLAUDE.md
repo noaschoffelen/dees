@@ -304,8 +304,8 @@ Dees is two buildings joined into one: the bakery, horeca and meeting room are a
 Google Business Profile should all say 22), the ateliers have their own front door at
 **Korte Tuinstraat 20** (mentioned as "ingang ateliers" on the contact and ateliers
 pages). The homepage hero corner deliberately says "Korte Tuinstraat 20 & 22" (the whole
-building). `privacy.html` still names "20-22" as the controller's address — check the
-KvK-registered address before changing it.
+building). The legal entity (controller in `privacy.html`) is **Dees Tilburg**, Korte
+Tuinstraat 22, 5038 SJ Tilburg, KvK-nummer 42058851.
 
 ## SEO / social metadata
 
