@@ -141,6 +141,9 @@
   width: 72%; height: 60%; background: var(--paper);
   -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
 }
+/* Langwerpige logo-sticker voor smalle woordbeelden (bijv. Studio Bouks.) */
+.maker__logo--breed { width: clamp(150px, 15vw, 220px); aspect-ratio: auto; border-radius: 100px; padding: .75em 1.1em; }
+.maker__logo--breed img { width: 100%; height: auto; border-radius: 0; }
 /* Tweede logo-sticker (bijv. Firma Defirma bij Het Kleinste Wijndoosje): rechtsonder */
 .maker__logo--tweede { left: auto; top: auto; right: -6%; bottom: 10%; transform: rotate(10deg); animation-delay: -3s; }
 .maker__logo--tweede span { width: 78%; height: 46%; }
