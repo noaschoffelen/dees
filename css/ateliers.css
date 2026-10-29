@@ -265,3 +265,11 @@
   .maker__logo--tweede { left: auto; right: -1%; }
   .maker__extra { right: -3%; }
 }
+
+/* In de rail moet alles binnen één schermhoogte passen (ook lange teksten zoals die van
+   Het Kleinste Wijndoosje): naam en tekst schalen mee met de hoogte en er blijft ruimte
+   vrij voor de namenbalk onderaan. */
+.makers.is-rail .maker__inner { padding-bottom: 5rem; padding-top: 2rem; }
+.makers.is-rail .maker__naam { font-size: clamp(2.2rem, min(5.8vw, 8.5vh), 6.2rem); }
+.makers.is-rail .maker__bio { font-size: clamp(.84rem, 1.75vh, 1rem); line-height: 1.5; gap: .6rem; margin-top: 1rem; }
+.makers.is-rail .maker__links { margin-top: 1.1rem; }

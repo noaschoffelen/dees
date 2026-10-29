@@ -227,8 +227,8 @@ loaded only by this page, so it can change without touching the rest of the site
   replace it with a fixed order. Panel colours are reassigned in sequence after the
   shuffle (blauw/inkt/papier/rood/paars), so the `maker--{kleur}` in the HTML is only
   the no-JS fallback.
-- Texts marked "PLACEHOLDER" (Daycare, Het Kleinste Wijndoosje, Kaapstad) still need the
-  maker's own copy; Studio Bouks.' text is a Dutch translation of their English blurb.
+- All seven texts come from the makers themselves (Studio Bouks.' is a Dutch translation of
+  their English blurb); each maker has an Instagram link.
   Source material from the makers lives in `brand/makers/<naam>/` (not served).
 
 ## Beweging (gedeeld, in `css/styles.css` + `js/main.js`)
