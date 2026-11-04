@@ -128,7 +128,7 @@ pages rather than templated (there's no templating system). When changing shared
 (nav, footer, mobile menu), update it identically across all eight pages (`index`, `menu`, `ateliers`,
 `werkplekken`, `team`, `vergaderen`, `contact`, `privacy`).
 
-The nav is: Home · Menu · **Bij ons** ▾ (Ateliers, Werkplekken, Vergaderen, Team) · Contact.
+The nav is: Home · Menu · **Bij ons** ▾ (Vergaderen, Ateliers, Werkplekken, Team) · Contact.
 On desktop "Bij ons" is a `.nav__group` with a `<button class="nav__group-toggle">` and a
 `.nav__dropdown`; the current page's link gets `aria-current="page"` and, when it's one of the
 four sub-pages, the group gets `is-current`. The mobile menu lists the same items flat, with
