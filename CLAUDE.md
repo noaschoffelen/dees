@@ -224,6 +224,9 @@ loaded only by this page, so it can change without touching the rest of the site
   doesn't fit inside one viewport height — e.g. on 1280×800 laptops or a low browser
   window. Don't "fix" that with a scrolling text column inside the panel: the client
   tried it and it scroll-fights with the page.
+  Maker names (`.maker__naam`) size with their own text column via container units
+  (`cqi`, `.maker__tekst` is a size container) and never break mid-word; panels with
+  the photo on the right swap the grid columns so the text always gets the wide one.
 - Each maker is an `<article class="maker maker--{kleur}">` (kleur: rood/blauw/paars/
   papier/inkt) with a photo (`.maker__deur` — same rounded frame as the homepage `.photo-row`),
   optional `.maker__extra` round

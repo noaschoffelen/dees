@@ -106,6 +106,8 @@
 @media (min-width: 900px) {
   .maker__inner { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
   .maker:nth-child(even of .maker) .maker__media { order: 2; }
+  /* foto rechts: dan krijgt de tekst (nu links) de brede kolom */
+  .maker:nth-child(even of .maker) .maker__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); }
 }
 
 /* Foto-kader: zelfde vorm als de fotorij op de homepage (.photo-row img) */
@@ -167,7 +169,8 @@
 }
 .maker__deur--leeg .hand-inline { display: block; margin: .6rem auto 0; height: 1.6em; filter: invert(1); }
 
-.maker__tekst { position: relative; min-width: 0; }
+/* container: de naam schaalt mee met de breedte van deze kolom, zodat een woord nooit midden in breekt */
+.maker__tekst { position: relative; min-width: 0; container-type: inline-size; }
 .makers.is-rail .maker__tekst { transform: translateX(calc(var(--d, 0) * 9vw)); }
 .maker__tag {
   display: inline-block; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
@@ -176,8 +179,8 @@
 }
 .maker--rood .maker__tag { color: var(--paper); }
 .maker__naam {
-  font-size: clamp(2.4rem, 5.8vw, 6.2rem); line-height: .9; text-transform: uppercase;
-  margin-top: .9rem; overflow-wrap: break-word; hyphens: manual;
+  font-size: clamp(2rem, min(12cqi, 6.4vw), 6.2rem); line-height: .9; text-transform: uppercase;
+  margin-top: .9rem; overflow-wrap: normal; word-break: normal; hyphens: manual;
 }
 .maker__bio { margin-top: 1.4rem; color: var(--m-tekst); max-width: 64ch; display: grid; gap: .8rem; font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.55; }
 .maker__bio p { margin: 0; }
@@ -259,8 +262,9 @@
    Het Kleinste Wijndoosje): naam en tekst schalen mee met de hoogte en er blijft ruimte
    vrij voor de namenbalk onderaan. */
 .makers.is-rail .maker__inner { padding-bottom: 5rem; padding-top: 2rem; }
-.makers.is-rail .maker__naam { font-size: clamp(2rem, min(5vw, 8vh), 5.6rem); }
-.makers.is-rail .maker--lang-naam .maker__naam { font-size: clamp(1.7rem, min(3.6vw, 6vh), 4.2rem); }
+.makers.is-rail .maker__naam { font-size: clamp(2rem, min(12cqi, 5vw, 8vh), 5.6rem); }
+.makers.is-rail .maker--lang-naam .maker__naam { font-size: clamp(1.7rem, min(9cqi, 3.6vw, 6vh), 4.2rem); }
+.maker--lang-naam .maker__naam { font-size: clamp(1.7rem, min(9cqi, 4.6vw), 4.6rem); }
 /* Past een tekst niet binnen één schermhoogte, dan zet js/ateliers.js de rail uit
    en staan de makers onder elkaar (geen scrollende tekstkolom: dat werkte niet prettig). */
 .makers.is-rail .maker__bio { font-size: clamp(.96rem, 2vh, 1.15rem); line-height: 1.45; gap: .6rem; margin-top: .9rem; max-width: none; }
